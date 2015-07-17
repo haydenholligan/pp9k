@@ -7,6 +7,7 @@ class textView: public View {
     char board[8][8];
     
 public:
+    void printBoard();
 };
 
 #endif

@@ -8,6 +8,7 @@
 class Game {
     Tile board[8][8];
     
+    
 public:
     Game();
     ~Game();

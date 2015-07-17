@@ -7,7 +7,6 @@ class View {
     View();
     ~View();
     virtual void printBoard() = 0;
-    virtual void printFinalScore() = 0;
 };
 
 #endif

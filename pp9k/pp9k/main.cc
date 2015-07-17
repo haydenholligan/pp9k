@@ -1,4 +1,7 @@
 #include <iostream>
+#include <string>
+
+using namespace std;
 
 #include "game.h"
 #include "tile.h"
@@ -16,5 +19,18 @@
 #include "graphicsView.h"
 
 int main(int argc, const char * argv[]) {
-
+    bool playing = false;
+    //Take input
+    string s;
+    while (cin >> s) {
+        if (s == "game" && playing == false) {
+            playing = true;
+            string s1, s2;
+            cin >> s1;
+            cin >> s2;
+            Game g;
+        }
+        
+        
+    }
 }

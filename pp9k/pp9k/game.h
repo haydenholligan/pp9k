@@ -4,6 +4,8 @@
 #include <vector>
 
 #include "player.h"
+#include "human.h"
+#include "computer.h"
 #include "tile.h"
 #include "piece.h"
 #include "pawn.h"
@@ -12,6 +14,7 @@
 #include "knight.h"
 #include "queen.h"
 #include "king.h"
+#include "view.h"
 
 const int boardSize = 8;
 
@@ -20,19 +23,24 @@ class Game {
     //white top left, alternate rest
     Tile **board;
     
+    //Pointers to each player
+    Player *p1;
+    Player *p2;
+    
     //holds pieces for each separate player
     std::vector<Piece> p1Pieces;
     std::vector<Piece> p2Pieces;
     
-    
+    View view;
     
 public:
-    Game();
+    Game(std::string s1, std::string s2);
     ~Game();
     void setup();
     string calcPosition(int x, int y);
     void endGame(Player *p);
-    void move(Piece *pc, std::string s);
+    void move(Piece *pc, std::string p);
+    void castle(Player *p);
     bool isCheck();
     bool isCheckmate();
     bool isStalemate();

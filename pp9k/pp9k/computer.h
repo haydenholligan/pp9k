@@ -5,11 +5,12 @@
 
 class Computer: public Player {
     int level;
+    Game *game;
+    int numWins;
 public:
+    Computer(int level);
     void movePiece(Piece, std::string);
     void castle();
-    void resign();
-    //void setGame(const &Game);
 };
 
 

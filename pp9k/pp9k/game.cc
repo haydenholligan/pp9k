@@ -1,9 +1,46 @@
 #include "game.h"
+#include <iostream>
 
-#include <string>
-Game::Game() {
+
+
+Game::Game(std::string s1, std::string s2) {
+    if (s1 == "human")
+        p1 = new Human();
     
+    else if (s1 == "computer[1]")
+        p1 = new Computer(1);
+    
+    else if (s1 == "computer[2]")
+        p1 = new Computer(2);
+    
+    else if (s1 == "computer[3]")
+        p1 = new Computer(3);
+    
+    else if (s1 == "computer[4]")
+        p1 = new Computer(4);
+    
+    else
+        std::cout << "invalid input" << std::endl;
+    
+    if (s2 == "human")
+    p2 = new Human();
+    
+    else if (s2 == "computer[1]")
+        p1 = new Computer(1);
+    
+    else if (s2 == "computer[2]")
+        p2 = new Computer(2);
+    
+    else if (s2 == "computer[3]")
+        p2 = new Computer(3);
+    
+    else if (s2 == "computer[4]")
+        p2 = new Computer(4);
+    
+    else
+        std::cout << "invalid input" << std::endl;
 }
+
 
 Game::~Game() {
     
@@ -11,7 +48,6 @@ Game::~Game() {
 
 //Set up the board
 void Game::setup() {
-    
     
     //Initialize memory for the tiles
     board = new Tile*[boardSize];
@@ -106,14 +142,20 @@ std::string Game::calcPosition(int x, int y) {
     return s;
 }
 
-//uses the loser as the parameter so endGame can be called by player->resign
-void Game::endGame(Player *loser) {
+void Game::castle(Player *p) {
     
 }
 
-void Game::move(Piece *pc, std::string s) {
-    
+void Game::endGame(Player *winner) {
+    winner->addWin();
 }
+
+void Game::move(Piece *pc, std::string p) {
+    pc->move(p);
+    //check for check, checkmate, stalemate, upgrade
+    updateBoard();
+}
+
 bool Game::isCheck() {
     
     return 0;

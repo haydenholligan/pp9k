@@ -6,11 +6,10 @@
 
 class Human: public Player {
     Game *game;
-    
+    int numWins;
 public:
+    Human();
+    ~Human();
     void movePiece(Piece *p, std::string location);
-    void castle();
-    void resign();
-    void setGame(Game *g);
 };
 #endif

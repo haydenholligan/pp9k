@@ -41,7 +41,6 @@ Game::Game(std::string s1, std::string s2) {
         std::cout << "invalid input" << std::endl;
 }
 
-
 Game::~Game() {
     
 }

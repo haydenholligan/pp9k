@@ -28,7 +28,8 @@ int main(int argc, const char * argv[]) {
             string s1, s2;
             cin >> s1;
             cin >> s2;
-            Game g;
+            Game g(s1, s2);
+            g.setup();
         }
         
         

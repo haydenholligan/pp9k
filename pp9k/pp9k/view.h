@@ -3,7 +3,7 @@
 
 //abstract class
 class View {
-    
+public:
     View();
     ~View();
     virtual void printBoard() = 0;

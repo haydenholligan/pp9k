@@ -5,8 +5,11 @@
 
 //abstract class
 class Piece {
+private:
+    int x,y;
+    std::string name;
 public:
-    //Might need constructor and/or destructor
+    Piece(int x, int y, std::string name);
     virtual int getX() = 0;
     virtual int getY() = 0;
     virtual std::string getPos() = 0;

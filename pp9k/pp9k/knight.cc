@@ -1,6 +1,6 @@
 #include "knight.h"
 
-Knight::Knight(int x, int y, std::string pos): Piece(x, y, position), name("knight") {}
+Knight::Knight(int x, int y, std::string position): Piece(x, y, position), name("knight") {}
 
 void Knight::move(std::string pos) {
     

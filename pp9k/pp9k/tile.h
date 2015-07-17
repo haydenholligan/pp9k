@@ -14,6 +14,8 @@ public:
    // Tile(int x, int y, std::string pos, Piece *p);
     int getX();
     int getY();
+    void setX(int x);
+    void setY(int y);
     Piece *getPiece();
     std::string getPos();
     void setPos(std::string);

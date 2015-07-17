@@ -24,3 +24,8 @@ std::string Knight::getName() {
 void Knight::setPos(std::string pos) {
     
 }
+
+bool Knight::isValidMove(std::string pos) {
+    
+    return 0;
+}

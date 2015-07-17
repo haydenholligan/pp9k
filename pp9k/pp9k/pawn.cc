@@ -24,3 +24,8 @@ std::string Pawn::getName() {
 void Pawn::setPos(std::string pos) {
     
 }
+
+bool Pawn::isValidMove(std::string pos) {
+    
+    return 0;
+}

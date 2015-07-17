@@ -1,4 +1,5 @@
 #include "game.h"
+
 #include <string>
 Game::Game() {
     
@@ -19,7 +20,7 @@ void Game::setup() {
     }
     
     //Initialize the pieces
-    //p1Pieces.push_back(new Piece()
+    p1Pieces.push_back(new Rook(0, 0,calcPosition(0, 0)));
     
     
     for (int i = 0; i < boardSize; i++) {

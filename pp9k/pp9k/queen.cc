@@ -24,3 +24,8 @@ std::string Queen::getName() {
 void Queen::setPos(std::string pos) {
     
 }
+
+bool Queen::isValidMove(std::string pos) {
+    
+    return 0;
+}

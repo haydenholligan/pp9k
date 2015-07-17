@@ -24,3 +24,8 @@ std::string Rook::getName() {
 void Rook::setPos(std::string pos) {
     
 }
+
+bool Rook::isValidMove(std::string pos) {
+    
+    return 0;
+}

@@ -6,6 +6,11 @@
 #include "player.h"
 #include "piece.h"
 #include "tile.h"
+#include "rook.h"
+#include "bishop.h"
+#include "knight.h"
+#include "queen.h"
+#include "king.h"
 
 const int boardSize = 8;
 

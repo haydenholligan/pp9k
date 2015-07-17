@@ -1,6 +1,6 @@
 #include "king.h"
 
-King::King(int x, int y, std::string pos): x(x), y(y), position(pos), name("king") {}
+King::King(int x, int y, std::string position): Piece(x, y, position), name("king") {}
 
 void King::move(std::string pos) {
     

@@ -1,6 +1,6 @@
 #include "bishop.h"
 
-Bishop::Bishop(int x, int y, std::string pos): x(x), y(y), position(pos), name("bishop") {}
+Bishop::Bishop(int x, int y, std::string position): Piece(x, y, position), name("bishop") {}
 
 void Bishop::move(std::string pos) {
     

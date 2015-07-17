@@ -7,9 +7,9 @@
 class Piece {
 private:
     int x,y;
-    std::string name;
+    std::string name, position;
 public:
-    Piece(int x, int y, std::string name);
+    Piece(int x, int y, std::string position);
     virtual int getX() = 0;
     virtual int getY() = 0;
     virtual std::string getPos() = 0;

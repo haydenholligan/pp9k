@@ -1,6 +1,6 @@
 #include "rook.h"
 
-Rook::Rook(int x, int y, std::string pos): x(x), y(y), position(pos), name("rook") {}
+Rook::Rook(int x, int y, std::string position): Piece(x, y, position), name("rook") {}
 
 void Rook::move(std::string pos) {
     

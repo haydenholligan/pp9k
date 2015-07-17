@@ -1,6 +1,8 @@
 #include "tile.h"
 
-Tile::Tile(int x, int y, std::string pos): x(x), y(y), position(pos) {}
+Tile::Tile(): x(0), y(0), position("0"), pieceOnTile(NULL) {}
+
+//Tile::Tile(int x, int y, std::string pos, Piece *p): x(x), y(y), position(pos), pieceOnTile((p != NULL) ? p : NULL) {}
 
 int Tile::getX() {
     return this->x;
@@ -12,6 +14,14 @@ int Tile::getY() {
 
 std::string Tile::getPos() {
     return this->position;
+}
+
+void Tile::setPiece(Piece *p) {
+    pieceOnTile = p;
+}
+
+Piece *Tile::getPiece() {
+    return pieceOnTile;
 }
 
 //sets the position as well as the x and y coordinates

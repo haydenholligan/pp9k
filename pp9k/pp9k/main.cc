@@ -6,7 +6,6 @@
 #include "human.h"
 #include "computer.h"
 #include "piece.h"
-#include "pawn.h"
 #include "rook.h"
 #include "bishop.h"
 #include "knight.h"

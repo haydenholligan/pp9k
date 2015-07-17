@@ -16,6 +16,7 @@ public:
     virtual std::string getName() = 0;
     virtual void setPos(std::string pos) = 0;
     virtual void move(std::string pos) = 0;
+    virtual bool isValidMove(std::string pos) = 0;
 };
 
 #endif 

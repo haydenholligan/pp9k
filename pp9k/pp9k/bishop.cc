@@ -22,5 +22,18 @@ std::string Bishop::getName() {
 }
 
 void Bishop::setPos(std::string pos) {
-    
+	this->position = pos;
+	
+	char xx = pos.substr(0,1);
+	char yy = pos.substr(1,1);
+	int tempx = xx - 96;
+	int tempy = yy - 48;
+	
+	this->x = tempx;
+	this->y = tempy;
+	    
+}
+
+bool Bishop::isValidMove(std::string pos) {
+
 }

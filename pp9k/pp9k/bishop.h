@@ -15,7 +15,7 @@ public:
     std::string getPos();
     std::string getName();
     void setPos(std::string pos);
-
+    bool isValidMove(std::string pos);
 };
 
 #endif

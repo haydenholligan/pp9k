@@ -64,20 +64,20 @@ void Game::setup() {
         board[i][1].setPos(position);
         board[i][1].setPiece(&((p1Pieces.at(i+8))));
         
+        
+        //Set x, y, position and piece for row 7
+        position = calcPosition(i, 7);
+        board[i][7].setX(i);
+        board[i][7].setY(7);
+        board[i][7].setPos(position);
+        board[i][7].setPiece(&((p2Pieces.at(i))));
+        
         //Set x, y, position and piece for row 6
         position = calcPosition(i, 6);
         board[i][6].setX(i);
         board[i][6].setY(6);
         board[i][6].setPos(position);
         board[i][6].setPiece(&((p2Pieces.at(i+8))));
-        
-        
-        //Set x, y, position and piece for row 2
-        position = calcPosition(i, 7);
-        board[i][7].setX(i);
-        board[i][7].setY(7);
-        board[i][7].setPos(position);
-        board[i][7].setPiece(&((p2Pieces.at(i))));
     }
     
     //Initialize empty cells
@@ -90,7 +90,6 @@ void Game::setup() {
             board[i][j].setPiece(NULL);
         }
     }
-    
 }
 
 

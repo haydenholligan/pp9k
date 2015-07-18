@@ -1,4 +1,7 @@
 #include "textView.h"
+#include <iostream>
+
+using namespace std;
 
 textView::textView() {
     
@@ -10,19 +13,10 @@ textView::textView() {
     //Initialize blank spaces
     for (int i = 2; i < 6; i++) {
         for (int j = 2; j < 10; j++) {
-            if ((i % 2 == 0) && (j % 2 == 0)) {
-                board[i][j] = ' ';
-            }
-            else if ((i % 2 != 0) && (j % 2 != 0)) {
-                board[i][j] = ' ';
-            }
-            
-            else {
-                board[i][j] = '-';
-            }
+            board[i][j] = dashOrSpace(i, j);
         }
     }
-    
+
     //Initialize top player's pieces
     board[0][2] = 'r';
     board[0][9] = 'r';
@@ -49,4 +43,49 @@ textView::textView() {
         board[6][i] = 'P';
     }
 }
+
+//Determine if dash or blank for chess board
+char textView::dashOrSpace(int x, int y) {
+    if ((x % 2 == 0) && (y % 2 == 0)) {
+        return ' ';
+    }
+    
+    else if ((x % 2 != 0) && (y % 2 != 0)) {
+        return ' ';
+    }
+    
+    else {
+        return '-';
+    }
+}
+
+void textView::updateBoard(string oldPos, string newPos, char newChar) {
+    
+}
+
+void textView::setPos(string pos) {
+    char xx = pos[0];
+    char yy = pos[1];
+    int tempx = xx - 97;
+    int tempy = yy - 49;
+    
+}
+
+void textView::setGame(Game *g) {
+    game = g;
+}
+
+void textView::printBoard() {
+    for (int i = 0; i < boardHeight; i++) {
+        for (int j = 0; j < boardWidth; j++) {
+            cout << board[i][j];
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
+
+
+
 

@@ -37,7 +37,7 @@ public:
     Game(std::string s1, std::string s2);
     ~Game();
     void setup();
-    string calcPosition(int x, int y);
+    std::string calcPosition(int x, int y);
     void endGame(Player *p);
     void move(Piece *pc, std::string p);
     void castle(Player *p);

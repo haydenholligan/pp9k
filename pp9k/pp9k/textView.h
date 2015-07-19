@@ -19,7 +19,7 @@ public:
     void setGame(Game *g);
     void setPos(std::string pos, char c);
     char dashOrSpace(int x, int y);
-    char dashOrSpace(string pos);
+    char dashOrSpace(std::string pos);
     void updateBoard(std::string oldPos, std::string newPos, char newChar);
 };
 

@@ -9,7 +9,7 @@ class Pawn: public Piece {
 public:
     Pawn(int x, int y, std::string pos);
     //s is the position (ex. e5)
-    void move(std::string pos);
+    bool move(std::string pos);
     int getX();
     int getY();
     std::string getPos();

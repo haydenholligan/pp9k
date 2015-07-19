@@ -2,7 +2,7 @@
 #include <iostream>
 
 //might change position later to use setPos function
-Piece::Piece(int x, int y, std::string position): x(x), y(y), position(position) {}
+Piece::Piece(int x, int y, std::string position, char colour): x(x), y(y), position(position), colour(colour) {}
 
 char Piece::getColour(){
 	return this->colour;

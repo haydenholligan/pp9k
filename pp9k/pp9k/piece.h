@@ -10,7 +10,7 @@ private:
     char colour;
     std::string name, position;
 public:
-    Piece(int x, int y, std::string position);
+    Piece(int x, int y, std::string position, char colour);
     virtual int getX() = 0;
     virtual int getY() = 0;
     virtual std::string getPos() = 0;

@@ -63,11 +63,15 @@ void textView::updateBoard(string oldPos, string newPos, char newChar) {
     
 }
 
-void textView::setPos(string pos) {
+void textView::setPos(string pos, Piece *p) {
     char xx = pos[0];
     char yy = pos[1];
     int tempx = xx - 97;
     int tempy = yy - 49;
+    
+    if (p->getColour() == 'w') {
+        board[tempx][tempy] = toupper(p->getName()[0]);
+    }
     
 }
 

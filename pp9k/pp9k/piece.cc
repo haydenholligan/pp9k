@@ -1,15 +1,15 @@
 #include "piece.h"
+#include <iostream>
 
 //might change position later to use setPos function
 Piece::Piece(int x, int y, std::string position): x(x), y(y), position(position) {}
 
-void Piece::getColour(){
+char Piece::getColour(){
 	return this->colour;
 }
 
 void Piece::setColour(char c){
-	if(c == 'b') this->colour = 'b';
-	else this->colour = 'w';
+    this->colour = c;
 
 }
 
@@ -27,10 +27,13 @@ void Piece::stringSetPos(std::string pos){
 bool Piece::move(std::string pos) {
 	if(isValidMove(pos)) {
 		setPos(pos); 
-		return true;}
+		return true;
+    }
 	else {
-		cout << "Invalid move, try again" << endl; 
-		return false;}
+        std::cout << "Invalid move, try again" << std::endl;
+		return false;
+    
+    }
     
 }
 

@@ -2,6 +2,7 @@
 #define __pp9k__textView__
 #include "view.h"
 #include "game.h"
+#include "piece.h"
 
 #include <string>
 
@@ -16,7 +17,7 @@ public:
     textView();
     void printBoard();
     void setGame(Game *g);
-    void setPos(std::string pos);
+    void setPos(std::string pos, Piece *p);
     char dashOrSpace(int x, int y);
     void updateBoard(std::string oldPos, std::string newPos, char newChar);
 };

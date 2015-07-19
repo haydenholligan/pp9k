@@ -1,6 +1,6 @@
 #include "queen.h"
 
-Queen::Queen(int x, int y, std::string position): Piece(x, y, position), name("queen") {}
+Queen::Queen(int x, int y, std::string position): Piece(x, y, position, colour), name("queen") {}
 
 int Queen::getX() {
     return this->x;

@@ -1,6 +1,6 @@
 #include "bishop.h"
 
-Bishop::Bishop(int x, int y, std::string position): Piece(x, y, position), name("bishop") {}
+Bishop::Bishop(int x, int y, std::string position): Piece(x, y, position, colour), name("bishop") {}
 
 int Bishop::getX() {
     return this->x;

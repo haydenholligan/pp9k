@@ -5,6 +5,7 @@
 
 class King: public Piece {
     int x, y;
+    char colour;
     std::string name, position;
 public:
     King(int x, int y, std::string pos);

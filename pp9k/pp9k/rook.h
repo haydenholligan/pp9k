@@ -5,6 +5,7 @@
 
 class Rook: public Piece {
     int x, y;
+    char colour;
     std::string name, position;
 public:
     Rook(int x, int y, std::string pos);

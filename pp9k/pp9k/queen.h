@@ -5,6 +5,7 @@
 
 class Queen: public Piece {
     int x, y;
+    char colour;
     std::string name, position;
 public:
     Queen(int x, int y, std::string pos);

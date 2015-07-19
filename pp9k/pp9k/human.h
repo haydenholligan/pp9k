@@ -5,10 +5,12 @@
 #include "player.h"
 
 class Human: public Player {
-    Game *game;
+    int playerNumber;
     int numWins;
+    Game *game;
+
 public:
-    Human();
+    Human(int playerNum);
     ~Human();
     void movePiece(Piece *p, std::string location);
 };

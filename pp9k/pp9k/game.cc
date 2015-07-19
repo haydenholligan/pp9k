@@ -57,29 +57,29 @@ void Game::setup(std::string s1, std::string s2) {
     }
     
     //Initialize the pieces for player 1
-    p1Pieces.push_back(*(new Rook(0, 0, calcPosition(0, 0), 'w')));
-    p1Pieces.push_back(*(new Rook(7, 0,calcPosition(7, 0), 'w')));
-    p1Pieces.push_back(*(new Knight(1, 0,calcPosition(1, 0), 'w')));
-    p1Pieces.push_back(*(new Knight(6, 0,calcPosition(6, 0), 'w')));
-    p1Pieces.push_back(*(new Bishop(2, 0,calcPosition(2, 0), 'w')));
-    p1Pieces.push_back(*(new Bishop(5, 0,calcPosition(5, 0), 'w')));
-    p1Pieces.push_back(*(new Queen(3, 0,calcPosition(3, 0), 'w')));
-    p1Pieces.push_back(*(new King(4, 0,calcPosition(4, 0), 'w')));
+    p1Pieces.push_back(*(new Rook(0, 0, calcPosition(0, 0), 'b')));
+    p1Pieces.push_back(*(new Rook(7, 0,calcPosition(7, 0), 'b')));
+    p1Pieces.push_back(*(new Knight(1, 0,calcPosition(1, 0), 'b')));
+    p1Pieces.push_back(*(new Knight(6, 0,calcPosition(6, 0), 'b')));
+    p1Pieces.push_back(*(new Bishop(2, 0,calcPosition(2, 0), 'b')));
+    p1Pieces.push_back(*(new Bishop(5, 0,calcPosition(5, 0), 'b')));
+    p1Pieces.push_back(*(new Queen(3, 0,calcPosition(3, 0), 'b')));
+    p1Pieces.push_back(*(new King(4, 0,calcPosition(4, 0), 'b')));
     
     //Initialize the pieces for player 2
-    p2Pieces.push_back(*(new Rook(0, 7,calcPosition(0, 7), 'b')));
-    p2Pieces.push_back(*(new Rook(7, 7,calcPosition(7, 7), 'b')));
-    p2Pieces.push_back(*(new Knight(1, 7,calcPosition(1, 7), 'b')));
-    p2Pieces.push_back(*(new Knight(6, 7,calcPosition(6, 7), 'b')));
-    p2Pieces.push_back(*(new Bishop(2, 7,calcPosition(2, 7), 'b')));
-    p2Pieces.push_back(*(new Bishop(5, 7,calcPosition(5, 7), 'b')));
-    p2Pieces.push_back(*(new Queen(3, 7,calcPosition(3, 7), 'b')));
-    p2Pieces.push_back(*(new King(4, 7,calcPosition(4, 7), 'b')));
+    p2Pieces.push_back(*(new Rook(0, 7,calcPosition(0, 7), 'w')));
+    p2Pieces.push_back(*(new Rook(7, 7,calcPosition(7, 7), 'w')));
+    p2Pieces.push_back(*(new Knight(1, 7,calcPosition(1, 7), 'w')));
+    p2Pieces.push_back(*(new Knight(6, 7,calcPosition(6, 7), 'w')));
+    p2Pieces.push_back(*(new Bishop(2, 7,calcPosition(2, 7), 'w')));
+    p2Pieces.push_back(*(new Bishop(5, 7,calcPosition(5, 7), 'w')));
+    p2Pieces.push_back(*(new Queen(3, 7,calcPosition(3, 7), 'w')));
+    p2Pieces.push_back(*(new King(4, 7,calcPosition(4, 7), 'w')));
     
     //Initialize the pawns for both players
     for (int i = 0; i < boardSize; i++) {
-        p1Pieces.push_back(*(new Pawn(i, 0,calcPosition(i, 0), 'w')));
-        p2Pieces.push_back(*(new Pawn(i, 6,calcPosition(i, 6), 'b')));
+        p1Pieces.push_back(*(new Pawn(i, 0,calcPosition(i, 0), 'b')));
+        p2Pieces.push_back(*(new Pawn(i, 6,calcPosition(i, 6), 'w')));
     }
     
     //Initialize tile information
@@ -169,6 +169,39 @@ char Game::getPieceAt(std::string pos) {
     int tempx = xx - 97;
     int tempy = yy - 49;
     std::string s = board[tempx][tempy].getPiece()->getName();
+    char colour = board[tempx][tempy].getPiece()->getColour();
+    if (colour == 'w') {
+        if (s == "knight") {
+            return 'N';
+        }
+        if (s == "king") {
+            return 'K';
+        }
+        else {
+            return toupper(s[0]);
+        }
+    }
+    
+    else if (colour == 'b') {
+        if (s == "knight") {
+            return 'n';
+        }
+        if (s == "king") {
+            return 'k';
+        }
+        else {
+            return tolower(s[0]);
+        }
+    }
+}
+
+Player * Game::getPlayer(int pNum) {
+    if (pNum == 1) {
+        return p1;
+    }
+    if (pNum == 2) {
+        return p2;
+    }
 }
 
 bool Game::isCheck() {

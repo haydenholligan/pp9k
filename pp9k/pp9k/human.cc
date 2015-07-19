@@ -1,6 +1,6 @@
 #include "human.h"
 
-Human::Human(): Player() {}
+Human::Human(int playerNum): Player(playerNum) {}
 
 Human::~Human() {
     game = NULL;

@@ -42,6 +42,7 @@ public:
     void move(Piece *pc, std::string pos);
     void castle(Player *p);
     bool isCheck();
+    Player *getPlayer(int pNum);
     bool isCheckmate();
     bool isStalemate();
     char getPieceAt(std::string p);

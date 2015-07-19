@@ -1,6 +1,6 @@
 #include "player.h"
 
-Player::Player(): numWins(0), game(NULL) {}
+Player::Player(int playerNum): numWins(0), game(NULL), playerNumber(playerNum) {}
 
 Player::~Player() {
     game = NULL;
@@ -17,4 +17,13 @@ void Player::addWin() {
 
 void Player::setGame(Game *g) {
     game = g;
+}
+
+
+int Player::getPlayerNum() {
+    return this->playerNumber;
+}
+
+void Player::setPlayerNum(int num) {
+    playerNumber = num;
 }

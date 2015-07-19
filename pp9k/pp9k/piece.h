@@ -18,6 +18,7 @@ public:
     virtual void setPos(std::string pos) = 0;
     virtual bool move(std::string pos);
     void setColour(char c);
+    char getColour();
     //For isValidMove, make sure it accounts for movements as well as check/checkmate
     virtual bool isValidMove(std::string pos) = 0;
     void stringSetPos(std::string pos);

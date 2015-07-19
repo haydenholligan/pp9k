@@ -22,7 +22,7 @@ std::string Knight::getName() {
 }
 
 void Knight::setPos(std::string pos) {
-    
+    stringSetPos(pos);
 }
 
 bool Knight::isValidMove(std::string pos) {

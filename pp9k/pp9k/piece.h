@@ -18,6 +18,7 @@ public:
     virtual void move(std::string pos) = 0;
     //For isValidMove, make sure it accounts for movements as well as check/checkmate
     virtual bool isValidMove(std::string pos) = 0;
+    void stringSetPos(std::string pos);
 };
 
 #endif 

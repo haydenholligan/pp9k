@@ -22,7 +22,7 @@ std::string King::getName() {
 }
 
 void King::setPos(std::string pos) {
-    
+    stringSetPos(pos);
 }
 
 bool King::isValidMove(std::string pos) {

@@ -22,7 +22,7 @@ std::string Rook::getName() {
 }
 
 void Rook::setPos(std::string pos) {
-    
+    stringSetPos(pos);
 }
 
 bool Rook::isValidMove(std::string pos) {

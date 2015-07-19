@@ -22,7 +22,7 @@ std::string Queen::getName() {
 }
 
 void Queen::setPos(std::string pos) {
-    
+    stringSetPos(pos);
 }
 
 bool Queen::isValidMove(std::string pos) {

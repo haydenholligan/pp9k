@@ -22,7 +22,7 @@ std::string Pawn::getName() {
 }
 
 void Pawn::setPos(std::string pos) {
-    
+    stringSetPos(pos);
 }
 
 bool Pawn::isValidMove(std::string pos) {

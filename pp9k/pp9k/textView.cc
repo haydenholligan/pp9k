@@ -59,20 +59,40 @@ char textView::dashOrSpace(int x, int y) {
     }
 }
 
-void textView::updateBoard(string oldPos, string newPos, char newChar) {
+char textView::dashOrSpace(string pos) {
     
+    char xx = pos[0];
+    char yy = pos[1];
+    int x = xx - 97;
+    int y = yy - 49;
+    
+    if ((x % 2 == 0) && (y % 2 == 0)) {
+        return ' ';
+    }
+    
+    else if ((x % 2 != 0) && (y % 2 != 0)) {
+        return ' ';
+    }
+    
+    else {
+        return '-';
+    }
 }
 
-void textView::setPos(string pos, Piece *p) {
+void textView::updateBoard(string oldPos, string newPos, char c) {
+    setPos(oldPos, dashOrSpace(oldPos));
+    setPos(newPos, c);
+    //might need to call more functions
+}
+
+void textView::setPos(string pos, char c) {
     char xx = pos[0];
     char yy = pos[1];
     int tempx = xx - 97;
     int tempy = yy - 49;
-    
-    if (p->getColour() == 'w') {
-        board[tempx][tempy] = toupper(p->getName()[0]);
-    }
-    
+
+    board[tempx][tempy] = c;
+
 }
 
 void textView::setGame(Game *g) {

@@ -8,7 +8,7 @@ class Rook: public Piece {
     char colour;
     std::string name, position;
 public:
-    Rook(int x, int y, std::string pos);
+    Rook(int x, int y, std::string pos, char colour);
     //s is the position (ex. e5)
     bool move(std::string pos);
     int getX();

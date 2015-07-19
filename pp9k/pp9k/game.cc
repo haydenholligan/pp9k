@@ -55,7 +55,7 @@ void Game::setup() {
     }
     
     //Initialize the pieces for player 1
-    p1Pieces.push_back(*(new Rook(0, 0,calcPosition(0, 0))));
+    p1Pieces.push_back(*(new Rook(0, 0, calcPosition(0, 0), 'w')));
     p1Pieces.push_back(*(new Rook(7, 0,calcPosition(7, 0))));
     p1Pieces.push_back(*(new Knight(1, 0,calcPosition(1, 0))));
     p1Pieces.push_back(*(new Knight(6, 0,calcPosition(6, 0))));

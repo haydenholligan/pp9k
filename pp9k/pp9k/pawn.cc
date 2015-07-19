@@ -1,6 +1,6 @@
 #include "pawn.h"
 
-Pawn::Pawn(int x, int y, std::string position): Piece(x, y, position, colour), name("pawn") {}
+Pawn::Pawn(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("pawn") {}
 
 int Pawn::getX() {
     return this->x;

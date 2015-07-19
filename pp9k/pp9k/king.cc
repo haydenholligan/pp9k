@@ -1,6 +1,6 @@
 #include "king.h"
 
-King::King(int x, int y, std::string position): Piece(x, y, position, colour), name("king") {}
+King::King(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("king") {}
 
 int King::getX() {
     return this->x;

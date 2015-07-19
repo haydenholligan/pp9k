@@ -8,7 +8,7 @@ class Queen: public Piece {
     char colour;
     std::string name, position;
 public:
-    Queen(int x, int y, std::string pos);
+    Queen(int x, int y, std::string pos, char colour);
     //s is the position (ex. e5)
     bool move(std::string pos);
     int getX();

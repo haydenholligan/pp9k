@@ -39,7 +39,7 @@ public:
     void setup(std::string s1, std::string s2);
     std::string calcPosition(int x, int y);
     void endGame(int player);
-    void move(Piece *pc, std::string pos);
+    void move(std::string oldPos, std::string newPos);
     void castle(Player *p);
     bool isCheck();
     Player *getPlayer(int pNum);

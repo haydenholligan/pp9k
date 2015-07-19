@@ -14,37 +14,37 @@ void Game::setup(std::string s1, std::string s2) {
     
     //initialize players
     if (s1 == "human")
-        p1 = new Human();
+        p1 = new Human(1);
     
     else if (s1 == "computer[1]")
-        p1 = new Computer(1);
+        p1 = new Computer(1, 1);
     
     else if (s1 == "computer[2]")
-        p1 = new Computer(2);
+        p1 = new Computer(2, 1);
     
     else if (s1 == "computer[3]")
-        p1 = new Computer(3);
+        p1 = new Computer(3, 1);
     
     else if (s1 == "computer[4]")
-        p1 = new Computer(4);
+        p1 = new Computer(4, 1);
     
     else
         std::cout << "invalid input" << std::endl;
     
     if (s2 == "human")
-        p2 = new Human();
+        p2 = new Human(1);
     
     else if (s2 == "computer[1]")
-        p1 = new Computer(1);
+        p1 = new Computer(1, 1);
     
     else if (s2 == "computer[2]")
-        p2 = new Computer(2);
+        p2 = new Computer(2, 1);
     
     else if (s2 == "computer[3]")
-        p2 = new Computer(3);
+        p2 = new Computer(3, 1);
     
     else if (s2 == "computer[4]")
-        p2 = new Computer(4);
+        p2 = new Computer(4, 1);
     
     else
         std::cout << "invalid input" << std::endl;
@@ -157,8 +157,12 @@ void Game::endGame(int player) {
     }
 }
 
-void Game::move(Piece *pc, std::string p) {
-    pc->move(p);
+void Game::move(std::string oldPos, std::string newPos) {
+    char xx = oldPos[0];
+    char yy = oldPos[1];
+    int x = xx - 97;
+    int y = yy - 49;
+    board[x][y].getPiece()->move(newPos);
     //check for check, checkmate, stalemate, upgrade
     updateBoard();
 }

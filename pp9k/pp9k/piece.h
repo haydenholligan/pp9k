@@ -11,11 +11,11 @@ private:
     std::string name, position;
 public:
     Piece(int x, int y, std::string position, char colour);
-    virtual int getX() = 0;
-    virtual int getY() = 0;
-    virtual std::string getPos() = 0;
-    virtual std::string getName() = 0;
-    virtual void setPos(std::string pos) = 0;
+    virtual int getX();
+    virtual int getY();
+    virtual std::string getPos();
+    virtual std::string getName();
+    virtual void setPos(std::string pos);
     virtual bool move(std::string pos);
     void setColour(char c);
     char getColour();

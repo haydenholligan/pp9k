@@ -3,7 +3,16 @@
 
 
 
-Game::Game(std::string s1, std::string s2) {
+Game::Game(): board(NULL) { }
+
+Game::~Game() {
+    
+}
+
+//Set up the board
+void Game::setup(std::string s1, std::string s2) {
+    
+    //initialize players
     if (s1 == "human")
         p1 = new Human();
     
@@ -23,7 +32,7 @@ Game::Game(std::string s1, std::string s2) {
         std::cout << "invalid input" << std::endl;
     
     if (s2 == "human")
-    p2 = new Human();
+        p2 = new Human();
     
     else if (s2 == "computer[1]")
         p1 = new Computer(1);
@@ -39,14 +48,7 @@ Game::Game(std::string s1, std::string s2) {
     
     else
         std::cout << "invalid input" << std::endl;
-}
 
-Game::~Game() {
-    
-}
-
-//Set up the board
-void Game::setup() {
     
     //Initialize memory for the tiles
     board = new Tile*[boardSize];
@@ -56,28 +58,28 @@ void Game::setup() {
     
     //Initialize the pieces for player 1
     p1Pieces.push_back(*(new Rook(0, 0, calcPosition(0, 0), 'w')));
-    p1Pieces.push_back(*(new Rook(7, 0,calcPosition(7, 0))));
-    p1Pieces.push_back(*(new Knight(1, 0,calcPosition(1, 0))));
-    p1Pieces.push_back(*(new Knight(6, 0,calcPosition(6, 0))));
-    p1Pieces.push_back(*(new Bishop(2, 0,calcPosition(2, 0))));
-    p1Pieces.push_back(*(new Bishop(5, 0,calcPosition(5, 0))));
-    p1Pieces.push_back(*(new Queen(3, 0,calcPosition(3, 0))));
-    p1Pieces.push_back(*(new King(4, 0,calcPosition(4, 0))));
+    p1Pieces.push_back(*(new Rook(7, 0,calcPosition(7, 0), 'w')));
+    p1Pieces.push_back(*(new Knight(1, 0,calcPosition(1, 0), 'w')));
+    p1Pieces.push_back(*(new Knight(6, 0,calcPosition(6, 0), 'w')));
+    p1Pieces.push_back(*(new Bishop(2, 0,calcPosition(2, 0), 'w')));
+    p1Pieces.push_back(*(new Bishop(5, 0,calcPosition(5, 0), 'w')));
+    p1Pieces.push_back(*(new Queen(3, 0,calcPosition(3, 0), 'w')));
+    p1Pieces.push_back(*(new King(4, 0,calcPosition(4, 0), 'w')));
     
     //Initialize the pieces for player 2
-    p2Pieces.push_back(*(new Rook(0, 7,calcPosition(0, 7))));
-    p2Pieces.push_back(*(new Rook(7, 7,calcPosition(7, 7))));
-    p2Pieces.push_back(*(new Knight(1, 7,calcPosition(1, 7))));
-    p2Pieces.push_back(*(new Knight(6, 7,calcPosition(6, 7))));
-    p2Pieces.push_back(*(new Bishop(2, 7,calcPosition(2, 7))));
-    p2Pieces.push_back(*(new Bishop(5, 7,calcPosition(5, 7))));
-    p2Pieces.push_back(*(new Queen(3, 7,calcPosition(3, 7))));
-    p2Pieces.push_back(*(new King(4, 7,calcPosition(4, 7))));
+    p2Pieces.push_back(*(new Rook(0, 7,calcPosition(0, 7), 'b')));
+    p2Pieces.push_back(*(new Rook(7, 7,calcPosition(7, 7), 'b')));
+    p2Pieces.push_back(*(new Knight(1, 7,calcPosition(1, 7), 'b')));
+    p2Pieces.push_back(*(new Knight(6, 7,calcPosition(6, 7), 'b')));
+    p2Pieces.push_back(*(new Bishop(2, 7,calcPosition(2, 7), 'b')));
+    p2Pieces.push_back(*(new Bishop(5, 7,calcPosition(5, 7), 'b')));
+    p2Pieces.push_back(*(new Queen(3, 7,calcPosition(3, 7), 'b')));
+    p2Pieces.push_back(*(new King(4, 7,calcPosition(4, 7), 'b')));
     
     //Initialize the pawns for both players
     for (int i = 0; i < boardSize; i++) {
-        p1Pieces.push_back(*(new Pawn(i, 0,calcPosition(i, 0))));
-        p2Pieces.push_back(*(new Pawn(i, 6,calcPosition(i, 6))));
+        p1Pieces.push_back(*(new Pawn(i, 0,calcPosition(i, 0), 'w')));
+        p2Pieces.push_back(*(new Pawn(i, 6,calcPosition(i, 6), 'b')));
     }
     
     //Initialize tile information
@@ -145,14 +147,28 @@ void Game::castle(Player *p) {
     
 }
 
-void Game::endGame(Player *winner) {
-    winner->addWin();
+void Game::endGame(int player) {
+    if (player == 1) {
+        p1->addWin();
+    }
+    
+    else if (player == 2) {
+        p2->addWin();
+    }
 }
 
 void Game::move(Piece *pc, std::string p) {
     pc->move(p);
     //check for check, checkmate, stalemate, upgrade
     updateBoard();
+}
+
+char Game::getPieceAt(std::string pos) {
+    char xx = pos[0];
+    char yy = pos[1];
+    int tempx = xx - 97;
+    int tempy = yy - 49;
+    std::string s = board[tempx][tempy].getPiece()->getName();
 }
 
 bool Game::isCheck() {
@@ -181,3 +197,4 @@ void Game::updateBoard() {
 void Game::setPosition(Piece *pc, std::string s) {
     
 }
+

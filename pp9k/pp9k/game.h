@@ -34,16 +34,17 @@ class Game {
     View view;
     
 public:
-    Game(std::string s1, std::string s2);
+    Game();
     ~Game();
-    void setup();
+    void setup(std::string s1, std::string s2);
     std::string calcPosition(int x, int y);
-    void endGame(Player *p);
-    void move(Piece *pc, std::string p);
+    void endGame(int player);
+    void move(Piece *pc, std::string pos);
     void castle(Player *p);
     bool isCheck();
     bool isCheckmate();
     bool isStalemate();
+    char getPieceAt(std::string p);
     void upgrade(Piece);
     void updateBoard();
     void setPosition(Piece *pc, std::string s);

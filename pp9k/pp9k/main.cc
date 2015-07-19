@@ -68,17 +68,13 @@ int main(int argc, const char * argv[]) {
                 //newPos will be a8, so newPos[1] is 8 (or 0)
                 if ((turn == 1 && newPos[1] == 8) || (turn == 2 && newPos[1] == 0)) {
                     cin >> upgrade;
-                    char xx = oldPos[0];
-                    char yy = oldPos[1];
-                    int x = xx - 97;
-                    int y = yy - 49;
-                    g.move(g.board[x][y].getPiece(), newPos);
+                }
+                    g.move(oldPos, newPos, upgrade);
                     if (g.isCheck()) {
                         if (g.isCheckmate()) {
                             g.endGame(turn);
                         }
                     }
-                }
                 
                 switch (turn) {
                     case 1:

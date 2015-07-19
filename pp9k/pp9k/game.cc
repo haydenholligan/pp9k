@@ -157,12 +157,19 @@ void Game::endGame(int player) {
     }
 }
 
-void Game::move(std::string oldPos, std::string newPos) {
+void Game::move(std::string oldPos, std::string newPos, char up) {
+
+    //get x, y coordinates
     char xx = oldPos[0];
     char yy = oldPos[1];
     int x = xx - 97;
     int y = yy - 49;
+    
     board[x][y].getPiece()->move(newPos);
+    if (up != 'a') {
+        //piece is to be upgraded
+        upgrade(board[x][y].getPiece(), up);
+    }
     //check for check, checkmate, stalemate, upgrade
     updateBoard();
 }
@@ -223,7 +230,7 @@ bool Game::isStalemate() {
     return 0;
 }
 
-void Game::upgrade(Piece) {
+void Game::upgrade(Piece *p, char piece) {
     
 }
 

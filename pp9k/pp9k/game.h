@@ -39,14 +39,14 @@ public:
     void setup(std::string s1, std::string s2);
     std::string calcPosition(int x, int y);
     void endGame(int player);
-    void move(std::string oldPos, std::string newPos);
+    void move(std::string oldPos, std::string newPos, char up = 'a');
     void castle(Player *p);
     bool isCheck();
     Player *getPlayer(int pNum);
     bool isCheckmate();
     bool isStalemate();
     char getPieceAt(std::string p);
-    void upgrade(Piece);
+    void upgrade(Piece *p, char piece);
     void updateBoard();
     void setPosition(Piece *pc, std::string s);
 };

@@ -2,10 +2,6 @@
 
 King::King(int x, int y, std::string position): Piece(x, y, position), name("king") {}
 
-void King::move(std::string pos) {
-    
-}
-
 int King::getX() {
     return this->x;
 }

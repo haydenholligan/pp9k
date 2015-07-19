@@ -2,10 +2,6 @@
 
 Pawn::Pawn(int x, int y, std::string position): Piece(x, y, position), name("pawn") {}
 
-void Pawn::move(std::string pos) {
-    
-}
-
 int Pawn::getX() {
     return this->x;
 }

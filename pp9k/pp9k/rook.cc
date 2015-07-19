@@ -2,10 +2,6 @@
 
 Rook::Rook(int x, int y, std::string position): Piece(x, y, position), name("rook") {}
 
-void Rook::move(std::string pos) {
-    
-}
-
 int Rook::getX() {
     return this->x;
 }

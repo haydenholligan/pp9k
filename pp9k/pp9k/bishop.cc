@@ -2,10 +2,6 @@
 
 Bishop::Bishop(int x, int y, std::string position): Piece(x, y, position), name("bishop") {}
 
-void Bishop::move(std::string pos) {
-    
-}
-
 int Bishop::getX() {
     return this->x;
 }

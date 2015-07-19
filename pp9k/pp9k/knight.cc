@@ -2,10 +2,6 @@
 
 Knight::Knight(int x, int y, std::string position): Piece(x, y, position), name("knight") {}
 
-void Knight::move(std::string pos) {
-    
-}
-
 int Knight::getX() {
     return this->x;
 }

@@ -1,7 +1,7 @@
 #include "bishop.h"
 #include <cmath>
 
-Bishop::Bishop(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("bishop") {}
+Bishop::Bishop(int x, int y, std::string position, char colour): Piece(x, y, position, colour,NULL), name("bishop") {}
 
 bool Bishop::isBishopMove(std::string pos){
 	int curX = this->getX(); 
@@ -15,9 +15,10 @@ bool Bishop::isBishopMove(std::string pos){
 }
 
 bool Bishop::ifBlockedPath(std::string pos){
-	
-	if(allied spot) return 0; // something about a null pointer
-	if(pieces blocking path) return 0; // something about a null pointer
+	if(g->getTileAt(pos)->getPieceAt() != NULL) {
+		if(g->getTileAt(string pos)->getPieceAt->getColour() == this->getColour()) return 1; // something about a null pointer}
+	if(pieces blocking path) return 1; // something about a null pointer loop pieces
+	return 0;
 }
 
 bool Bishop::isValidMove(std::string pos) {

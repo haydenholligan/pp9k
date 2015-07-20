@@ -9,6 +9,7 @@ private:
     int x,y;
     char colour;
     std::string name, position;
+    Game *g;
 public:
     Piece(int x, int y, std::string position, char colour);
     virtual int getX();
@@ -21,6 +22,8 @@ public:
     char getColour();
     //For isValidMove, make sure it accounts for movements as well as check/checkmate
     virtual bool isValidMove(std::string pos) = 0;
+    Game * getGame();
+    void setGame(Game * g);
     void stringSetPos(std::string pos);
 };
 

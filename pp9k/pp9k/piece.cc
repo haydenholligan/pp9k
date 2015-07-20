@@ -2,7 +2,7 @@
 #include <iostream>
 
 //might change position later to use setPos function
-Piece::Piece(int x, int y, std::string position, char colour): x(x), y(y), position(position), colour(colour) {}
+Piece::Piece(int x, int y, std::string position, char colour): x(x), y(y), position(position), colour(colour), g(NULL) {}
 
 int Piece::getX() {
     return this->x;
@@ -54,5 +54,13 @@ bool Piece::move(std::string pos) {
     
     }
     
+}
+
+void Piece::setGame(Game * g){
+	this->g = g;
+}
+
+Game * Piece::getGame(){
+	return this->g;
 }
 

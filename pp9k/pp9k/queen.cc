@@ -1,9 +1,14 @@
 #include "queen.h"
 
-Queen::Queen(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("queen") {}
+Queen::Queen(int x, int y, std::string position, char colour): Piece(x, y, position, colour,NULL), name("queen") {}
 
 bool Queen::isQueenMove(std::string pos){
-
+	if(g->getTileAt(pos)->getPieceAt() != NULL) {
+		if(g->getTileAt(string pos)->getPieceAt->getColour() == this->getColour()) return 1; // something about a null pointer}
+	
+	if(pieces blocking path) return 1; // something about a null pointer loop pieces
+	
+	return 0;
 }
 
 bool Queen::isValidMove(std::string pos) {

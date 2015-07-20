@@ -400,6 +400,18 @@ Player * Game::getPlayer(int pNum) {
         return p2;
 }
 
+bool Game::isValidPosition(std::string pos) {
+    char xx = pos[0];
+    char yy = pos[1];
+    int x = xx - 97;
+    int y = yy - 49;
+    if (x < 0 || x > 7 || y < 0 || y > 7) {
+        return 0;
+    }
+    return 1;
+}
+
+
 bool Game::isCheck() {
     
     return 0;
@@ -418,6 +430,15 @@ bool Game::isStalemate() {
 void Game::upgrade(Piece *p, char piece) {
     
 }
+
+Tile * Game::getTileAt(std::string pos) {
+    char xx = pos[0];
+    char yy = pos[1];
+    int x = xx - 97;
+    int y = yy - 49;
+    return &board[x][y];
+}
+
 
 void Game::updateBoard() {
     

@@ -51,6 +51,8 @@ public:
     char getPieceAt(std::string p);
     void upgrade(Piece *p, char piece);
     void updateBoard();
+    bool isValidPosition(std::string pos);
+    Tile *getTileAt(std::string pos);
     void setPosition(Piece *pc, std::string s);
 };
 

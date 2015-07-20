@@ -143,7 +143,14 @@ int main(int argc, const char * argv[]) {
                     string newPos;
                     cin >> piece;
                     cin >> newPos;
-                    
+                    switch (piece) {
+                        case 'r':
+                            
+                            break;
+                            
+                        default:
+                            break;
+                    }
                 }
                 
                 else if (next == "-") {

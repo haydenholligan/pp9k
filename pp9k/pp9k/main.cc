@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -17,6 +19,9 @@ using namespace std;
 #include "view.h"
 #include "textView.h"
 #include "graphicsView.h"
+
+char setupArr[9][8];
+
 
 bool isPieceMine(Game *g, string pos, int turn) {
     if (g->getPlayer(turn)->getPlayerNum() == 1 && (g->getPieceAt(pos) >= 65 && g->getPieceAt(pos) <= 90)) {
@@ -36,6 +41,41 @@ int main(int argc, const char * argv[]) {
     //Take input
     string s;
     Game g;
+
+    if (argc > 2) // argc should be 2 for correct execution
+        // We print argv[0] assuming it is the program name
+        cout<<"usage: "<< argv[0] <<" <filename>\n";
+    
+    else if (argc == 2) {
+        ifstream file (argv[1]);
+        if (!file.is_open())
+            cout<<"Could not open file\n";
+        else {
+            cout << "opening file" << endl;
+            char c;
+            int down = 0, across = 0;
+            while (file.get (c)) {
+                if (c == '\n')
+                    continue;
+                setupArr[down][across] = c;
+                across++;
+                if (across==8) {
+                    down++;
+                    across = 0;
+                }
+            }
+
+        }
+        g.setup(setupArr);
+        playing = true;
+        if (setupArr[9][0] == 'W') {
+            turn = 1;
+        }
+        else if (setupArr[9][0] == 'B') {
+            turn = 2;
+        }
+    }
+    
     while (cin >> s) {
         if (s == "game" && playing == false) {
             turn = 1;

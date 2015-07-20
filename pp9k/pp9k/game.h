@@ -14,9 +14,11 @@
 #include "knight.h"
 #include "queen.h"
 #include "king.h"
-#include "view.h"
+// #include "view.h"
 
 const int boardSize = 8;
+
+class View;
 
 class Game {
     //Board to hold the tiles, 8x8
@@ -37,6 +39,7 @@ public:
     Game();
     ~Game();
     void setup(std::string s1, std::string s2);
+    void setup(char setupArr[9][8]);
     std::string calcPosition(int x, int y);
     void endGame(int player);
     void move(std::string oldPos, std::string newPos, char up = 'a');

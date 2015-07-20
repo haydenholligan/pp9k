@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>6B4FACC6-604A-4FB0-99B5-6D674921561E</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>pp9k</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>FD6E112A8AC291BECAACA4765F8E1B33CB469D6C</key>
 		<string>https://github.com/haydenholligan/pp9k.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>pp9k/pp9k.xcodeproj/project.xcworkspace</string>
+	<string>pp9k/pp9k.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>FD6E112A8AC291BECAACA4765F8E1B33CB469D6C</key>

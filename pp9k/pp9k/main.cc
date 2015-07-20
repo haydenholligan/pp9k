@@ -21,7 +21,7 @@ using namespace std;
 #include "graphicsView.h"
 
 char setupArr[9][8];
-
+bool isBoardSet = 0;
 
 bool isPieceMine(Game *g, string pos, int turn) {
     if (g->getPlayer(turn)->getPlayerNum() == 1 && (g->getPieceAt(pos) >= 65 && g->getPieceAt(pos) <= 90)) {
@@ -67,6 +67,7 @@ int main(int argc, const char * argv[]) {
 
         }
         g.setup(setupArr);
+        isBoardSet = true;
         playing = true;
         if (setupArr[9][0] == 'W') {
             turn = 1;
@@ -77,14 +78,21 @@ int main(int argc, const char * argv[]) {
     }
     
     while (cin >> s) {
-        if (s == "game" && playing == false) {
+        if (s == "game") {
+            if (playing) {
+                cout << "already playing a game!" << endl;
+                continue;
+            }
             turn = 1;
             playing = true;
             string s1, s2;
             cin >> s1;
             cin >> s2;
             //might need to be fixed
-            g.setup(s1, s2);
+            if (!isBoardSet) {
+                g.setup(s1, s2);
+                isBoardSet = true;
+            }
         }
         
         else if (s == "resign") {
@@ -133,8 +141,22 @@ int main(int argc, const char * argv[]) {
         }
         
         //finish setup
-        else if (s == "setup" && playing == false) {
+        else if (s == "setup") {
+            if (playing) {
+                cout << "already playing a game!" << endl;
+                continue;
+            }
             playing = true;
+            char emptyBoard[9][8];
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 8; j++) {
+                        emptyBoard[i][j] = '_';
+                }
+            }
+            
+            //might need to fix
+            g.setup(emptyBoard);
+            isBoardSet = true;
             string next;
             while (cin >> next) {
                 
@@ -143,6 +165,10 @@ int main(int argc, const char * argv[]) {
                     string newPos;
                     cin >> piece;
                     cin >> newPos;
+                    if (!(g.isValidPosition(newPos))) {
+                        cout << "invalid position" << endl;
+                        continue;
+                    }
                     switch (piece) {
                         case 'r':
                             
@@ -156,6 +182,10 @@ int main(int argc, const char * argv[]) {
                 else if (next == "-") {
                     string tilePos;
                     cin >> tilePos;
+                    if (!(g.isValidPosition(tilePos))) {
+                        cout << "invalid position" << endl;
+                        continue;
+                    }
                     //remove piece
                 }
                 

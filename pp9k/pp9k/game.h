@@ -39,7 +39,7 @@ public:
     Game();
     ~Game();
     void setup(std::string s1, std::string s2);
-    void setup(char setupArr[9][8]);
+    void setup(char setupArr[9][8], bool isEmpty = 0);
     std::string calcPosition(int x, int y);
     void endGame(int player);
     void move(std::string oldPos, std::string newPos, char up = 'a');

@@ -11,9 +11,9 @@ class Player {
     Game *game;
 public:
     Player(int playerNum);
-    ~Player();
+    virtual ~Player();
     //movePiece is virtual bc computer's will be different
-    virtual void movePiece(Piece, std::string);
+    virtual void movePiece(Piece *p, std::string location);
     //rest don't need to be virtual
     int getPlayerNum();
     void setPlayerNum(int num);

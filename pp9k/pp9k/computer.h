@@ -10,7 +10,7 @@ class Computer: public Player {
     int numWins;
 public:
     Computer(int playerNum, int level);
-    void movePiece(Piece, std::string);
+    void movePiece(Piece *p, std::string location);
     void castle();
 };
 

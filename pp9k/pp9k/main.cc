@@ -99,7 +99,7 @@ int main(int argc, const char * argv[]) {
         
         else if (s == "move") {
             std::string oldPos, newPos;
-            char upgrade;
+            char upgrade = 0;
             cin >> oldPos;
             cin >> newPos;
             //make sure the player is moving THEIR pieces

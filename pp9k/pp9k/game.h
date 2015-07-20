@@ -33,7 +33,7 @@ class Game {
     std::vector<Piece> p1Pieces;
     std::vector<Piece> p2Pieces;
     
-   // View *view;
+   View *view;
     
 public:
     Game();

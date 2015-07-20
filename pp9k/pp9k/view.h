@@ -5,7 +5,7 @@
 class View {
 public:
     View();
-    ~View();
+    virtual ~View() = 0;
     virtual void printBoard() = 0;
 };
 

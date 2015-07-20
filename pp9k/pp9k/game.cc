@@ -7,6 +7,13 @@ Game::Game(): board(NULL) { }
 
 Game::~Game() {
     
+    for (int i = 0; i < boardSize; i++) {
+        delete [] board[i];
+    }
+    
+    delete [] board;
+    delete p1;
+    delete p2;
 }
 
 //Set up the board

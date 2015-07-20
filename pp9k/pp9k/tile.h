@@ -11,6 +11,7 @@ class Tile {
     Piece *pieceOnTile;
 public:
     Tile();
+    ~Tile();
    // Tile(int x, int y, std::string pos, Piece *p);
     int getX();
     int getY();

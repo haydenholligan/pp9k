@@ -2,6 +2,10 @@
 
 Tile::Tile(): x(0), y(0), position("0"), pieceOnTile(NULL) {}
 
+Tile::~Tile() {
+    pieceOnTile = NULL;
+}
+
 //Tile::Tile(int x, int y, std::string pos, Piece *p): x(x), y(y), position(pos), pieceOnTile((p != NULL) ? p : NULL) {}
 
 int Tile::getX() {

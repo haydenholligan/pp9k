@@ -69,12 +69,12 @@ int main(int argc, const char * argv[]) {
                 if ((turn == 1 && newPos[1] == 8) || (turn == 2 && newPos[1] == 0)) {
                     cin >> upgrade;
                 }
-                    g.move(oldPos, newPos, upgrade);
-                    if (g.isCheck()) {
-                        if (g.isCheckmate()) {
-                            g.endGame(turn);
-                        }
+                g.move(oldPos, newPos, upgrade);
+                if (g.isCheck()) {
+                    if (g.isCheckmate()) {
+                        g.endGame(turn);
                     }
+                }
                 
                 switch (turn) {
                     case 1:
@@ -90,11 +90,42 @@ int main(int argc, const char * argv[]) {
             else {
                 cout << "You can only move YOUR pieces!" << endl;
             }
-            
         }
         
-        else if (s == "setup") {
-            
+        else if (s == "setup" && playing == false) {
+            playing = true;
+            string next;
+            while (cin >> next) {
+                
+                if (next == "+") {
+                    char piece;
+                    string newPos;
+                    cin >> piece;
+                    cin >> newPos;
+                    
+                }
+                
+                else if (next == "-") {
+                    string tilePos;
+                    cin >> tilePos;
+                    //remove piece
+                }
+                
+                else if (next == "=") {
+                    int s;
+                    cin >> s;
+                    turn = s;
+                }
+                
+                else if (next == "done") {
+                    break;
+                }
+                
+                else {
+                    cout << "not valid setup input" << endl;
+                    continue;
+                }
+            }
         }
         
         else {

@@ -92,6 +92,7 @@ int main(int argc, const char * argv[]) {
             }
         }
         
+        //finish setup
         else if (s == "setup" && playing == false) {
             playing = true;
             string next;
@@ -131,7 +132,6 @@ int main(int argc, const char * argv[]) {
         else {
             cout << "invalid input" << endl;
         }
-        
         
     }
 }

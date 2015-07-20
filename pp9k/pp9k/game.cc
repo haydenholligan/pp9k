@@ -211,15 +211,15 @@ char Game::getPieceAt(std::string pos) {
             return tolower(s[0]);
         }
     }
+    return 'A'; // bad if A
 }
 
 Player * Game::getPlayer(int pNum) {
     if (pNum == 1) {
         return p1;
     }
-    if (pNum == 2) {
+    else
         return p2;
-    }
 }
 
 bool Game::isCheck() {

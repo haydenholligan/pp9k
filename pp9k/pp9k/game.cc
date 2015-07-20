@@ -1,6 +1,6 @@
 #include "game.h"
 #include <iostream>
-
+#include <sstream>
 
 
 Game::Game(): board(NULL) { }
@@ -402,10 +402,16 @@ Player * Game::getPlayer(int pNum) {
 
 bool Game::isValidPosition(std::string pos) {
     char xx = pos[0];
-    char yy = pos[1];
     int x = xx - 97;
-    int y = yy - 49;
-    if (x < 0 || x > 7 || y < 0 || y > 7) {
+    int y = 0;
+    std::string s = pos.substr(1, (pos.length() - 1));
+    std::stringstream ss(s);
+    ss>>y;
+    
+    if (x < 0 || x > 7) {
+        return 0;
+    }
+    if (y < 1 || y > 8) {
         return 0;
     }
     return 1;

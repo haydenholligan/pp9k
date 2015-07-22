@@ -1,10 +1,11 @@
 #include "king.h"
+#include "game.h"
 
 King::King(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("king") {}
 
 bool King::isKingMove(std::string pos){
-	if(g->getTileAt(pos)->getPieceAt() != NULL) {
-		if(g->getTileAt(string pos)->getPieceAt->getColour() == this->getColour()) return 1; // something about a null pointer}
+	if(g->getTileAt(pos)->getPiece() != NULL) {
+		if(g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) return 1; // something about a null pointer}
 	
 	if(pieces blocking path) return 1; // something about a null pointer loop pieces
 	

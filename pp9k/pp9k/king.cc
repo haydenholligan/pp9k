@@ -1,6 +1,6 @@
 #include "king.h"
 
-King::King(int x, int y, std::string position, char colour): Piece(x, y, position, colour, NULL), name("king") {}
+King::King(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("king") {}
 
 bool King::isKingMove(std::string pos){
 	if(g->getTileAt(pos)->getPieceAt() != NULL) {

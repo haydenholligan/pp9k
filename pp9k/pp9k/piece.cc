@@ -53,7 +53,6 @@ bool Piece::move(std::string pos) {
 		return false;
     
     }
-    
 }
 
 void Piece::setGame(Game * g){

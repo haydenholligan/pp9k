@@ -1,10 +1,11 @@
 #include "pawn.h"
+#include "game.h"
 
-Pawn::Pawn(int x, int y, std::string position, char colour): Piece(x, y, position, colour,NULL), name("pawn") {}
+Pawn::Pawn(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("pawn") {}
 
 bool Pawn::isPawnMove(std::string pos){
-	if(g->getTileAt(pos)->getPieceAt() != NULL) {
-		if(g->getTileAt(string pos)->getPieceAt->getColour() == this->getColour()) return 1; // something about a null pointer}
+	if(g->getTileAt(pos)->getPiece() != NULL) {
+		if(g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) return 1; // something about a null pointer}
 	if(pieces blocking path) return 1; // something about a null pointer loop pieces
 	
 	return 0;

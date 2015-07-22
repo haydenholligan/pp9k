@@ -1,6 +1,6 @@
 #include "rook.h"
 
-Rook::Rook(int x, int y, std::string position, char colour): Piece(x, y, position, colour,NULL), name("rook") {}
+Rook::Rook(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("rook") {}
 
 bool Rook::isRookMove(std::string pos){
 	if(g->getTileAt(pos)->getPieceAt() != NULL) {

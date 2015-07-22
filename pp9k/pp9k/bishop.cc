@@ -1,7 +1,7 @@
 #include "bishop.h"
 #include <cmath>
 
-Bishop::Bishop(int x, int y, std::string position, char colour): Piece(x, y, position, colour,NULL), name("bishop") {}
+Bishop::Bishop(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("bishop") {}
 
 bool Bishop::isBishopMove(std::string pos){
 	int curX = this->getX(); 

@@ -1,9 +1,9 @@
 #include "game.h"
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
-
-Game::Game(): board(NULL) { }
+Game::Game(): board(NULL), p1Pieces(0), p2Pieces(0) { }
 
 Game::~Game() {
     
@@ -14,6 +14,8 @@ Game::~Game() {
     delete [] board;
     delete p1;
     delete p2;
+    nump1Pieces = 0;
+    nump2Pieces = 0;
 }
 
 std::string Game::calcPosition(int x, int y) {
@@ -29,8 +31,120 @@ std::string Game::calcPosition(int x, int y) {
     return s;
 }
 
-void Game::castle(Player *p) {
-    
+//should be done now
+//might need to switch x and y in board[x][y]
+void Game::addPiece(char p, std::string pos) {
+    char xx = pos[0];
+    char yy = pos[1];
+    int x = xx - 97;
+    int y = yy - 49;
+    switch(p) {
+        case 'r':
+            p2Pieces.push_back(*(new Rook(x, y, pos, 'b')));
+            board[x][y].setPiece(&((p1Pieces.at(nump2Pieces))));
+            nump2Pieces++;
+            break;
+            
+        case 'n':
+            p2Pieces.push_back(*(new Knight(x, y, calcPosition(x, y), 'b')));
+            board[x][y].setPiece(&((p1Pieces.at(nump2Pieces))));
+            nump2Pieces++;
+            break;
+            
+        case 'b':
+            p2Pieces.push_back(*(new Bishop(x, y, calcPosition(x, y), 'b')));
+            board[x][y].setPiece(&((p1Pieces.at(nump2Pieces))));
+            nump2Pieces++;
+            break;
+            
+        case 'q':
+            p2Pieces.push_back(*(new Queen(x, y, calcPosition(x, y), 'b')));
+            board[x][y].setPiece(&((p1Pieces.at(nump2Pieces))));
+            nump2Pieces++;
+            break;
+            
+        case 'k':
+            p2Pieces.push_back(*(new King(x, y, calcPosition(x, y), 'b')));
+            board[x][y].setPiece(&((p1Pieces.at(nump2Pieces))));
+            nump2Pieces++;
+            break;
+            
+        case 'p':
+            p2Pieces.push_back(*(new Pawn(x, y, calcPosition(x, y), 'b')));
+            board[x][y].setPiece(&((p1Pieces.at(nump2Pieces))));
+            nump2Pieces++;
+            break;
+            
+        case 'R':
+            p1Pieces.push_back(*(new Rook(x, y, calcPosition(x, y), 'b')));
+            board[x][y].setPiece(&((p1Pieces.at(nump1Pieces))));
+            nump1Pieces++;
+            break;
+            
+        case 'N':
+            p1Pieces.push_back(*(new Knight(x, y, calcPosition(x, y), 'b')));
+            board[x][y].setPiece(&((p1Pieces.at(nump1Pieces))));
+            nump1Pieces++;
+            break;
+            
+        case 'B':
+            p1Pieces.push_back(*(new Bishop(x, y, calcPosition(x, y), 'b')));
+            board[x][y].setPiece(&((p1Pieces.at(nump1Pieces))));
+            nump1Pieces++;
+            break;
+            
+        case 'Q':
+            p1Pieces.push_back(*(new Queen(x, y, calcPosition(x, y), 'b')));
+            board[x][y].setPiece(&((p1Pieces.at(nump1Pieces))));
+            nump1Pieces++;
+            break;
+            
+        case 'K':
+            p1Pieces.push_back(*(new King(x, y, calcPosition(x, y), 'b')));
+            board[x][y].setPiece(&((p1Pieces.at(nump1Pieces))));
+            nump1Pieces++;
+            break;
+            
+        case 'P':
+            p1Pieces.push_back(*(new Pawn(x, y, calcPosition(x, y), 'b')));
+            board[x][y].setPiece(&((p1Pieces.at(nump1Pieces))));
+            nump1Pieces++;
+            break;
+            
+        default:
+            std::cout << "Not a valid piece!" << std::endl;
+            break;
+    }
+}
+
+void Game::removePiece(std::string pos) {
+    char xx = pos[0];
+    char yy = pos[1];
+    int x = xx - 97;
+    int y = yy - 49;
+    if (board[x][y].getPiece() == NULL) {
+        std::cout << "No piece to delete, taking no action" << std::endl;
+        return;
+    }
+    else {
+        std::string tmpName = board[x][y].getPiece()->getName();
+        for (int i = 0; i < std::max(p1Pieces.size(), p2Pieces.size()); i++) {
+            if (p1Pieces.at(i).getName() == tmpName) {
+                std::cout << "Found the piece, deleting from board" << std::endl;
+                //might need to change formula for begin + i
+                p1Pieces.erase(p1Pieces.begin() + i);
+                board[x][y].setPiece(NULL);
+                //redisplay board here
+            }
+            
+            if (p2Pieces.at(i).getName() == tmpName) {
+                std::cout << "Found the piece, deleting from board" << std::endl;
+                p2Pieces.erase(p1Pieces.begin() + i);
+                board[x][y].setPiece(NULL);
+                //redisplay board here
+            }
+        }
+    }
 }
 
 void Game::endGame(int player) {
@@ -58,6 +172,10 @@ void Game::move(std::string oldPos, std::string newPos, char up) {
     }
     //check for check, checkmate, stalemate, upgrade
     updateBoard();
+}
+
+void Game::castle(Player *p) {
+    
 }
 
 char Game::getPieceAt(std::string pos) {
@@ -212,6 +330,7 @@ void Game::setup(std::string s1, std::string s2) {
     p1Pieces.push_back(*(new Bishop(5, 0,calcPosition(5, 0), 'b')));
     p1Pieces.push_back(*(new Queen(3, 0,calcPosition(3, 0), 'b')));
     p1Pieces.push_back(*(new King(4, 0,calcPosition(4, 0), 'b')));
+    nump1Pieces += 8;
     
     //Initialize the pieces for player 2
     p2Pieces.push_back(*(new Rook(0, 7,calcPosition(0, 7), 'w')));
@@ -222,11 +341,14 @@ void Game::setup(std::string s1, std::string s2) {
     p2Pieces.push_back(*(new Bishop(5, 7,calcPosition(5, 7), 'w')));
     p2Pieces.push_back(*(new Queen(3, 7,calcPosition(3, 7), 'w')));
     p2Pieces.push_back(*(new King(4, 7,calcPosition(4, 7), 'w')));
-    
+    nump2Pieces += 8;
+
     //Initialize the pawns for both players
     for (int i = 0; i < boardSize; i++) {
         p1Pieces.push_back(*(new Pawn(i, 0,calcPosition(i, 0), 'b')));
         p2Pieces.push_back(*(new Pawn(i, 6,calcPosition(i, 6), 'w')));
+        nump1Pieces++;
+        nump2Pieces++;
     }
     
     //Initialize tile information
@@ -279,8 +401,6 @@ void Game::setup(std::string s1, std::string s2) {
 void Game::setup(char setupArr[9][8], bool isEmpty) {
     p1 = new Human(1);
     p2 = new Human(1);
-    int nump1Pieces = 0;
-    int nump2Pieces = 0;
     
     board = new Tile*[boardSize];
     for (int i = 0; i < boardSize; i++) {

@@ -1,6 +1,6 @@
 #include "queen.h"
 
-Queen::Queen(int x, int y, std::string position, char colour): Piece(x, y, position, colour,NULL), name("queen") {}
+Queen::Queen(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("queen") {}
 
 bool Queen::isQueenMove(std::string pos){
 	if(g->getTileAt(pos)->getPieceAt() != NULL) {

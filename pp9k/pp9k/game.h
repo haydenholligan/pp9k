@@ -32,6 +32,8 @@ class Game {
     //holds pieces for each separate player
     std::vector<Piece> p1Pieces;
     std::vector<Piece> p2Pieces;
+    int nump1Pieces;
+    int nump2Pieces;
     
    View *view;
     
@@ -40,6 +42,8 @@ public:
     ~Game();
     void setup(std::string s1, std::string s2);
     void setup(char setupArr[9][8], bool isEmpty = 0);
+    void addPiece(char p, std::string pos);
+    void removePiece(std::string pos);
     std::string calcPosition(int x, int y);
     void endGame(int player);
     void move(std::string oldPos, std::string newPos, char up = 'a');

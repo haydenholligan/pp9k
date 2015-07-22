@@ -98,10 +98,14 @@ int main(int argc, const char * argv[]) {
         else if (s == "resign") {
             if (turn == 1) {
                 g.endGame(2);
+                isBoardSet = false;
+                playing = false;
             }
             
             else if (turn == 2) {
                 g.endGame(1);
+                isBoardSet = false;
+                playing = false;
             }
         }
         
@@ -117,10 +121,13 @@ int main(int argc, const char * argv[]) {
                 if ((turn == 1 && newPos[1] == 8) || (turn == 2 && newPos[1] == 0)) {
                     cin >> upgrade;
                 }
+                
                 g.move(oldPos, newPos, upgrade);
                 if (g.isCheck()) {
                     if (g.isCheckmate()) {
                         g.endGame(turn);
+                        isBoardSet = false;
+                        playing = false;
                     }
                 }
                 
@@ -159,7 +166,6 @@ int main(int argc, const char * argv[]) {
             isBoardSet = true;
             string next;
             while (cin >> next) {
-                
                 if (next == "+") {
                     char piece;
                     string newPos;
@@ -169,14 +175,8 @@ int main(int argc, const char * argv[]) {
                         cout << "invalid position" << endl;
                         continue;
                     }
-                    switch (piece) {
-                        case 'r':
-                            
-                            break;
-                            
-                        default:
-                            break;
-                    }
+                    cout << "adding piece" << endl;
+                    g.addPiece(playing, newPos);
                 }
                 
                 else if (next == "-") {
@@ -186,16 +186,18 @@ int main(int argc, const char * argv[]) {
                         cout << "invalid position" << endl;
                         continue;
                     }
-                    //remove piece
+                    g.removePiece(tilePos);
                 }
                 
                 else if (next == "=") {
                     int s;
                     cin >> s;
                     turn = s;
+                    cout << "Player " << s << "'s turn" << endl;
                 }
                 
                 else if (next == "done") {
+                    cout << "exiting setup" << endl;
                     break;
                 }
                 

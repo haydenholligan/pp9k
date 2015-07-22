@@ -1,6 +1,6 @@
 #include "knight.h"
 
-Knight::Knight(int x, int y, std::string position, char colour): Piece(x, y, position, colour,NULL), name("knight") {}
+Knight::Knight(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("knight") {}
 
 bool Knight::isKnightMove(std::string pos){
 	if(g->getTileAt(pos)->getPieceAt() != NULL) {

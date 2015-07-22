@@ -3,12 +3,14 @@
 
 #include <string>
 
+class Game;
 //abstract class
 class Piece {
 private:
     int x,y;
     char colour;
     std::string name, position;
+protected:
     Game *g;
 public:
     Piece(int x, int y, std::string position, char colour);

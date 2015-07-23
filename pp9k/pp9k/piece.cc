@@ -34,13 +34,12 @@ void Piece::setColour(char c){
 
 void Piece::stringSetPos(std::string pos){
 	this->position = pos;
-    
-    	char xx = pos[0];
-    	char yy = pos[1];
-    	int tempx = xx - 97;
-    	int tempy = yy - 49;
-	this->x = tempx;
-	this->y = tempy;
+    char xx = pos[0];
+    char yy = pos[1];
+    int x = xx - 97;
+    int y = 7 - (yy - 49);
+	this->x = x;
+	this->y = y;
 }
 
 bool Piece::move(std::string pos) {

@@ -19,7 +19,7 @@ public:
     void setY(int y);
     Piece *getPiece();
     std::string getPos();
-    void setPos(std::string);
+    void setPos(std::string pos);
     void setPiece(Piece *p);
 };
 

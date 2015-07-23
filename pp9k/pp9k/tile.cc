@@ -37,6 +37,12 @@ Piece *Tile::getPiece() {
 }
 
 //sets the position as well as the x and y coordinates
-void Tile::setPos(std::string) {
-    
+void Tile::setPos(std::string pos) {
+    position = pos;
+    char xx = pos[0];
+    char yy = pos[1];
+    int x2 = xx - 97;
+    int y2 = 7 - (yy - 49);
+    x = x2;
+    y = y2;
 }

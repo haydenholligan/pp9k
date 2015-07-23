@@ -6,7 +6,8 @@ using namespace std;
 textView::textView() {
     
     for (int i = 0; i < boardHeight; i++) {
-        board[i][0] = 'a';
+        //initialize line number
+        board[i][0] = 8 - i + 48;
         board[i][1] = ' ';
     }
     
@@ -64,7 +65,7 @@ char textView::dashOrSpace(string pos) {
     char xx = pos[0];
     char yy = pos[1];
     int x = xx - 97;
-    int y = yy - 49;
+    int y = 7 - (yy - 49);
     
     if ((x % 2 == 0) && (y % 2 == 0)) {
         return ' ';
@@ -82,16 +83,16 @@ char textView::dashOrSpace(string pos) {
 void textView::updateBoard(string oldPos, string newPos, char c) {
     setPos(oldPos, dashOrSpace(oldPos));
     setPos(newPos, c);
-    //might need to call more functions
+    printBoard();
 }
 
 void textView::setPos(string pos, char c) {
     char xx = pos[0];
     char yy = pos[1];
-    int tempx = xx - 97;
-    int tempy = yy - 49;
+    int x = xx - 97;
+    int y = 7 - (yy - 49);
 
-    board[tempx][tempy] = c;
+    board[y][x] = c;
 
 }
 
@@ -108,8 +109,4 @@ void textView::printBoard() {
     }
     cout << endl;
 }
-
-
-
-
 

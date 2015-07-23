@@ -7,7 +7,6 @@ class Game;
 
 class Player {
     int playerNumber;
-    int numWins;
     Game *game;
 public:
     Player(int playerNum);
@@ -19,7 +18,6 @@ public:
     void setPlayerNum(int num);
     void castle();
     void resign();
-    void addWin();
     void setGame(Game *Game);
 };
 

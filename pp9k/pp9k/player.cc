@@ -1,6 +1,6 @@
 #include "player.h"
 
-Player::Player(int playerNum): numWins(0), game(NULL), playerNumber(playerNum) {}
+Player::Player(int playerNum): game(NULL), playerNumber(playerNum) {}
 
 Player::~Player() {
     game = NULL;
@@ -11,9 +11,6 @@ void Player::resign() {
     //game->endGame(this);
 }
 
-void Player::addWin() {
-    numWins++;
-}
 
 void Player::setGame(Game *g) {
     game = g;

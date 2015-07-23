@@ -45,7 +45,6 @@ public:
     void addPiece(char p, std::string pos);
     void removePiece(std::string pos);
     std::string calcPosition(int x, int y);
-    void endGame(int player);
     void move(std::string oldPos, std::string newPos, char up = 'a');
     void castle(Player *p);
     bool isCheck();
@@ -54,7 +53,7 @@ public:
     bool isStalemate();
     char getPieceAt(std::string p);
     void upgrade(Piece *p, char piece);
-    void updateBoard();
+    void updateBoard(std::string oldPos, std::string newPos);
     bool isValidPosition(std::string pos);
     Tile *getTileAt(std::string pos);
     void setPosition(Piece *pc, std::string s);

@@ -22,6 +22,8 @@ using namespace std;
 
 char setupArr[9][8];
 bool isBoardSet = 0;
+int numWhiteWins = 0;
+int numBlackWins = 0;
 
 bool isPieceMine(Game *g, string pos, int turn) {
     if (g->getPlayer(turn)->getPlayerNum() == 1 && (g->getPieceAt(pos) >= 65 && g->getPieceAt(pos) <= 90)) {
@@ -34,14 +36,19 @@ bool isPieceMine(Game *g, string pos, int turn) {
     return false;
 }
 
+void outputFinalScore() {
+    cout << "Final Score: " << endl;
+    cout << "White: " << numWhiteWins << endl;
+    cout << "Black: " << numBlackWins << endl;
+}
+
 int main(int argc, const char * argv[]) {
     bool playing = false;
     int turn = -1;
     //1 is player 1's turn(white), 2 is player 2's turn(black)
     //Take input
     string s;
-    Game g;
-
+    Game *g = NULL;
     if (argc > 2) // argc should be 2 for correct execution
         // We print argv[0] assuming it is the program name
         cout<<"usage: "<< argv[0] <<" <filename>\n";
@@ -66,7 +73,9 @@ int main(int argc, const char * argv[]) {
             }
 
         }
-        g.setup(setupArr);
+        
+        g = new Game;
+        g->setup(setupArr);
         isBoardSet = true;
         playing = true;
         if (setupArr[9][0] == 'W') {
@@ -90,20 +99,25 @@ int main(int argc, const char * argv[]) {
             cin >> s2;
             //might need to be fixed
             if (!isBoardSet) {
-                g.setup(s1, s2);
+                g = new Game;
+                g->setup(s1, s2);
                 isBoardSet = true;
             }
         }
         
         else if (s == "resign") {
             if (turn == 1) {
-                g.endGame(2);
+                cout << "Black wins!" << endl;
+                numBlackWins++;
+                delete g;
                 isBoardSet = false;
                 playing = false;
             }
             
             else if (turn == 2) {
-                g.endGame(1);
+                cout << "White wins!" << endl;
+                numWhiteWins++;
+                delete g;
                 isBoardSet = false;
                 playing = false;
             }
@@ -115,17 +129,19 @@ int main(int argc, const char * argv[]) {
             cin >> oldPos;
             cin >> newPos;
             //make sure the player is moving THEIR pieces
-            if (isPieceMine(&g, oldPos, turn)) {
+            if (isPieceMine(g, oldPos, turn)) {
                 //check for another cin statement for upgrading
                 //newPos will be a8, so newPos[1] is 8 (or 0)
                 if ((turn == 1 && newPos[1] == 8) || (turn == 2 && newPos[1] == 0)) {
                     cin >> upgrade;
                 }
                 
-                g.move(oldPos, newPos, upgrade);
-                if (g.isCheck()) {
-                    if (g.isCheckmate()) {
-                        g.endGame(turn);
+                g->move(oldPos, newPos, upgrade);
+                if (g->isCheck()) {
+                    if (g->isCheckmate()) {
+                        //if it's white's turn, white gets a point, else black gets a point
+                        (turn == 1) ? numWhiteWins++ : numBlackWins++;
+                        delete g;
                         isBoardSet = false;
                         playing = false;
                     }
@@ -133,9 +149,11 @@ int main(int argc, const char * argv[]) {
                 
                 switch (turn) {
                     case 1:
+                        cout << "Black's turn!" << endl;
                         turn = 2;
                         break;
                     case 2:
+                        cout << "White's turn!" << endl;
                         turn = 1;
                     default:
                         break;
@@ -162,7 +180,8 @@ int main(int argc, const char * argv[]) {
             }
             
             //might need to fix
-            g.setup(emptyBoard);
+            g = new Game;
+            g->setup(emptyBoard);
             isBoardSet = true;
             string next;
             while (cin >> next) {
@@ -171,22 +190,22 @@ int main(int argc, const char * argv[]) {
                     string newPos;
                     cin >> piece;
                     cin >> newPos;
-                    if (!(g.isValidPosition(newPos))) {
+                    if (!(g->isValidPosition(newPos))) {
                         cout << "invalid position" << endl;
                         continue;
                     }
                     cout << "adding piece" << endl;
-                    g.addPiece(playing, newPos);
+                    g->addPiece(playing, newPos);
                 }
                 
                 else if (next == "-") {
                     string tilePos;
                     cin >> tilePos;
-                    if (!(g.isValidPosition(tilePos))) {
+                    if (!(g->isValidPosition(tilePos))) {
                         cout << "invalid position" << endl;
                         continue;
                     }
-                    g.removePiece(tilePos);
+                    g->removePiece(tilePos);
                 }
                 
                 else if (next == "=") {
@@ -213,4 +232,6 @@ int main(int argc, const char * argv[]) {
         }
         
     }
+    outputFinalScore();
+    delete g;
 }

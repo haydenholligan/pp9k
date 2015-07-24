@@ -14,7 +14,6 @@
 #include "knight.h"
 #include "queen.h"
 #include "king.h"
-// #include "view.h"
 
 const int boardSize = 8;
 
@@ -53,7 +52,7 @@ public:
     bool isStalemate();
     char getPieceAt(std::string p);
     void upgrade(Piece *p, char piece);
-    void updateBoard(std::string oldPos, std::string newPos);
+    void updateBoard(std::string oldPos = "0", std::string newPos = "0", char c = 'a');
     bool isValidPosition(std::string pos);
     Tile *getTileAt(std::string pos);
     void setPosition(Piece *pc, std::string s);

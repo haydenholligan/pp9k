@@ -45,6 +45,10 @@ textView::textView() {
     }
 }
 
+textView::~textView() {
+    game = NULL;
+}
+
 //Determine if dash or blank for chess board
 char textView::dashOrSpace(int x, int y) {
     if ((x % 2 == 0) && (y % 2 == 0)) {
@@ -81,8 +85,19 @@ char textView::dashOrSpace(string pos) {
 }
 
 void textView::updateBoard(string oldPos, string newPos, char c) {
-    setPos(oldPos, dashOrSpace(oldPos));
-    setPos(newPos, c);
+    //add new piece
+    if (c != 'c' && newPos != "0") {
+        setPos(newPos, c);
+    }
+    //move piece
+    else if (oldPos != "0" && newPos != "0") {
+        setPos(oldPos, dashOrSpace(oldPos));
+        setPos(newPos, getCharAt(oldPos));
+    }
+    //remove piece
+    else if (oldPos != "0" && c == 'x') {
+        setPos(oldPos, dashOrSpace(oldPos));
+    }
     printBoard();
 }
 
@@ -94,6 +109,14 @@ void textView::setPos(string pos, char c) {
 
     board[y][x] = c;
 
+}
+
+char textView::getCharAt(std::string pos) {
+    char xx = pos[0];
+    char yy = pos[1];
+    int x = xx - 97;
+    int y = 7 - (yy - 49);
+    return board[y][x+2];
 }
 
 void textView::setGame(Game *g) {

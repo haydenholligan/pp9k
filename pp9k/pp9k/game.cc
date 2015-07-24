@@ -2,12 +2,17 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include "view.h"
+#include "textView.h"
+//#include <graphicsView.h>
 
 using namespace std;
 
 Game::Game(): board(NULL), p1Pieces(0), p2Pieces(0) {
     cout << "Calling game constructor" << endl;
+    view = new textView;
 }
+
 
 Game::~Game() {
     cout << "Calling game destructor" << endl;
@@ -34,13 +39,12 @@ string Game::calcPosition(int x, int y) {
     return s;
 }
 
-//should be done now
-//might need to switch x and y in board[x][y]
 void Game::addPiece(char p, string pos) {
     char xx = pos[0];
     char yy = pos[1];
     int x = xx - 97;
     int y = 7 - (yy - 49);
+    string s = calcPosition(x, y);
     switch(p) {
         case 'r':
             p2Pieces.push_back(*(new Rook(x, y, pos, 'b')));
@@ -118,7 +122,8 @@ void Game::addPiece(char p, string pos) {
             cout << "Not a valid piece!" << endl;
             break;
     }
-    updateBoard();
+    //old position doesn't change, new position gets piece p
+    updateBoard("0", s, p);
 }
 
 void Game::removePiece(string pos) {
@@ -138,14 +143,14 @@ void Game::removePiece(string pos) {
                 //might need to change formula for begin + i
                 p1Pieces.erase(p1Pieces.begin() + i);
                 board[y][x].setPiece(NULL);
-                updateBoard();
+                updateBoard(pos, "0", 'x');
             }
             
             if (p2Pieces.at(i).getName() == tmpName) {
                 cout << "Found the piece, deleting from board" << endl;
                 p2Pieces.erase(p1Pieces.begin() + i);
                 board[y][x].setPiece(NULL);
-                updateBoard();
+                updateBoard(pos, "0", 'x');
             }
         }
     }
@@ -166,7 +171,7 @@ void Game::move(string oldPos, string newPos, char up) {
         upgrade(board[y][x].getPiece(), up);
     }
     //check for check, checkmate, stalemate, upgrade
-    updateBoard();
+    updateBoard(oldPos, newPos, up);
 }
 
 void Game::castle(Player *p) {
@@ -268,8 +273,8 @@ Tile * Game::getTileAt(string pos) {
 }
 
 
-void Game::updateBoard(std::string oldPos, std::string newPos) {
-    //TODO
+void Game::updateBoard(std::string oldPos, std::string newPos, char c) {
+    view->updateBoard(oldPos, newPos, c);
 }
 
 void Game::setPosition(Piece *pc, string s) {

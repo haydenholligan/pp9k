@@ -4,9 +4,28 @@
 Pawn::Pawn(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("pawn") {}
 
 bool Pawn::isPawnMove(std::string pos){
+	
+	int curX = this->getX(); 
+	int curY = this->getY();
+	char xx = pos[0];
+    	char yy = pos[1];
+	int moveX = xx - 97;
+    	int moveY = yy - 49;
+	
 	if(g->getTileAt(pos)->getPiece() != NULL) {
-		if(g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) return 1; // something about a null pointer}
-	if(pieces blocking path) return 1; // something about a null pointer loop pieces
+		if(g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) return 0; // something about a null pointer}
+	
+	if ((abs(xx - moveX) == abs(yy - moveY)) == 1) && 
+			((g->getTileAt(pos)->getPiece() != NULL) && 
+				(g->getTileAt(pos)->getPiece()->getColour() != this->getColour()))) return 1; //attacking opponents diagonally 1 unit
+
+	if ((abs(yy - moveY) == 1)) && 
+			((g->getTileAt(pos)->getPiece() == NULL)) return 1; //moving 1 unit forward
+	
+	if ((((abs(yy - moveY) == 2)) && (***FIRST MOVE***)) &&
+			((g->getTileAt(pos)->getPiece() == NULL)) return 1; //moving 2 units forward on first move
+
+	//en passant
 	
 	return 0;
 }

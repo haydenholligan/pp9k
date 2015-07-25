@@ -22,6 +22,7 @@ public:
     virtual bool move(std::string pos);
     void setColour(char c);
     char getColour();
+    std::string intPosToStr(int x,int y);
     //For isValidMove, make sure it accounts for movements as well as check/checkmate
     virtual bool isValidMove(std::string pos) = 0;
     Game * getGame();

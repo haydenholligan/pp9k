@@ -32,6 +32,17 @@ void Piece::setColour(char c){
 
 }
 
+string Piece::intPosToStr(int x, int y){
+    char c = x + 97;
+    string s = "";
+    //add c to the beginning of the string
+    s = s + c;
+    //this just flips j so instead of 0, you get 8, or instead of 1 you get 7, etc. due to the layout of a chessboard
+    int i1 = 8 - y;
+    s = s + to_string(i1);
+    return s;
+}
+
 void Piece::stringSetPos(std::string pos){
 	this->position = pos;
     char xx = pos[0];

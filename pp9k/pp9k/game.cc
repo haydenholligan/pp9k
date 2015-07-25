@@ -170,11 +170,6 @@ void Game::move(string oldPos, string newPos, char up) {
     
     board[y][x].getPiece()->move(newPos);
     if (up != 'a') {
-        //piece is to be upgraded
-        //need to
-        // delete old piece
-        // create new piece
-        // update the board
         upgrade(board[y][x].getPiece(), up);
     }
     //check for check, checkmate, stalemate, upgrade
@@ -295,6 +290,28 @@ void Game::upgrade(Piece *p, char piece) {
 	string pos = p->getPos();
 	char c = p->getColour();
     
+    switch (piece) {
+        case 'Q':
+            board[y][x].setPiece(new Queen(x, y, pos, c));
+            break;
+            
+        case 'R':
+            board[y][x].setPiece(new Rook(x, y, pos, c));
+            break;
+            
+        case 'N':
+            board[y][x].setPiece(new Knight(x, y, pos, c));
+            break;
+            
+        case 'B':
+            board[y][x].setPiece(new Bishop(x, y, pos, c));
+            break;
+            
+        default:
+            cout << "invalid character for upgrade" << endl;
+            break;
+    }
+    
     string tmpName = board[y][x].getPiece()->getName();
     char tmpColour = board[y][x].getPiece()->getColour();
     
@@ -302,43 +319,17 @@ void Game::upgrade(Piece *p, char piece) {
     for (int i = 0; i < max(p1Pieces.size(), p2Pieces.size()); i++) {
         if ((p1Pieces.at(i).getName() == tmpName) && (p1Pieces.at(i).getColour() == tmpColour)) {
             iter = i;
+            p1Pieces.erase(p1Pieces.begin() + iter);
+            p1Pieces.insert(p1Pieces.begin() + iter, *board[y][x].getPiece());
         }
         
-        else if ((p1Pieces.at(i).getName() == tmpName) && (p1Pieces.at(i).getColour() == tmpColour)) {
+        else if ((p2Pieces.at(i).getName() == tmpName) && (p2Pieces.at(i).getColour() == tmpColour)) {
             iter = i;
+            p2Pieces.erase(p2Pieces.begin() + iter);
+            p2Pieces.insert(p2Pieces.begin() + iter, *board[y][x].getPiece());
         }
     }
 
-    switch (piece) {
-        case 'Q':
-            p2Pieces.erase(p1Pieces.begin() + iter);
-            p1Pieces.insert(p1Pieces.begin() + iter, *(new Queen(x, y, pos, c)));
-            board[y][x].setPiece(&p1Pieces.at(iter));
-            
-            break;
-            
-        case 'R':
-            p2Pieces.erase(p1Pieces.begin() + iter);
-            p1Pieces.insert(p1Pieces.begin() + iter, *(new Rook(x, y, pos, c)));
-            board[y][x].setPiece(&p1Pieces.at(iter));
-            break;
-            
-        case 'N':
-            p2Pieces.erase(p1Pieces.begin() + iter);
-            p1Pieces.insert(p1Pieces.begin() + iter, *(new Knight(x, y, pos, c)));
-            board[y][x].setPiece(&p1Pieces.at(iter));
-            break;
-            
-        case 'B':
-            p2Pieces.erase(p1Pieces.begin() + iter);
-            p1Pieces.insert(p1Pieces.begin() + iter, *(new Bishop(x, y, pos, c)));
-            board[y][x].setPiece(&p1Pieces.at(iter));
-            break;
-            
-        default:
-            cout << "invalid character for upgrade" << endl;
-            break;
-    }
     
     updateBoard("0", pos, 'x');
 }

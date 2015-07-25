@@ -182,7 +182,13 @@ void Game::move(string oldPos, string newPos, char up) {
 }
 
 void Game::castle(Player *p) {
-    
+    if(king moved)
+    else if(rook moved)
+    else if(pieces between)
+    else if(this->isCheck())
+    else if(any spots it passes can be attacked)
+    else if(would be in check after move)
+    else 
 }
 
 char Game::getPieceAt(string pos) {

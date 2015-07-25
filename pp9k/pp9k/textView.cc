@@ -17,7 +17,7 @@ textView::textView() {
             board[i][j] = dashOrSpace(i, j);
         }
     }
-
+    
     //Initialize top player's pieces
     board[0][2] = 'r';
     board[0][9] = 'r';
@@ -106,9 +106,9 @@ void textView::setPos(string pos, char c) {
     char yy = pos[1];
     int x = xx - 97;
     int y = 7 - (yy - 49);
-
+    
     board[y][x] = c;
-
+    
 }
 
 char textView::getCharAt(std::string pos) {

@@ -20,56 +20,56 @@ std::string Piece::getName() {
 }
 
 void Piece::setPos(std::string pos) {
-	stringSetPos(pos);
+    stringSetPos(pos);
 }
 
 char Piece::getColour(){
-	return this->colour;
+    return this->colour;
 }
 
 void Piece::setColour(char c){
     this->colour = c;
-
+    
 }
 
-string Piece::intPosToStr(int x, int y){
+std::string Piece::intPosToStr(int x, int y){
     char c = x + 97;
-    string s = "";
+    std::string s = "";
     //add c to the beginning of the string
     s = s + c;
     //this just flips j so instead of 0, you get 8, or instead of 1 you get 7, etc. due to the layout of a chessboard
     int i1 = 8 - y;
-    s = s + to_string(i1);
+    s = s + std::to_string(i1);
     return s;
 }
 
 void Piece::stringSetPos(std::string pos){
-	this->position = pos;
+    this->position = pos;
     char xx = pos[0];
     char yy = pos[1];
     int x = xx - 97;
     int y = 7 - (yy - 49);
-	this->x = x;
-	this->y = y;
+    this->x = x;
+    this->y = y;
 }
 
 bool Piece::move(std::string pos) {
-	if(isValidMove(pos)) {
-		setPos(pos); 
-		return true;
+    if(isValidMove(pos)) {
+        setPos(pos);
+        return true;
     }
-	else {
+    else {
         std::cout << "Invalid move, try again" << std::endl;
-		return false;
-    
+        return false;
+        
     }
 }
 
 void Piece::setGame(Game * g){
-	this->g = g;
+    this->g = g;
 }
 
 Game * Piece::getGame(){
-	return this->g;
+    return this->g;
 }
 

@@ -239,7 +239,12 @@ bool Game::isValidPosition(string pos) {
 
 
 bool Game::isCheck() {
-    
+    //should be simple to determine if a king is in check
+    //every time a piece is moved, determine if any of the opponent's pieces
+    //have legal moves to capture the king
+    //if they do, it's check
+    //this has to be checked before a move as well to make sure you
+    //aren't placing your king in check
     cout << "White is in check!" << endl;
     cout << "Black is in check!" << endl;
 
@@ -247,7 +252,11 @@ bool Game::isCheck() {
 }
 
 bool Game::isCheckmate() {
-    
+    //ways to avoid checkmate:
+    //1. capture the checking piece (doesn't work in double check)
+    //2. move a piece inbetween the king and threatening piece
+    //3. king moves out of check
+    //if none of these are possible, it is checkmate or stalemate
     cout << "Checkmate! White wins!" << endl;
     cout << "Checkmate! Black wins!" << endl;
     
@@ -255,7 +264,12 @@ bool Game::isCheckmate() {
 }
 
 bool Game::isStalemate() {
+    //If any player ever has no legal moves available, but is not
+    //in check, it is known as stalemate,and the game is a draw.
+    //taken from the assignment, this is all we need to do for isStalemate
     
+    //loop through each piece, and if any possible move for that piece is invalid
+    //and not check, then it's stalemate.
     cout << "Stalemate!" << endl;
     return 0;
 }

@@ -17,7 +17,6 @@ public:
     std::string getName();
     void setPos(std::string pos);
     bool isValidMove(std::string pos);
-    bool isBlockedPath(std::string pos);
     void stringSetPos(std::string pos);
     bool isKingMove(std::string pos);
 };

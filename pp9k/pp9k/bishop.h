@@ -19,6 +19,8 @@ public:
     bool isValidMove(std::string pos);
     void stringSetPos(std::string pos);
     bool isBishopMove(std::string pos);
+    bool isBlockedPath(std::string pos);
+
 };
 
 #endif

@@ -71,7 +71,7 @@ int main(int argc, const char * argv[]) {
                     across = 0;
                 }
             }
-
+            
         }
         
         g = new Game;
@@ -175,7 +175,7 @@ int main(int argc, const char * argv[]) {
             char emptyBoard[9][8];
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 8; j++) {
-                        emptyBoard[i][j] = '_';
+                    emptyBoard[i][j] = '_';
                 }
             }
             

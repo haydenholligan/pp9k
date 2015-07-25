@@ -247,7 +247,7 @@ bool Game::isCheck() {
     //aren't placing your king in check
     cout << "White is in check!" << endl;
     cout << "Black is in check!" << endl;
-
+    
     return 0;
 }
 
@@ -270,6 +270,7 @@ bool Game::isStalemate() {
     
     //loop through each piece, and if any possible move for that piece is invalid
     //and not check, then it's stalemate.
+    
     cout << "Stalemate!" << endl;
     return 0;
 }
@@ -363,7 +364,7 @@ void Game::setup(string s1, string s2) {
     p2Pieces.push_back(*(new Queen(3, 7,calcPosition(3, 7), 'w')));
     p2Pieces.push_back(*(new King(4, 7,calcPosition(4, 7), 'w')));
     nump2Pieces += 8;
-
+    
     //Initialize the pawns for both players
     for (int i = 0; i < boardSize; i++) {
         p1Pieces.push_back(*(new Pawn(i, 0,calcPosition(i, 0), 'b')));

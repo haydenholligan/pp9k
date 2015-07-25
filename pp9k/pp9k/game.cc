@@ -276,7 +276,28 @@ bool Game::isStalemate() {
 }
 
 void Game::upgrade(Piece *p, char piece) {
-    
+	int xx = p->getX();
+	int yy = p->getY();
+	string pos = p->getPos();
+	char c = p->colour;    
+	delete p;
+    if(piece == 'Q'){
+	board[yy][xx].setPiece(Queen(xx,yy,pos,c));
+	}
+
+    else if(piece == 'R'){
+	board[yy][xx].setPiece(Rook(xx,yy,pos,c));
+	}
+
+    else if(piece == 'K'){
+	board[yy][xx].setPiece(Knight(xx,yy,pos,c));
+	}
+
+    else if(piece == 'B'){
+	board[yy][xx].setPiece(Bishop(xx,yy,pos,c));
+	}
+    else {
+	cout<< "ERROR'<< endl;}
 }
 
 Tile * Game::getTileAt(string pos) {

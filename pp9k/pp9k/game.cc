@@ -272,8 +272,8 @@ bool Game::isCheck() {
     // if valid, return true
 	int len;
 	
-	if(last move is black) {len = p1pieces.size(); 
-		string colour = "White";
+	if(turn == 2) {len = p1pieces.size(); 
+		string colour = "Black";
 		for(int i = 0; i < p1pieces.size(); i++){
 			if(p2pieces.at(i).getName() == 'king') 
 				string pos = p2pieces.back().getPos();}
@@ -284,7 +284,7 @@ bool Game::isCheck() {
 		}
 	}
 	else {len = p2pieces.size(); 
-		string colour = "Black";
+		string colour = "White";
 		//gets your king's location
 		for(int i = 0; i < p1pieces.size(); i++){
 			if(p2pieces.at(i).getName() == 'king') 

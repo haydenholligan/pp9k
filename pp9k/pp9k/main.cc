@@ -24,6 +24,9 @@ char setupArr[9][8];
 bool isBoardSet = 0;
 int numWhiteWins = 0;
 int numBlackWins = 0;
+int turn = -1;
+//1 is player 1's turn(white), 2 is player 2's turn(black)
+
 
 bool isPieceMine(Game *g, string pos, int turn) {
     if (g->getPlayer(turn)->getPlayerNum() == 1 && (g->getPieceAt(pos) >= 65 && g->getPieceAt(pos) <= 90)) {
@@ -44,8 +47,6 @@ void outputFinalScore() {
 
 int main(int argc, const char * argv[]) {
     bool playing = false;
-    int turn = -1;
-    //1 is player 1's turn(white), 2 is player 2's turn(black)
     //Take input
     string s;
     Game *g = NULL;
@@ -224,6 +225,8 @@ int main(int argc, const char * argv[]) {
                     cout << "not valid setup input" << endl;
                     continue;
                 }
+                
+                
             }
         }
         

@@ -333,15 +333,55 @@ bool Game::isCheckmate() {
     //3. king moves out of check
     //if none of these are possible, it is checkmate or stalemate
 	
-	if(turn == 1) string colour = "Black";
-	else string colour = "White";
+	if(turn == 1) {
+		string colour = "Black";
+		for (int i = 0; i < p1pieces.size(); i++) {
+				if (p1pieces.at(i).getName() == 'king')
+					Piece king = p1pieces.at(i);
+        			}//for
+	}//if
+	else{
+		string colour = "White";
+		for (int i = 0; i < p2pieces.size(); i++) {
+				if (p2pieces.at(i).getName() == 'king')
+					Piece king = p2pieces.at(i);
+        			}//for
+	}
 	//have to generate 8 possible moves and find king in vector
-	for(int i = 0; i < 8; i++)
+	char xx = pos[0];
+    	char yy = pos[1];
+    	int x = xx - 97;
+    	int y = 7 - (yy - 49);
+	string arr[8];
+	
+	for(int i = 0; i < 8; i++){
+		if(i == 0)
+			arr[i] = calcPosition(x + 1,y + 1);
+		if(i == 1)
+			arr[i] = calcPosition(x + 1,y);
+		if(i == 2)
+			arr[i] = calcPosition(x + 1,y - 1);
+		if(i == 3)
+			arr[i] = calcPosition(x,y + 1);
+		if(i == 4)
+			arr[i] = calcPosition(x,y - 1);
+		if(i == 5)
+			arr[i] = calcPosition(x - 1,y - 1);
+		if(i == 6)
+			arr[i] = calcPosition(x - 1,y);
+		if(i == 7)
+			arr[i] = calcPosition(x - 1,y + 1);
+ 
+	}	
+
+	for(int i = 0; i < 8; i++){
+		
 		pos = arr[i];
+	
 		if(king.isValidMove(pos)){	
 			return 0;
-		}
-
+		}//if
+	}//for
     cout << "Checkmate! "<<colour<<" wins!" << endl;
     
     return 1;

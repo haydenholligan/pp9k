@@ -177,13 +177,27 @@ void Game::move(string oldPos, string newPos, char up) {
 }
 
 void Game::castle(Player *p) {
-    if(king moved)
-    else if(rook moved)
-    else if(pieces between)
-    else if(this->isCheck())
-    else if(any spots it passes can be attacked)
-    else if(would be in check after move)
-    else 
+    if(king moved){
+
+	}
+    else if(rook moved){
+
+	}
+    else if(pieces between){
+
+	}
+    else if(this->isCheck()){
+
+	}
+    else if(any spots it passes can be attacked){
+
+	}
+    else if(would be in check after move){
+
+	}
+    else {
+
+	}
 }
 
 char Game::getPieceAt(string pos) {
@@ -253,8 +267,19 @@ bool Game::isCheck() {
     //if they do, it's check
     //this has to be checked before a move as well to make sure you
     //aren't placing your king in check
-    cout << "White is in check!" << endl;
-    cout << "Black is in check!" << endl;
+    
+    //loop thru opponent's piece array, checking each person having a valid move to your King
+    // if valid, return true
+	int len;
+	if(last move is black) {len = p1pieces.size(); string colour = "White"}
+	if(last move is white) {len = p2pieces.size(); string colour = "Black"}
+
+    for(int i = 0; i < len; i++){
+	if(this->a.at(i).isValidMove(king opp colour)){
+		cout << colour <<" is in check!" << endl;
+		return 1;}
+}
+    
     
     return 0;
 }

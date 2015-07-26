@@ -271,14 +271,34 @@ bool Game::isCheck() {
     //loop thru opponent's piece array, checking each person having a valid move to your King
     // if valid, return true
 	int len;
-	if(last move is black) {len = p1pieces.size(); string colour = "White"}
-	else {len = p2pieces.size(); string colour = "Black"}
-
-    for(int i = 0; i < len; i++){
-	if(this->a.at(i).isValidMove(king opp colour)){
-		cout << colour <<" is in check!" << endl;
-		return 1;}
+	
+	if(last move is black) {len = p1pieces.size(); 
+		string colour = "White";
+		for(int i = 0; i < p1pieces.size(); i++){
+			if(p2pieces.at(i).getName() == 'king') 
+				string pos = p2pieces.back().getPos();}
+		for(int i = 0; i < len; i++){
+			if(this->p1pieces.at(i).isValidMove(pos)){
+				cout << colour <<" is in check!" << endl;
+				return 1;}
+		}
+	}
+	else {len = p2pieces.size(); 
+		string colour = "Black";
+		//gets your king's location
+		for(int i = 0; i < p1pieces.size(); i++){
+			if(p2pieces.at(i).getName() == 'king') 
+				string pos = p1pieces.back().getPos();}
+		//checks if any of the opponents pieces can kill your king
+		for(int i = 0; i < len; i++){
+			if(this->p2pieces.at(i).isValidMove(pos)){
+				cout << colour <<" is in check!" << endl;
+				return 1;}
+		}
+	}
 }
+
+   
     
     
     return 0;

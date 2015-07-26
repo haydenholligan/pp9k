@@ -8,6 +8,10 @@
 
 using namespace std;
 
+extern int numWhiteWin;
+extern int numBlackWins;
+extern int turn;
+
 Game::Game(): board(NULL), p1Pieces(0), p2Pieces(0) {
     cout << "Calling game constructor" << endl;
     view = new textView;
@@ -177,26 +181,42 @@ void Game::move(string oldPos, string newPos, char up) {
 }
 
 void Game::castle(Player *p) {
-    if(king moved){
-
+    //all if, no else if
+    //return; ends the function, void so don't return anything
+    if (king moved) {
+        std::cout << "The king has already moved, cannot castle!" << endl;
+        return;
 	}
-    else if(rook moved){
-
+    if (rook moved) {
+        std::cout << "The rook has already moved, cannot castle!" << endl;
+        return;
+    }
+    
+    if (pieces between) {
+        std::cout << "There are pieces inbetween, cannot castle!" << endl;
+        return;
 	}
-    else if(pieces between){
-
+    
+    if (this->isCheck()) {
+        std::cout << "You are in check, cannot castle!" << endl;
+        return;
 	}
-    else if(this->isCheck()){
-
+    
+    if (any spots it passes can be attacked) {
+        std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
+        return;
 	}
-    else if(any spots it passes can be attacked){
+    
+    if (would be in check after move) {
+        std::cout << "You would be in check, cannot castle!" << endl;
 
+        return;
 	}
-    else if(would be in check after move){
-
-	}
+    
     else {
+        std::cout << "Castling!" << endl;
 
+        //move
 	}
 }
 
@@ -272,6 +292,7 @@ bool Game::isCheck() {
     // if valid, return true
 	int len;
 	
+<<<<<<< HEAD
 	if(turn == 2) {len = p1pieces.size(); 
 		string colour = "Black";
 		for(int i = 0; i < p1pieces.size(); i++){
@@ -279,21 +300,42 @@ bool Game::isCheck() {
 				string pos = p2pieces.back().getPos();}
 		for(int i = 0; i < len; i++){
 			if(this->p1pieces.at(i).isValidMove(pos)){
+=======
+	if (last move is black) {
+        len = p1pieces.size();
+		string colour = "White";
+		for (int i = 0; i < p1pieces.size(); i++) {
+			if (p2pieces.at(i).getName() == 'king')
+				string pos = p2pieces.back().getPos();
+        }
+        
+		for (int i = 0; i < len; i++){
+			if (this->p1pieces.at(i).isValidMove(pos)){
+>>>>>>> origin/master
 				cout << colour <<" is in check!" << endl;
-				return 1;}
+				return 1;
+            }
 		}
 	}
+<<<<<<< HEAD
 	else {len = p2pieces.size(); 
 		string colour = "White";
+=======
+	else { //last move is white
+        len = p2pieces.size();
+		string colour = "Black";
+>>>>>>> origin/master
 		//gets your king's location
 		for(int i = 0; i < p1pieces.size(); i++){
-			if(p2pieces.at(i).getName() == 'king') 
-				string pos = p1pieces.back().getPos();}
+			if (p2pieces.at(i).getName() == 'king')
+				string pos = p1pieces.back().getPos();
+        }
 		//checks if any of the opponents pieces can kill your king
-		for(int i = 0; i < len; i++){
-			if(this->p2pieces.at(i).isValidMove(pos)){
+		for (int i = 0; i < len; i++) {
+			if (this->p2pieces.at(i).isValidMove(pos)){
 				cout << colour <<" is in check!" << endl;
-				return 1;}
+				return 1;
+            }
 		}
 	}
 }
@@ -374,8 +416,6 @@ void Game::upgrade(Piece *p, char piece) {
             p2Pieces.insert(p2Pieces.begin() + iter, *board[y][x].getPiece());
         }
     }
-
-    
     updateBoard("0", pos, 'x');
 }
 
@@ -444,31 +484,31 @@ void Game::setup(string s1, string s2) {
     }
     
     //Initialize the pieces for player 1
-    p1Pieces.push_back(*(new Rook(0, 0, calcPosition(0, 0), 'b')));
-    p1Pieces.push_back(*(new Rook(7, 0,calcPosition(7, 0), 'b')));
-    p1Pieces.push_back(*(new Knight(1, 0,calcPosition(1, 0), 'b')));
-    p1Pieces.push_back(*(new Knight(6, 0,calcPosition(6, 0), 'b')));
-    p1Pieces.push_back(*(new Bishop(2, 0,calcPosition(2, 0), 'b')));
-    p1Pieces.push_back(*(new Bishop(5, 0,calcPosition(5, 0), 'b')));
-    p1Pieces.push_back(*(new Queen(3, 0,calcPosition(3, 0), 'b')));
-    p1Pieces.push_back(*(new King(4, 0,calcPosition(4, 0), 'b')));
-    nump1Pieces += 8;
+    p2Pieces.push_back(*(new Rook(0, 0, calcPosition(0, 0), 'b')));
+    p2Pieces.push_back(*(new Rook(7, 0,calcPosition(7, 0), 'b')));
+    p2Pieces.push_back(*(new Knight(1, 0,calcPosition(1, 0), 'b')));
+    p2Pieces.push_back(*(new Knight(6, 0,calcPosition(6, 0), 'b')));
+    p2Pieces.push_back(*(new Bishop(2, 0,calcPosition(2, 0), 'b')));
+    p2Pieces.push_back(*(new Bishop(5, 0,calcPosition(5, 0), 'b')));
+    p2Pieces.push_back(*(new Queen(3, 0,calcPosition(3, 0), 'b')));
+    p2Pieces.push_back(*(new King(4, 0,calcPosition(4, 0), 'b')));
+    nump2Pieces += 8;
     
     //Initialize the pieces for player 2
-    p2Pieces.push_back(*(new Rook(0, 7,calcPosition(0, 7), 'w')));
-    p2Pieces.push_back(*(new Rook(7, 7,calcPosition(7, 7), 'w')));
-    p2Pieces.push_back(*(new Knight(1, 7,calcPosition(1, 7), 'w')));
-    p2Pieces.push_back(*(new Knight(6, 7,calcPosition(6, 7), 'w')));
-    p2Pieces.push_back(*(new Bishop(2, 7,calcPosition(2, 7), 'w')));
-    p2Pieces.push_back(*(new Bishop(5, 7,calcPosition(5, 7), 'w')));
-    p2Pieces.push_back(*(new Queen(3, 7,calcPosition(3, 7), 'w')));
-    p2Pieces.push_back(*(new King(4, 7,calcPosition(4, 7), 'w')));
-    nump2Pieces += 8;
+    p1Pieces.push_back(*(new Rook(0, 7,calcPosition(0, 7), 'w')));
+    p1Pieces.push_back(*(new Rook(7, 7,calcPosition(7, 7), 'w')));
+    p1Pieces.push_back(*(new Knight(1, 7,calcPosition(1, 7), 'w')));
+    p1Pieces.push_back(*(new Knight(6, 7,calcPosition(6, 7), 'w')));
+    p1Pieces.push_back(*(new Bishop(2, 7,calcPosition(2, 7), 'w')));
+    p1Pieces.push_back(*(new Bishop(5, 7,calcPosition(5, 7), 'w')));
+    p1Pieces.push_back(*(new Queen(3, 7,calcPosition(3, 7), 'w')));
+    p1Pieces.push_back(*(new King(4, 7,calcPosition(4, 7), 'w')));
+    nump1Pieces += 8;
     
     //Initialize the pawns for both players
     for (int i = 0; i < boardSize; i++) {
-        p1Pieces.push_back(*(new Pawn(i, 0,calcPosition(i, 0), 'b')));
-        p2Pieces.push_back(*(new Pawn(i, 6,calcPosition(i, 6), 'w')));
+        p2Pieces.push_back(*(new Pawn(i, 0,calcPosition(i, 0), 'b')));
+        p1Pieces.push_back(*(new Pawn(i, 6,calcPosition(i, 6), 'w')));
         nump1Pieces++;
         nump2Pieces++;
     }
@@ -483,14 +523,14 @@ void Game::setup(string s1, string s2) {
         board[0][i].setX(i);
         board[0][i].setY(0);
         board[0][i].setPos(position);
-        board[0][i].setPiece(&((p1Pieces.at(i))));
+        board[0][i].setPiece(&((p2Pieces.at(i))));
         
         //Set x, y, position and piece for row 2
         position = calcPosition(i, 1);
         board[1][i].setX(i);
         board[1][i].setY(1);
         board[1][i].setPos(position);
-        board[1][i].setPiece(&((p1Pieces.at(i+8))));
+        board[1][i].setPiece(&((p2Pieces.at(i+8))));
         
         
         //Set x, y, position and piece for row 7
@@ -498,14 +538,14 @@ void Game::setup(string s1, string s2) {
         board[7][i].setX(i);
         board[7][i].setY(7);
         board[7][i].setPos(position);
-        board[7][i].setPiece(&((p2Pieces.at(i))));
+        board[7][i].setPiece(&((p1Pieces.at(i))));
         
         //Set x, y, position and piece for row 6
         position = calcPosition(i, 6);
         board[6][i].setX(i);
         board[6][i].setY(6);
         board[6][i].setPos(position);
-        board[6][i].setPiece(&((p2Pieces.at(i+8))));
+        board[6][i].setPiece(&((p1Pieces.at(i+8))));
     }
     
     //Initialize empty cells
@@ -623,29 +663,29 @@ void Game::setup(char setupArr[9][8], bool isEmpty) {
     
     if (!(isEmpty)) {
         //Initialize the pieces for player 1
-        p1Pieces.push_back(*(new Rook(0, 0, calcPosition(0, 0), 'b')));
-        p1Pieces.push_back(*(new Rook(7, 0,calcPosition(7, 0), 'b')));
-        p1Pieces.push_back(*(new Knight(1, 0,calcPosition(1, 0), 'b')));
-        p1Pieces.push_back(*(new Knight(6, 0,calcPosition(6, 0), 'b')));
-        p1Pieces.push_back(*(new Bishop(2, 0,calcPosition(2, 0), 'b')));
-        p1Pieces.push_back(*(new Bishop(5, 0,calcPosition(5, 0), 'b')));
-        p1Pieces.push_back(*(new Queen(3, 0,calcPosition(3, 0), 'b')));
-        p1Pieces.push_back(*(new King(4, 0,calcPosition(4, 0), 'b')));
+        p2Pieces.push_back(*(new Rook(0, 0, calcPosition(0, 0), 'b')));
+        p2Pieces.push_back(*(new Rook(7, 0,calcPosition(7, 0), 'b')));
+        p2Pieces.push_back(*(new Knight(1, 0,calcPosition(1, 0), 'b')));
+        p2Pieces.push_back(*(new Knight(6, 0,calcPosition(6, 0), 'b')));
+        p2Pieces.push_back(*(new Bishop(2, 0,calcPosition(2, 0), 'b')));
+        p2Pieces.push_back(*(new Bishop(5, 0,calcPosition(5, 0), 'b')));
+        p2Pieces.push_back(*(new Queen(3, 0,calcPosition(3, 0), 'b')));
+        p2Pieces.push_back(*(new King(4, 0,calcPosition(4, 0), 'b')));
         
         //Initialize the pieces for player 2
-        p2Pieces.push_back(*(new Rook(0, 7,calcPosition(0, 7), 'w')));
-        p2Pieces.push_back(*(new Rook(7, 7,calcPosition(7, 7), 'w')));
-        p2Pieces.push_back(*(new Knight(1, 7,calcPosition(1, 7), 'w')));
-        p2Pieces.push_back(*(new Knight(6, 7,calcPosition(6, 7), 'w')));
-        p2Pieces.push_back(*(new Bishop(2, 7,calcPosition(2, 7), 'w')));
-        p2Pieces.push_back(*(new Bishop(5, 7,calcPosition(5, 7), 'w')));
-        p2Pieces.push_back(*(new Queen(3, 7,calcPosition(3, 7), 'w')));
-        p2Pieces.push_back(*(new King(4, 7,calcPosition(4, 7), 'w')));
+        p1Pieces.push_back(*(new Rook(0, 7,calcPosition(0, 7), 'w')));
+        p1Pieces.push_back(*(new Rook(7, 7,calcPosition(7, 7), 'w')));
+        p1Pieces.push_back(*(new Knight(1, 7,calcPosition(1, 7), 'w')));
+        p1Pieces.push_back(*(new Knight(6, 7,calcPosition(6, 7), 'w')));
+        p1Pieces.push_back(*(new Bishop(2, 7,calcPosition(2, 7), 'w')));
+        p1Pieces.push_back(*(new Bishop(5, 7,calcPosition(5, 7), 'w')));
+        p1Pieces.push_back(*(new Queen(3, 7,calcPosition(3, 7), 'w')));
+        p1Pieces.push_back(*(new King(4, 7,calcPosition(4, 7), 'w')));
         
         //Initialize the pawns for both players
         for (int i = 0; i < boardSize; i++) {
-            p1Pieces.push_back(*(new Pawn(i, 0,calcPosition(i, 0), 'b')));
-            p2Pieces.push_back(*(new Pawn(i, 6,calcPosition(i, 6), 'w')));
+            p2Pieces.push_back(*(new Pawn(i, 0,calcPosition(i, 0), 'b')));
+            p1Pieces.push_back(*(new Pawn(i, 6,calcPosition(i, 6), 'w')));
         }
     }
     
@@ -671,14 +711,14 @@ void Game::setup(char setupArr[9][8], bool isEmpty) {
             board[0][i].setX(i);
             board[0][i].setY(0);
             board[0][i].setPos(position);
-            board[0][i].setPiece(&((p1Pieces.at(i))));
+            board[0][i].setPiece(&((p2Pieces.at(i))));
             
             //Set x, y, position and piece for row 2
             position = calcPosition(i, 1);
             board[1][i].setX(i);
             board[1][i].setY(1);
             board[1][i].setPos(position);
-            board[1][i].setPiece(&((p1Pieces.at(i+8))));
+            board[1][i].setPiece(&((p2Pieces.at(i+8))));
             
             
             //Set x, y, position and piece for row 7
@@ -686,14 +726,14 @@ void Game::setup(char setupArr[9][8], bool isEmpty) {
             board[7][i].setX(i);
             board[7][i].setY(7);
             board[7][i].setPos(position);
-            board[7][i].setPiece(&((p2Pieces.at(i))));
+            board[7][i].setPiece(&((p1Pieces.at(i))));
             
             //Set x, y, position and piece for row 6
             position = calcPosition(i, 6);
             board[6][i].setX(i);
             board[6][i].setY(6);
             board[6][i].setPos(position);
-            board[6][i].setPiece(&((p2Pieces.at(i+8))));
+            board[6][i].setPiece(&((p1Pieces.at(i+8))));
         }
         
         //Initialize empty cells

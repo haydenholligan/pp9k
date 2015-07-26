@@ -181,26 +181,42 @@ void Game::move(string oldPos, string newPos, char up) {
 }
 
 void Game::castle(Player *p) {
-    if(king moved){
-
+    //all if, no else if
+    //return; ends the function, void so don't return anything
+    if (king moved) {
+        std::cout << "The king has already moved, cannot castle!" << endl;
+        return;
 	}
-    else if(rook moved){
-
+    if (rook moved) {
+        std::cout << "The rook has already moved, cannot castle!" << endl;
+        return;
+    }
+    
+    if (pieces between) {
+        std::cout << "There are pieces inbetween, cannot castle!" << endl;
+        return;
 	}
-    else if(pieces between){
-
+    
+    if (this->isCheck()) {
+        std::cout << "You are in check, cannot castle!" << endl;
+        return;
 	}
-    else if(this->isCheck()){
-
+    
+    if (any spots it passes can be attacked) {
+        std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
+        return;
 	}
-    else if(any spots it passes can be attacked){
+    
+    if (would be in check after move) {
+        std::cout << "You would be in check, cannot castle!" << endl;
 
+        return;
 	}
-    else if(would be in check after move){
-
-	}
+    
     else {
+        std::cout << "Castling!" << endl;
 
+        //move
 	}
 }
 

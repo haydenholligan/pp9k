@@ -272,7 +272,7 @@ bool Game::isCheck() {
     // if valid, return true
 	int len;
 	if(last move is black) {len = p1pieces.size(); string colour = "White"}
-	if(last move is white) {len = p2pieces.size(); string colour = "Black"}
+	else {len = p2pieces.size(); string colour = "Black"}
 
     for(int i = 0; i < len; i++){
 	if(this->a.at(i).isValidMove(king opp colour)){

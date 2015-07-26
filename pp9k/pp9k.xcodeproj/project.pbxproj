@@ -325,6 +325,7 @@
 				4020EDAF1B56CD6400FA6220 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

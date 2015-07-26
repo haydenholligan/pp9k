@@ -279,7 +279,7 @@ bool Game::isValidPosition(string pos) {
 }
 
 
-bool Game::isCheck() {
+bool Game::isCheck(string posn = "a0") {
     //should be simple to determine if a king is in check
     //every time a piece is moved, determine if any of the opponent's pieces
     //have legal moves to capture the king
@@ -291,41 +291,38 @@ bool Game::isCheck() {
     // if valid, return true
 	int len;
 	
-	if(turn == 2) {len = p1pieces.size(); 
+	if(turn == 2) {
+		len = p1pieces.size(); 
 		string colour = "Black";
-		for(int i = 0; i < p1pieces.size(); i++){
-			if(p2pieces.at(i).getName() == 'king') 
-				string pos = p2pieces.back().getPos();}
+		if(posn == "a0"){
+			for(int i = 0; i < p1pieces.size(); i++){
+				if(p2pieces.at(i).getName() == 'king') 
+					posn = p2pieces.at(i).getPos();
+			}//for
+		}//if
 		for(int i = 0; i < len; i++){
-            if(this->p1pieces.at(i).isValidMove(pos) {
-
+			if(this->p1pieces.at(i).isValidMove(posn)){ 
 				cout << colour <<" is in check!" << endl;
 				return 1;
-            }
-		}
-	}
-
-	else { //last move is white
+			}//if
+		}//for
+	}//if	
+	else{
         len = p2pieces.size();
-		string colour = "Black";
-		//gets your king's location
-		for(int i = 0; i < p1pieces.size(); i++){
-			if (p2pieces.at(i).getName() == 'king')
-				string pos = p1pieces.back().getPos();
-        }
-		//checks if any of the opponents pieces can kill your king
-		for (int i = 0; i < len; i++) {
-			if (this->p2pieces.at(i).isValidMove(pos)){
+		string colour = "White";
+		if(posn == "a0"){
+			for (int i = 0; i < p2pieces.size(); i++) {
+				if (p1pieces.at(i).getName() == 'king')
+					posn = p2pieces.at(i).getPos();
+        			}//for
+        	}//if
+		for (int i = 0; i < len; i++){
+			if (this->p1pieces.at(i).isValidMove(posn)){
 				cout << colour <<" is in check!" << endl;
 				return 1;
-            }
-		}
-	}
-}
-
-   
-    
-    
+            		}//if
+		}//for
+	}//else
     return 0;
 }
 
@@ -335,23 +332,15 @@ bool Game::isCheckmate() {
     //2. move a piece inbetween the king and threatening piece
     //3. king moves out of check
     //if none of these are possible, it is checkmate or stalemate
+	
 	if(turn == 1) string colour = "Black";
 	else string colour = "White";
-
-
-	if(can attack threatening piece){
-	
-	return 0;
-	}
-
-	if(can move king into a space that isnotcheck){
-
-	return 0;
-	}
-	if(Can sacrifice piece for king){
-
-	return 0;
-	}
+	//have to generate 8 possible moves and find king in vector
+	for(int i = 0; i < 8; i++)
+		pos = arr[i];
+		if(king.isValidMove(pos)){	
+			return 0;
+		}
 
     cout << "Checkmate! "<<colour<<" wins!" << endl;
     

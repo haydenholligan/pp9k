@@ -292,39 +292,23 @@ bool Game::isCheck() {
     // if valid, return true
 	int len;
 	
-<<<<<<< HEAD
 	if(turn == 2) {len = p1pieces.size(); 
 		string colour = "Black";
 		for(int i = 0; i < p1pieces.size(); i++){
 			if(p2pieces.at(i).getName() == 'king') 
 				string pos = p2pieces.back().getPos();}
 		for(int i = 0; i < len; i++){
-			if(this->p1pieces.at(i).isValidMove(pos)){
-=======
-	if (last move is black) {
-        len = p1pieces.size();
-		string colour = "White";
-		for (int i = 0; i < p1pieces.size(); i++) {
-			if (p2pieces.at(i).getName() == 'king')
-				string pos = p2pieces.back().getPos();
-        }
-        
-		for (int i = 0; i < len; i++){
-			if (this->p1pieces.at(i).isValidMove(pos)){
->>>>>>> origin/master
+            if(this->p1pieces.at(i).isValidMove(pos) {
+
 				cout << colour <<" is in check!" << endl;
 				return 1;
             }
 		}
 	}
-<<<<<<< HEAD
-	else {len = p2pieces.size(); 
-		string colour = "White";
-=======
+
 	else { //last move is white
         len = p2pieces.size();
 		string colour = "Black";
->>>>>>> origin/master
 		//gets your king's location
 		for(int i = 0; i < p1pieces.size(); i++){
 			if (p2pieces.at(i).getName() == 'king')

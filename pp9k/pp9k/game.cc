@@ -213,11 +213,10 @@ void Game::castle(Player *p) {
         return;
 	}
     
-    else {
         std::cout << "Castling!" << endl;
-
+	
         //move
-	}
+	
 }
 
 char Game::getPieceAt(string pos) {
@@ -336,10 +335,27 @@ bool Game::isCheckmate() {
     //2. move a piece inbetween the king and threatening piece
     //3. king moves out of check
     //if none of these are possible, it is checkmate or stalemate
-    cout << "Checkmate! White wins!" << endl;
-    cout << "Checkmate! Black wins!" << endl;
+	if(turn == 1) string colour = "Black";
+	else string colour = "White";
+
+
+	if(can attack threatening piece){
+	
+	return 0;
+	}
+
+	if(can move king into a space that isnotcheck){
+
+	return 0;
+	}
+	if(Can sacrifice piece for king){
+
+	return 0;
+	}
+
+    cout << "Checkmate! "<<colour<<" wins!" << endl;
     
-    return 0;
+    return 1;
 }
 
 bool Game::isStalemate() {

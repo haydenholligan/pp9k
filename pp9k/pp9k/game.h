@@ -34,14 +34,6 @@ class Game {
     int nump1Pieces;
     int nump2Pieces;
     
-    //keeps track of if the rooks or kings have been moved for castling
-
-    bool p1rookR;
-    bool p1rookL;
-    bool p1King;
-    bool p2rookR;
-    bool p2rookL;
-    bool p2King;
 
    View *view;
     
@@ -59,10 +51,6 @@ public:
     Player *getPlayer(int pNum);
     bool isCheckmate();
     bool isStalemate();
-    bool isMovedKing(char c);
-    bool isMovedRook(char c, char side);
-    void setKingMove(char c);
-    void setRookMove(char c, char side);
     char getPieceAt(std::string p);
     void upgrade(Piece *p, char piece);
     void updateBoard(std::string oldPos = "0", std::string newPos = "0", char c = 'a');

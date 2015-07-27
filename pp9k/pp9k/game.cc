@@ -471,38 +471,6 @@ bool Game::isStalemate() {
     return 1;
 }
 
-bool Game::isMovedKing(char c){
-    if(c == 'w') return this->p1King;
-    else return this->p2King;
-}
-
-bool Game::isMovedRook(char c, char side){
-    if(c == 'w'){
-        if(side == 'l')return this->p1rookL;
-        else return this->p1rookR;
-    }
-    else{
-        if(side == 'l')return this->p2rookL;
-        else return this->p2rookR;
-    }
-}
-
-
-void Game::setKingMove(char c){
-    if(c == 'w') this->p1King == 1;
-    else return this->p2King == 1;
-}
-
-void Game::setRookMove(char side){
-    if(c == 'w'){
-        if(side == 'l')this->p1rookL  = 1;
-        else this->p1rookR = 1;
-    }
-    else {
-        if(side == 'l')this->p2rookL = 1;
-        else this->p2rookR = 1;
-    }
-}
 
 void Game::upgrade(Piece *p, char piece) {
     int iter = 0;

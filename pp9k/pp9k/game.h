@@ -54,7 +54,7 @@ public:
     void removePiece(std::string pos);
     std::string calcPosition(int x, int y);
     void move(std::string oldPos, std::string newPos, char up = 'a');
-    void castle(Player *p);
+    void castle(std::string kingPos);
     bool isCheck(std::string pos = "a0");
     Player *getPlayer(int pNum);
     bool isCheckmate();

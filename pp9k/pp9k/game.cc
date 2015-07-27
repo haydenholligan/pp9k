@@ -295,7 +295,22 @@ void Game::castle(string newPos, King *k, Rook *r) {
     std::cout << "Castling!" << endl;
     
     setPosition(k, newPos);
-        
+
+    //rook new pos
+    string rPos = newPos[0];
+	//if rook is to the left of King
+    if(r->getX() < xOld){
+	int z = k->getX() + 1; // it will now be one tile to the right of the king
+        char c = z + 97;
+        rPos += c;
+	}
+    else{
+	int z = k->getX() - 1; //it will now be one tile to the left of the king
+        char c = z + 97;
+        rPos += c;
+	}//if its to the right of the king    
+
+    setPosition(r, rPos);    
 }
 
 

@@ -1,7 +1,6 @@
 #include "game.h"
 #include <iostream>
 #include <sstream>
-#include <algorithm>
 #include "view.h"
 #include "textView.h"
 //#include <graphicsView.h>
@@ -35,11 +34,13 @@ Game::~Game() {
 string Game::calcPosition(int x, int y) {
     char c = x + 97;
     string s = "";
+    stringstream ss;
     //add c to the beginning of the string
     s = s + c;
     //this just flips j so instead of 0, you get 8, or instead of 1 you get 7, etc. due to the layout of a chessboard
     int i1 = 8 - y;
-    s = s + to_string(i1);
+    ss << i1;
+    s = s + ss.str();
     return s;
 }
 
@@ -298,7 +299,9 @@ void Game::castle(string newPos, King *k, Rook *r) {
     setPosition(k, newPos);
 
     //rook new pos
-    string rPos = newPos[0];
+    char c1 = newPos[0];
+    string rPos = "";
+    rPos += c1;
 	//if rook is to the left of King
     if(r->getX() < xOld){
 	int z = k->getX() + 1; // it will now be one tile to the right of the king

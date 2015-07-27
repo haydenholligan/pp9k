@@ -20,6 +20,8 @@ using namespace std;
 #include "textView.h"
 #include "graphicsView.h"
 
+bool dbg = true;
+
 char setupArr[9][8];
 bool isBoardSet = 0;
 int numWhiteWins = 0;

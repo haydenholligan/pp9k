@@ -172,6 +172,22 @@ void Game::move(string oldPos, string newPos, char up) {
     int x = xx - 97;
     int y = 7 - (yy - 49);
     
+    char xx2 = newPos[0];
+    char yy2 = newPos[1];
+    int x2 = xx - 97;
+    int y2 = 7 - (yy - 49);
+    
+    if (oldPos == "e1" && (newPos == "c1" || "g1")) {
+        //white king to be castled
+       // if (board[y][x].getPiece()->getName() == "king" && board[y2][x2].getPiece()->getName(
+    }
+        
+    if (oldPos == "e8" && (newPos == "c8" || "g8")) {
+        //black king to be castled
+    
+    }
+    else {
+    
     board[y][x].getPiece()->move(newPos);
     if (up != 'a') {
         upgrade(board[y][x].getPiece(), up);
@@ -179,83 +195,83 @@ void Game::move(string oldPos, string newPos, char up) {
     //check for check, checkmate, stalemate, upgrade
     updateBoard(oldPos, newPos, up);
 }
-/*
- void Game::castle(Player *p) {
- //all if, no else if
- //return; ends the function, void so don't return anything
- 
- if(turn == 1){
- if (isMovedKing('w')) {
- std::cout << "The king has already moved, cannot castle!" << endl;
- return;
- }
- if (isMovedRook('w', side)) {
- std::cout << "The rook has already moved, cannot castle!" << endl;
- return;
- }
- 
- if (pieces between) { interim pieces not NULL
- std::cout << "There are pieces inbetween, cannot castle!" << endl;
- return;
- }
- 
- if (this->isCheck()) {
- std::cout << "You are in check, cannot castle!" << endl;
- return;
- }
- 
- if (isCheck() || isCheck() || isCheck()) { interim spaces cause check
- std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
- return;
- }
- 
- if (isCheck()) { final space is check
- std::cout << "You would be in check, cannot castle!" << endl;
- 
- return;
- }
- }
- else{
- 
- 
- if (isMovedKing('b')) {
- std::cout << "The king has already moved, cannot castle!" << endl;
- return;
- }
- if (isMovedRook('b', side)) {
- std::cout << "The rook has already moved, cannot castle!" << endl;
- return;
- }
- 
- if (pieces between) { interim pieces not NULL
- std::cout << "There are pieces inbetween, cannot castle!" << endl;
- return;
- }
- 
- if (this->isCheck()) {
- std::cout << "You are in check, cannot castle!" << endl;
- return;
- }
- 
- if (isCheck() || isCheck() || isCheck()) { interim spaces cause check
- std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
- return;
- }
- 
- if (isCheck()) { final space is check
- std::cout << "You would be in check, cannot castle!" << endl;
- 
- return;
- }
- 
- }//else
- 
- std::cout << "Castling!" << endl;
- 
- //move
- 
- }
- */
+
+void Game::castle(Player *p) {
+    //all if, no else if
+    //return; ends the function, void so don't return anything
+    
+    if(turn == 1){
+        if (isMovedKing('w')) {
+            std::cout << "The king has already moved, cannot castle!" << endl;
+            return;
+        }
+        if (isMovedRook('w', side)) {
+            std::cout << "The rook has already moved, cannot castle!" << endl;
+            return;
+        }
+        
+        if (pieces between) { interim pieces not NULL
+            std::cout << "There are pieces inbetween, cannot castle!" << endl;
+            return;
+        }
+        
+        if (this->isCheck()) {
+            std::cout << "You are in check, cannot castle!" << endl;
+            return;
+        }
+        
+        if (isCheck() || isCheck() || isCheck()) { interim spaces cause check
+            std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
+            return;
+        }
+        
+        if (isCheck()) { final space is check
+            std::cout << "You would be in check, cannot castle!" << endl;
+            
+            return;
+        }
+    }
+    else{
+        
+        
+        if (isMovedKing('b')) {
+            std::cout << "The king has already moved, cannot castle!" << endl;
+            return;
+        }
+        if (isMovedRook('b', side)) {
+            std::cout << "The rook has already moved, cannot castle!" << endl;
+            return;
+        }
+        
+        if (pieces between) { interim pieces not NULL
+            std::cout << "There are pieces inbetween, cannot castle!" << endl;
+            return;
+        }
+        
+        if (this->isCheck()) {
+            std::cout << "You are in check, cannot castle!" << endl;
+            return;
+        }
+        
+        if (isCheck() || isCheck() || isCheck()) { interim spaces cause check
+            std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
+            return;
+        }
+        
+        if (isCheck()) { final space is check
+            std::cout << "You would be in check, cannot castle!" << endl;
+            
+            return;
+        }
+        
+    }//else
+    
+    std::cout << "Castling!" << endl;
+    
+    //move
+    
+}
+
 char Game::getPieceAt(string pos) {
     //if no piece, char is = 'U'
     char xx = pos[0];
@@ -315,8 +331,7 @@ bool Game::isValidPosition(string pos) {
     return 1;
 }
 
-
-bool Game::isCheck(string posn) {
+bool Game::isCheck(string pos) {
     //should be simple to determine if a king is in check
     //every time a piece is moved, determine if any of the opponent's pieces
     //have legal moves to capture the king
@@ -328,35 +343,33 @@ bool Game::isCheck(string posn) {
     // if valid, return true
     int len;
     
-    if(turn == 2) {
+    if (turn == 2) { //black's turn
         len = (int)p1Pieces.size();
-        string colour = "Black";
-        if(posn == "a0"){
+        if (pos == "a0") {
             for(int i = 0; i < len; i++){
                 if(p2Pieces.at(i).getName() == "king")
-                    posn = p2Pieces.at(i).getPos();
+                    pos = p2Pieces.at(i).getPos();
             }//for
         }//if
-        for(int i = 0; i < len; i++){
-            if(this->p1Pieces.at(i).isValidMove(posn)){
-                std::cout << colour <<" is in check!" << endl;
+        for (int i = 0; i < len; i++){
+            if (this->p1Pieces.at(i).isValidMove(pos)){
+                cout << "Black is in check!" << endl;
                 return 1;
             }//if
         }//for
     }//if
     
-    else {
+    else { //white's turn
         len = (int)p2Pieces.size();
-        string colour = "White";
-        if(posn == "a0"){
+        if (pos == "a0"){
             for (int i = 0; i < len; i++) {
                 if (p1Pieces.at(i).getName() == "king")
-                    posn = p2Pieces.at(i).getPos();
+                    pos = p2Pieces.at(i).getPos();
             }//for
         }//if
         for (int i = 0; i < len; i++){
-            if (this->p1Pieces.at(i).isValidMove(posn)){
-                std::cout << colour <<" is in check!" << endl;
+            if (this->p1Pieces.at(i).isValidMove(pos)){
+                cout << "White is in check!" << endl;
                 return 1;
             }//if
         }//for
@@ -370,57 +383,46 @@ bool Game::isCheckmate() {
     //2. move a piece inbetween the king and threatening piece
     //3. king moves out of check
     //if none of these are possible, it is checkmate or stalemate
-    
+    Piece *tmpKing = NULL;
     if (turn == 1) {
         int len = (int)p1Pieces.size();
         string colour = "Black";
         for (int i = 0; i < len; i++) {
             if (p1Pieces.at(i).getName() == "king")
-                Piece *tmpKing = &p1Pieces.at(i);
+                tmpKing = &p1Pieces.at(i);
         }//for
     }//if
     
     else {
         int len = (int)p2Pieces.size();
         string colour = "White";
-        for (int i = 0; i < p2Pieces.size(); i++) {
+        for (int i = 0; i < len; i++) {
             if (p2Pieces.at(i).getName() == "king")
-                Piece *tmpKing = &p2Pieces.at(i);
+                tmpKing = &p2Pieces.at(i);
         }//for
     }
     
     //have to generate 8 possible moves and find king in vector
-    char xx = pos[0];
-    char yy = pos[1];
-    int x = xx - 97;
-    int y = 7 - (yy - 49);
+    int x = tmpKing->getX();
+    int y = tmpKing->getY();
+    
     string arr[8];
     //fills array with possible king moves
-    for(int i = 0; i < 8; i++){
-        if(i == 0)
-            arr[i] = calcPosition(x + 1,y + 1);
-        if(i == 1)
-            arr[i] = calcPosition(x + 1,y);
-        if(i == 2)
-            arr[i] = calcPosition(x + 1,y - 1);
-        if(i == 3)
-            arr[i] = calcPosition(x,y + 1);
-        if(i == 4)
-            arr[i] = calcPosition(x,y - 1);
-        if(i == 5)
-            arr[i] = calcPosition(x - 1,y - 1);
-        if(i == 6)
-            arr[i] = calcPosition(x - 1,y);
-        if(i == 7)
-            arr[i] = calcPosition(x - 1,y + 1);
-        
-    }
+    arr[0] = calcPosition(x + 1,y + 1);
+    arr[1] = calcPosition(x + 1,y);
+    arr[2] = calcPosition(x + 1,y - 1);
+    arr[3] = calcPosition(x,y + 1);
+    arr[4] = calcPosition(x,y - 1);
+    arr[5] = calcPosition(x - 1,y - 1);
+    arr[6] = calcPosition(x - 1,y);
+    arr[7] = calcPosition(x - 1,y + 1);
+    
     //checks if there is a valid move the king can use
     for(int i = 0; i < 8; i++){
         
         string pos = arr[i];
         //if there is a valid move, return false
-        if(tmpKing.isValidMove(pos)){
+        if(tmpKing->isValidMove(pos)){
             return 0;
         }//if
     }//for
@@ -435,34 +437,34 @@ bool Game::isStalemate() {
     
     //loop through each piece, and if any possible move for that piece is invalid
     //then it's stalemate.
-    
+    Piece *p = NULL;
     if (turn == 1) {
         int len = (int)p1Pieces.size();
         for (int i = 0; i < len; i++) {
-            Piece p = p1Pieces.at(i);
+            p = &p1Pieces.at(i);
             for(int j = 0; j < 8; j++){
                 for(int k = 0; k < 8; k++){
                     string str = calcPosition(j,k);
-                    if(p.isValidMove(str)) return 0;
+                    if(p->isValidMove(str)) return 0;
                 }
             }
         }
     }
+    
     else {
         int len = (int)p2Pieces.size();
         for (int i = 0; i < len; i++) {
-            Piece p = p2Pieces.at(i);
+            p = &p2Pieces.at(i);
             for(int j = 0; j < 8; j++){
                 for(int k = 0; k < 8; k++){
                     string str = calcPosition(j,k);
-                    if(p.isValidMove(str)) return 0;
+                    if(p->isValidMove(str)) return 0;
                 }
             }
         }
-        
-        cout << "Stalemate!" << endl;
-        return 1;
     }
+    cout << "Stalemate!" << endl;
+    return 1;
 }
 
 bool Game::isMovedKing(char c){

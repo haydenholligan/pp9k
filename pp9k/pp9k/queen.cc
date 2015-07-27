@@ -5,8 +5,6 @@
 Queen::Queen(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("queen") {}
 
 bool Queen::isQueenMove(std::string pos){
-    int curX = this->getX();
-    int curY = this->getY();
     char xx = pos[0];
     char yy = pos[1];
     int moveX = xx - 97;

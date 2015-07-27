@@ -184,40 +184,39 @@ void Game::castle(Player *p) {
     //all if, no else if
     //return; ends the function, void so don't return anything
     if (king moved) {
-        std::cout << "The king has already moved, cannot castle!" << endl;
+        cout << "The king has already moved, cannot castle!" << endl;
         return;
 	}
     if (rook moved) {
-        std::cout << "The rook has already moved, cannot castle!" << endl;
+        cout << "The rook has already moved, cannot castle!" << endl;
         return;
     }
     
     if (pieces between) {
-        std::cout << "There are pieces inbetween, cannot castle!" << endl;
+        cout << "There are pieces inbetween, cannot castle!" << endl;
         return;
 	}
     
     if (this->isCheck()) {
-        std::cout << "You are in check, cannot castle!" << endl;
+        cout << "You are in check, cannot castle!" << endl;
         return;
 	}
     
     if (any spots it passes can be attacked) {
-        std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
+        cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
         return;
 	}
     
     if (would be in check after move) {
-        std::cout << "You would be in check, cannot castle!" << endl;
+        cout << "You would be in check, cannot castle!" << endl;
 
         return;
 	}
     
-    else {
-        std::cout << "Castling!" << endl;
-
+        cout << "Castling!" << endl;
+	
         //move
-	}
+	
 }
 
 char Game::getPieceAt(string pos) {
@@ -280,7 +279,7 @@ bool Game::isValidPosition(string pos) {
 }
 
 
-bool Game::isCheck() {
+bool Game::isCheck(string pos) {
     //should be simple to determine if a king is in check
     //every time a piece is moved, determine if any of the opponent's pieces
     //have legal moves to capture the king
@@ -292,41 +291,38 @@ bool Game::isCheck() {
     // if valid, return true
 	int len;
 	
-	if(turn == 2) {len = p1pieces.size(); 
+	if(turn == 2) {
+		len = p1pieces.size(); 
 		string colour = "Black";
-		for(int i = 0; i < p1pieces.size(); i++){
-			if(p2pieces.at(i).getName() == 'king') 
-				string pos = p2pieces.back().getPos();}
+		if(posn == "a0"){
+			for(int i = 0; i < p1pieces.size(); i++){
+				if(p2pieces.at(i).getName() == 'king') 
+					posn = p2pieces.at(i).getPos();
+			}//for
+		}//if
 		for(int i = 0; i < len; i++){
-            if(this->p1pieces.at(i).isValidMove(pos) {
-
+			if(this->p1pieces.at(i).isValidMove(posn)){ 
 				cout << colour <<" is in check!" << endl;
 				return 1;
-            }
-		}
-	}
-
-	else { //last move is white
+			}//if
+		}//for
+	}//if	
+	else{
         len = p2pieces.size();
-		string colour = "Black";
-		//gets your king's location
-		for(int i = 0; i < p1pieces.size(); i++){
-			if (p2pieces.at(i).getName() == 'king')
-				string pos = p1pieces.back().getPos();
-        }
-		//checks if any of the opponents pieces can kill your king
-		for (int i = 0; i < len; i++) {
-			if (this->p2pieces.at(i).isValidMove(pos)){
+		string colour = "White";
+		if(posn == "a0"){
+			for (int i = 0; i < p2pieces.size(); i++) {
+				if (p1pieces.at(i).getName() == 'king')
+					posn = p2pieces.at(i).getPos();
+        			}//for
+        	}//if
+		for (int i = 0; i < len; i++){
+			if (this->p1pieces.at(i).isValidMove(posn)){
 				cout << colour <<" is in check!" << endl;
 				return 1;
-            }
-		}
-	}
-}
-
-   
-    
-    
+            		}//if
+		}//for
+	}//else
     return 0;
 }
 
@@ -336,10 +332,19 @@ bool Game::isCheckmate() {
     //2. move a piece inbetween the king and threatening piece
     //3. king moves out of check
     //if none of these are possible, it is checkmate or stalemate
-    cout << "Checkmate! White wins!" << endl;
-    cout << "Checkmate! Black wins!" << endl;
+	
+	if(turn == 1) string colour = "Black";
+	else string colour = "White";
+	//have to generate 8 possible moves and find king in vector
+	for(int i = 0; i < 8; i++)
+		pos = arr[i];
+		if(king.isValidMove(pos)){	
+			return 0;
+		}
+
+    cout << "Checkmate! "<<colour<<" wins!" << endl;
     
-    return 0;
+    return 1;
 }
 
 bool Game::isStalemate() {
@@ -412,7 +417,7 @@ Tile * Game::getTileAt(string pos) {
 }
 
 
-void Game::updateBoard(std::string oldPos, std::string newPos, char c) {
+void Game::updateBoard(string oldPos, string newPos, char c) {
     view->updateBoard(oldPos, newPos, c);
 }
 

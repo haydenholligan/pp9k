@@ -20,25 +20,26 @@ bool Pawn::isPawnMove(std::string pos) {
 	if(g->getTileAt(pos)->getPiece() != NULL) {
 		if(g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) return 0; // something about a null pointer}
 	
-	if ((abs(xx - moveX) == abs(yy - moveY)) == 1) && 
+	if (((abs(xx - moveX) == abs(yy - moveY)) == 1) &&
 		((this->getColour() == 'w' && moveY > yy) || (this->getColour() == 'b' && moveY < yy)) &&
 			((g->getTileAt(pos)->getPiece() != NULL) && 
 				(g->getTileAt(pos)->getPiece()->getColour() != this->getColour()))) return 1; //attacking opponents diagonally 1 unit
 
-	if ((abs(yy - moveY) == 1)) && 
+	if ((abs(yy - moveY) == 1) &&
 		((this->getColour() == 'w' && moveY > yy) || (this->getColour() == 'b' && moveY < yy)) &&
-			((g->getTileAt(pos)->getPiece() == NULL)) return 1; //moving 1 unit forward
+			((g->getTileAt(pos)->getPiece() == NULL))) return 1; //moving 1 unit forward
 	
 	//checks what colour and piece it is to verify its in its initial position
-	if ((((abs(yy - moveY) == 2)) && 
+	if (((abs(yy - moveY) == 2)) &&
 		((this->getColour() == 'w' && moveY > yy) || (this->getColour() == 'b' && moveY < yy)) &&
 			((this->getColour() == 'w' && curY == 2) || (this->getColour() == 'b' && curY == 6)) &&
-				((g->getTileAt(pos)->getPiece() == NULL)) return 1; //moving 2 units forward on first move
-
+				((g->getTileAt(pos)->getPiece() == NULL))) return 1; //moving 2 units forward on first move
+    }
 	//en passant
 	
 	return 0;
 }
+
 
 bool Pawn::isValidMove(std::string pos) {
     

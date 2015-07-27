@@ -24,8 +24,8 @@ bool Queen::isBlockedPath(std::string pos){
     // putting current position and desired move into arrays of numbers to ease the comparison of them
     char xx = pos[0];
     char yy = pos[1];
-    arrPos[2] = {xx - 97, 7 - (yy - 49)}; // pos as an array of num coordinates
-    arr[2] = {this->getX(), this->getY()}; //current location as an array of num coordinates
+    int arrPos[2] = {xx - 97, 7 - (yy - 49)}; // pos as an array of num coordinates
+    int arr[2] = {this->getX(), this->getY()}; //current location as an array of num coordinates
     
     //loops and checks if each tile between the current and the desired move is empty
     while(arr[0] != arrPos[0] || arr[1] != arrPos[1]){//not final position
@@ -57,7 +57,7 @@ bool Queen::isBlockedPath(std::string pos){
             arr[0]++;
         }
         
-        else if(arr[0] > arrPos[0]]){
+        else if(arr[0] > arrPos[0]){
             arr[0]--;
         }
         

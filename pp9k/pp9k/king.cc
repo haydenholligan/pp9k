@@ -15,21 +15,21 @@ bool King::isKingMove(std::string pos){
     
     if(g->getTileAt(pos)->getPiece() != NULL) {
         if(g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) return 0; // something about a null pointer}
-        
+
 	if(g->isCheck(pos)) return 0; //if it puts the king in Check, move is invalid
 	
-        if ((abs(xx - moveX) == abs(yy - moveY)) == 1) ||
-            (((((xx - moveX) == 1) && ((yy - moveY) == 0)) || (((xx - moveX) == 0) && ((yy - moveY) == 1))))) &&
+        if (((abs(xx - moveX) == abs(yy - moveY)) == 1) ||
+            ((((xx - moveX) == 1) && ((yy - moveY) == 0)) || ((((xx - moveX) == 0) && ((yy - moveY) == 1)) &&
             ((g->getTileAt(pos)->getPiece() != NULL) &&
-             (g->getTileAt(pos)->getPiece()->getColour() != this->getColour()))) return 1; //attacks
+             (g->getTileAt(pos)->getPiece()->getColour() != this->getColour()))))) return 1; //attacks
         
         if (((abs(xx - moveX) == abs(yy - moveY)) == 1) ||
-            (((((xx - moveX) == 1) && ((yy - moveY) == 0)) || (((xx - moveX) == 0) && ((yy - moveY) == 1))))) &&
-            (g->getTileAt(pos)->getPiece() == NULL)) return 1; //non attacks
-        
-        return 0;
+            ((((((xx - moveX) == 1) && ((yy - moveY) == 0)) || (((xx - moveX) == 0) && ((yy - moveY) == 1)))) &&
+            (g->getTileAt(pos)->getPiece() == NULL))) return 1; //non attacks
     }
-    
+    return 0;
+}
+
     bool King::isValidMove(std::string pos) {
         
         if(pos == this->position) return 0;
@@ -37,16 +37,6 @@ bool King::isKingMove(std::string pos){
         if(pieces blocking path) return 0; // something about a null pointer
         if((pos[0] > 104 || pos[0] < 97 )||(pos[1] > '8' || pos[1] < '1')) return 0;
         if(!isKingMove(pos)) return 0;
-        
-<<<<<<< HEAD
-	if(pos == this->position) return 0;
-	if(pieces blocking path) return 0; // something about a null pointer
-	if((pos[0] > 104 || pos[0] < 97 )||(pos[1] > '8' || pos[1] < '1')) return 0;
-	if(!isKingMove(pos)) return 0;
-	
-	return 1;
-}
-=======
+
         return 1;
     }
->>>>>>> origin/master

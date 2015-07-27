@@ -5,8 +5,6 @@
 Bishop::Bishop(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("bishop") {}
 
 bool Bishop::isBishopMove(std::string pos){
-    int curX = this->getX();
-    int curY = this->getY();
     char xx = pos[0];
     char yy = pos[1];
     int moveX = xx - 97;
@@ -24,8 +22,8 @@ bool Bishop::isBlockedPath(std::string pos){
     // putting current position and0 desired move into arrays of numbers to ease the comparison of them
     char xx = pos[0];
     char yy = pos[1];
-    arrPos[2] = {xx - 97, 7 - (yy - 49)}; // pos as an array of num coordinates
-    arr[2] = {this->getX(), this->getY()}; //current location as an array of num coordinates
+    int arrPos[2] = {xx - 97, 7 - (yy - 49)}; // pos as an array of num coordinates
+    int arr[2] = {this->getX(), this->getY()}; //current location as an array of num coordinates
     
     //loops and checks if each tile between the current and the desired move is empty
     while(arr[0] != arrPos[0] && arr[1] != arrPos[1]){//not final position

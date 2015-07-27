@@ -184,24 +184,30 @@ void Game::castle(Player *p) {
     //all if, no else if
     //return; ends the function, void so don't return anything
     if (king moved) {
-        std::cout << "The king has already moved, cannot castle!" << endl;
+        cout << "The king has already moved, cannot castle!" << endl;
         return;
 	}
     if (rook moved) {
-        std::cout << "The rook has already moved, cannot castle!" << endl;
+        cout << "The rook has already moved, cannot castle!" << endl;
         return;
     }
     
+<<<<<<< HEAD
     if (pieces between) { interim pieces not NULL
         std::cout << "There are pieces inbetween, cannot castle!" << endl;
+=======
+    if (pieces between) {
+        cout << "There are pieces inbetween, cannot castle!" << endl;
+>>>>>>> origin/master
         return;
 	}
     
     if (this->isCheck()) {
-        std::cout << "You are in check, cannot castle!" << endl;
+        cout << "You are in check, cannot castle!" << endl;
         return;
 	}
     
+<<<<<<< HEAD
     if (isCheck() || isCheck() || isCheck()) { interim spaces cause check
         std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
         return;
@@ -209,11 +215,20 @@ void Game::castle(Player *p) {
     
     if (isCheck()) { final space is check
         std::cout << "You would be in check, cannot castle!" << endl;
+=======
+    if (any spots it passes can be attacked) {
+        cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
+        return;
+	}
+    
+    if (would be in check after move) {
+        cout << "You would be in check, cannot castle!" << endl;
+>>>>>>> origin/master
 
         return;
 	}
     
-        std::cout << "Castling!" << endl;
+        cout << "Castling!" << endl;
 	
         //move
 	
@@ -279,7 +294,7 @@ bool Game::isValidPosition(string pos) {
 }
 
 
-bool Game::isCheck(string posn = "a0") {
+bool Game::isCheck(string pos) {
     //should be simple to determine if a king is in check
     //every time a piece is moved, determine if any of the opponent's pieces
     //have legal moves to capture the king
@@ -480,7 +495,7 @@ Tile * Game::getTileAt(string pos) {
 }
 
 
-void Game::updateBoard(std::string oldPos, std::string newPos, char c) {
+void Game::updateBoard(string oldPos, string newPos, char c) {
     view->updateBoard(oldPos, newPos, c);
 }
 

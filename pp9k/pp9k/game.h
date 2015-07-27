@@ -46,7 +46,7 @@ public:
     std::string calcPosition(int x, int y);
     void move(std::string oldPos, std::string newPos, char up = 'a');
     void castle(Player *p);
-    bool isCheck();
+    bool isCheck(std::string pos = "a0");
     Player *getPlayer(int pNum);
     bool isCheckmate();
     bool isStalemate();

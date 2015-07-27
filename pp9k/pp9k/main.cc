@@ -45,6 +45,7 @@ void outputFinalScore() {
 }
 
 int main(int argc, const char * argv[]) {
+    cout << "starting game" << endl;
     bool playing = false;
     //Take input
     string s;

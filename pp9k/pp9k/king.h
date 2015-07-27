@@ -11,17 +11,12 @@ class King: public Piece {
 public:
     King(int x, int y, std::string pos, char colour);
     //s is the position (ex. e5)
-    bool move(std::string pos);
-    int getX();
-    int getY();
-    std::string getPos();
     std::string getName();
-    void setPos(std::string pos);
     bool isValidMove(std::string pos);
-    void stringSetPos(std::string pos);
     bool isKingMove(std::string pos);
     bool getHasMoved();
     void setHasMoved(bool b);
+    bool move(std::string pos);
 };
 
 #endif

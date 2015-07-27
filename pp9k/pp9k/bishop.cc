@@ -1,6 +1,7 @@
 #include "bishop.h"
 #include "game.h"
 #include <cstdlib>
+#include <iostream>
 
 Bishop::Bishop(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("bishop") {}
 
@@ -57,6 +58,18 @@ bool Bishop::isBlockedPath(std::string pos){
     return 0;
 }
 
+bool Bishop::move(std::string pos) {
+    if(isValidMove(pos)) {
+        setPos(pos);
+        return true;
+    }
+    else {
+        std::cout << "Invalid move, try again" << std::endl;
+        return false;
+        
+    }
+}
+
 bool Bishop::isValidMove(std::string pos) {
     
     if(pos == this->position) return 0;
@@ -65,3 +78,4 @@ bool Bishop::isValidMove(std::string pos) {
     if(!isBishopMove(pos)) return 0;
     return 1;
 }
+

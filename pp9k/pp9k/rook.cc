@@ -1,5 +1,6 @@
 #include "rook.h"
 #include "game.h"
+#include <iostream>
 
 Rook::Rook(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("rook"), hasMoved(0) {}
 
@@ -51,6 +52,19 @@ bool Rook::isBlockedPath(std::string pos){
     
     return 0;
 }
+
+bool Rook::move(std::string pos) {
+    if(isValidMove(pos)) {
+        setPos(pos);
+        return true;
+    }
+    else {
+        std::cout << "Invalid move, try again" << std::endl;
+        return false;
+        
+    }
+}
+
 
 bool Rook::isValidMove(std::string pos) {
     

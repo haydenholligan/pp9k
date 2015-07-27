@@ -10,17 +10,11 @@ class Bishop: public Piece {
 public:
     Bishop(int x, int y, std::string pos, char colour);
     //s is the position (ex. e5)
-    bool move(std::string pos);
-    int getX();
-    int getY();
-    std::string getPos();
     std::string getName();
-    void setPos(std::string pos);
     bool isValidMove(std::string pos);
-    void stringSetPos(std::string pos);
     bool isBishopMove(std::string pos);
     bool isBlockedPath(std::string pos);
-
+    bool move(std::string pos);
 };
 
 #endif

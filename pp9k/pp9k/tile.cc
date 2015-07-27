@@ -16,12 +16,12 @@ int Tile::getY() {
     return y;
 }
 
-void setX(int x) {
-    x = x;
+void Tile::setX(int x) {
+    this->x = x;
 }
 
-void setY(int y) {
-    y = y;
+void Tile::setY(int y) {
+    this->y = y;
 }
 
 std::string Tile::getPos() {

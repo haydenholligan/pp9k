@@ -19,8 +19,15 @@ std::string Piece::getName() {
     return this->name;
 }
 
+
 void Piece::setPos(std::string pos) {
-    stringSetPos(pos);
+    this->position = pos;
+    char xx = pos[0];
+    char yy = pos[1];
+    int x = xx - 97;
+    int y = 7 - (yy - 49);
+    this->x = x;
+    this->y = y;
 }
 
 char Piece::getColour(){
@@ -41,28 +48,6 @@ std::string Piece::intPosToStr(int x, int y){
     int i1 = 8 - y;
     s = s + std::to_string(i1);
     return s;
-}
-
-void Piece::stringSetPos(std::string pos){
-    this->position = pos;
-    char xx = pos[0];
-    char yy = pos[1];
-    int x = xx - 97;
-    int y = 7 - (yy - 49);
-    this->x = x;
-    this->y = y;
-}
-
-bool Piece::move(std::string pos) {
-    if(isValidMove(pos)) {
-        setPos(pos);
-        return true;
-    }
-    else {
-        std::cout << "Invalid move, try again" << std::endl;
-        return false;
-        
-    }
 }
 
 void Piece::setGame(Game * g){

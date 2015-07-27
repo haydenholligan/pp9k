@@ -1,6 +1,7 @@
 #include "queen.h"
 #include "game.h"
 #include <cstdlib>
+#include <iostream>
 
 Queen::Queen(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("queen") {}
 
@@ -72,6 +73,18 @@ bool Queen::isBlockedPath(std::string pos){
     return 0;
 }
 
+bool Queen::move(std::string pos) {
+    if(isValidMove(pos)) {
+        setPos(pos);
+        return true;
+    }
+    else {
+        std::cout << "Invalid move, try again" << std::endl;
+        return false;
+        
+    }
+}
+
 bool Queen::isValidMove(std::string pos) {
     
     if(pos == this->position) return 0;
@@ -80,3 +93,4 @@ bool Queen::isValidMove(std::string pos) {
     if(!isQueenMove(pos)) return 0;
     return 1;
 }
+

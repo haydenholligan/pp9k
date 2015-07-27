@@ -29,8 +29,8 @@ class Game {
     Player *p2;
     
     //holds pieces for each separate player
-    std::vector<Piece> p1Pieces;
-    std::vector<Piece> p2Pieces;
+    std::vector<Piece *> p1Pieces;
+    std::vector<Piece *> p2Pieces;
     int nump1Pieces;
     int nump2Pieces;
     

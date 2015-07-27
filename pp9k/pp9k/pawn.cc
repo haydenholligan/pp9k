@@ -1,6 +1,7 @@
 #include "pawn.h"
 #include "game.h"
 #include <cstdlib>
+#include <iostream>
 
 Pawn::Pawn(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("pawn") {}
 
@@ -40,6 +41,17 @@ bool Pawn::isPawnMove(std::string pos) {
 	return 0;
 }
 
+bool Pawn::move(std::string pos) {
+    if(isValidMove(pos)) {
+        setPos(pos);
+        return true;
+    }
+    else {
+        std::cout << "Invalid move, try again" << std::endl;
+        return false;
+        
+    }
+}
 
 bool Pawn::isValidMove(std::string pos) {
     

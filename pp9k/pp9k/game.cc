@@ -192,7 +192,7 @@ void Game::castle(Player *p) {
         return;
     }
     
-    if (pieces between) {
+    if (pieces between) { interim pieces not NULL
         std::cout << "There are pieces inbetween, cannot castle!" << endl;
         return;
 	}
@@ -202,12 +202,12 @@ void Game::castle(Player *p) {
         return;
 	}
     
-    if (any spots it passes can be attacked) {
+    if (isCheck() || isCheck() || isCheck()) { interim spaces cause check
         std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
         return;
 	}
     
-    if (would be in check after move) {
+    if (isCheck()) { final space is check
         std::cout << "You would be in check, cannot castle!" << endl;
 
         return;
@@ -353,7 +353,7 @@ bool Game::isCheckmate() {
     	int x = xx - 97;
     	int y = 7 - (yy - 49);
 	string arr[8];
-	
+	//fills array with possible king moves
 	for(int i = 0; i < 8; i++){
 		if(i == 0)
 			arr[i] = calcPosition(x + 1,y + 1);
@@ -373,18 +373,18 @@ bool Game::isCheckmate() {
 			arr[i] = calcPosition(x - 1,y + 1);
  
 	}	
-
+	checks if there is a valid move the king can use
 	for(int i = 0; i < 8; i++){
 		
 		pos = arr[i];
-	
+		//if there is a valid move, return false
 		if(king.isValidMove(pos)){	
 			return 0;
 		}//if
 	}//for
     cout << "Checkmate! "<<colour<<" wins!" << endl;
     
-    return 1;
+    return 1; //if not, return true
 }
 
 bool Game::isStalemate() {
@@ -393,10 +393,33 @@ bool Game::isStalemate() {
     //taken from the assignment, this is all we need to do for isStalemate
     
     //loop through each piece, and if any possible move for that piece is invalid
-    //and not check, then it's stalemate.
+    //then it's stalemate.
+
+	if(turn == 1) {
+		int len = p1pieces.size();
+		for (int i = 0; i < len; i++) {
+			Piece p = p1pieces.at(i);
+			for(int j = 0; j < 8; j++){
+				for(int k = 0; k < 8; k++){
+				string str = calcPosition(j,k);
+					if(p.isValidMove(str)) return 0;
+				}
+			}
+	}//if
+	else{
+		int len = p2pieces.size();
+		for (int i = 0; i < len; i++) {
+			Piece p = p2pieces.at(i);
+			for(int j = 0; j < 8; j++){
+				for(int k = 0; k < 8; k++){
+				string str = calcPosition(j,k);
+					if(p.isValidMove(str)) return 0;
+				}
+			}
+	}
     
     cout << "Stalemate!" << endl;
-    return 0;
+    return 1;
 }
 
 void Game::upgrade(Piece *p, char piece) {

@@ -13,13 +13,13 @@ extern int numBlackWins;
 extern int turn;
 
 Game::Game(): board(NULL), p1Pieces(0), p2Pieces(0) {
-    cout << "Calling game constructor" << endl;
+    std::cout << "Calling game constructor" << endl;
     view = new textView;
 }
 
 
 Game::~Game() {
-    cout << "Calling game destructor" << endl;
+    std::cout << "Calling game destructor" << endl;
     
     for (int i = 0; i < boardSize; i++) {
         delete [] board[i];
@@ -123,7 +123,7 @@ void Game::addPiece(char p, string pos) {
             break;
             
         default:
-            cout << "Not a valid piece!" << endl;
+            std::cout << "Not a valid piece!" << endl;
             break;
     }
     //old position doesn't change, new position gets piece p
@@ -136,7 +136,7 @@ void Game::removePiece(string pos) {
     int x = xx - 97;
     int y = 7 - (yy - 49);
     if (board[y][x].getPiece() == NULL) {
-        cout << "No piece to delete, taking no action" << endl;
+        std::cout << "No piece to delete, taking no action" << endl;
         return;
     }
     else {
@@ -146,7 +146,7 @@ void Game::removePiece(string pos) {
 
         for (int i = 0; i < max(p1Pieces.size(), p2Pieces.size()); i++) {
             if (p1Pieces.at(i).getName() == tmpName && p1Pieces.at(i).getColour() == tmpColour) {
-                cout << "Found the piece, deleting from board" << endl;
+                std::cout << "Found the piece, deleting from board" << endl;
                 //might need to change formula for begin + i
                 p1Pieces.erase(p1Pieces.begin() + i);
                 board[y][x].setPiece(NULL);
@@ -154,7 +154,7 @@ void Game::removePiece(string pos) {
             }
             
             else if (p1Pieces.at(i).getName() == tmpName && p1Pieces.at(i).getColour() == tmpColour) {
-                cout << "Found the piece, deleting from board" << endl;
+                std::cout << "Found the piece, deleting from board" << endl;
                 p2Pieces.erase(p1Pieces.begin() + i);
                 board[y][x].setPiece(NULL);
                 updateBoard(pos, "0", 'x');
@@ -183,31 +183,27 @@ void Game::move(string oldPos, string newPos, char up) {
 void Game::castle(Player *p) {
     //all if, no else if
     //return; ends the function, void so don't return anything
-    if (king moved) {
-        cout << "The king has already moved, cannot castle!" << endl;
+
+if(turn == 1){
+    if (isMovedKing('w')) {
+        std::cout << "The king has already moved, cannot castle!" << endl;
         return;
 	}
-    if (rook moved) {
-        cout << "The rook has already moved, cannot castle!" << endl;
+    if (isMovedRook('w', side)) {
+        std::cout << "The rook has already moved, cannot castle!" << endl;
         return;
     }
     
-<<<<<<< HEAD
     if (pieces between) { interim pieces not NULL
         std::cout << "There are pieces inbetween, cannot castle!" << endl;
-=======
-    if (pieces between) {
-        cout << "There are pieces inbetween, cannot castle!" << endl;
->>>>>>> origin/master
         return;
 	}
     
     if (this->isCheck()) {
-        cout << "You are in check, cannot castle!" << endl;
+        std::cout << "You are in check, cannot castle!" << endl;
         return;
 	}
     
-<<<<<<< HEAD
     if (isCheck() || isCheck() || isCheck()) { interim spaces cause check
         std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
         return;
@@ -215,20 +211,46 @@ void Game::castle(Player *p) {
     
     if (isCheck()) { final space is check
         std::cout << "You would be in check, cannot castle!" << endl;
-=======
-    if (any spots it passes can be attacked) {
-        cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
-        return;
-	}
-    
-    if (would be in check after move) {
-        cout << "You would be in check, cannot castle!" << endl;
->>>>>>> origin/master
 
         return;
 	}
+}
+else{
+
+
+    if (isMovedKing('b')) {
+        std::cout << "The king has already moved, cannot castle!" << endl;
+        return;
+	}
+    if (isMovedRook('b', side)) {
+        std::cout << "The rook has already moved, cannot castle!" << endl;
+        return;
+    }
     
-        cout << "Castling!" << endl;
+    if (pieces between) { interim pieces not NULL
+        std::cout << "There are pieces inbetween, cannot castle!" << endl;
+        return;
+	}
+    
+    if (this->isCheck()) {
+        std::cout << "You are in check, cannot castle!" << endl;
+        return;
+	}
+    
+    if (isCheck() || isCheck() || isCheck()) { interim spaces cause check
+        std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
+        return;
+	}
+    
+    if (isCheck()) { final space is check
+        std::cout << "You would be in check, cannot castle!" << endl;
+
+        return;
+	}
+
+}//else
+    
+        std::cout << "Castling!" << endl;
 	
         //move
 	
@@ -294,7 +316,7 @@ bool Game::isValidPosition(string pos) {
 }
 
 
-bool Game::isCheck(string pos) {
+bool Game::isCheck(string posn = "a0") {
     //should be simple to determine if a king is in check
     //every time a piece is moved, determine if any of the opponent's pieces
     //have legal moves to capture the king
@@ -317,7 +339,7 @@ bool Game::isCheck(string pos) {
 		}//if
 		for(int i = 0; i < len; i++){
 			if(this->p1pieces.at(i).isValidMove(posn)){ 
-				cout << colour <<" is in check!" << endl;
+				std::cout << colour <<" is in check!" << endl;
 				return 1;
 			}//if
 		}//for
@@ -333,7 +355,7 @@ bool Game::isCheck(string pos) {
         	}//if
 		for (int i = 0; i < len; i++){
 			if (this->p1pieces.at(i).isValidMove(posn)){
-				cout << colour <<" is in check!" << endl;
+				std::cout << colour <<" is in check!" << endl;
 				return 1;
             		}//if
 		}//for
@@ -397,7 +419,7 @@ bool Game::isCheckmate() {
 			return 0;
 		}//if
 	}//for
-    cout << "Checkmate! "<<colour<<" wins!" << endl;
+    std::cout << "Checkmate! "<<colour<<" wins!" << endl;
     
     return 1; //if not, return true
 }
@@ -433,10 +455,42 @@ bool Game::isStalemate() {
 			}
 	}
     
-    cout << "Stalemate!" << endl;
+    std::cout << "Stalemate!" << endl;
     return 1;
 }
 
+bool isMovedKing(char c){
+	if(c == 'w') return this->p1King;
+	else return this->p2King;
+}
+
+bool isMovedRook(char c, char side){
+	if(c == 'w'){
+		if(side == 'l')return this->p1rookL;
+		else return this->p1rookR;
+	}
+	else{
+	if(side == 'l')return this->p2rookL;
+		else return this->p2rookR;
+	}
+}
+
+
+void setKingMove(char c){
+	if(c == 'w') this->p1King == 1;
+	else return this->p2King == 1;
+}
+
+void setRookMove(char side){
+	if(c == 'w'){
+		if(side == 'l')this->p1rookL  = 1;
+		else this->p1rookR = 1;
+	}
+	else{
+	if(side == 'l')this->p2rookL = 1;
+		else this->p2rookR = 1;
+	}
+}
 void Game::upgrade(Piece *p, char piece) {
     int iter = 0;
 	int x = p->getX();
@@ -462,7 +516,7 @@ void Game::upgrade(Piece *p, char piece) {
             break;
             
         default:
-            cout << "invalid character for upgrade" << endl;
+            std::cout << "invalid character for upgrade" << endl;
             break;
     }
     
@@ -495,7 +549,7 @@ Tile * Game::getTileAt(string pos) {
 }
 
 
-void Game::updateBoard(string oldPos, string newPos, char c) {
+void Game::updateBoard(std::string oldPos, std::string newPos, char c) {
     view->updateBoard(oldPos, newPos, c);
 }
 
@@ -523,7 +577,7 @@ void Game::setup(string s1, string s2) {
         p1 = new Computer(4, 1);
     
     else
-        cout << "invalid input" << endl;
+        std::cout << "invalid input" << endl;
     
     if (s2 == "human")
         p2 = new Human(1);
@@ -541,7 +595,7 @@ void Game::setup(string s1, string s2) {
         p2 = new Computer(4, 1);
     
     else
-        cout << "invalid input" << endl;
+        std::cout << "invalid input" << endl;
     
     
     //Initialize memory for the tiles

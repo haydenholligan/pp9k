@@ -6,16 +6,17 @@ Pawn::Pawn(int x, int y, std::string position, char colour): Piece(x, y, positio
 
 bool Pawn::isPawnMove(std::string pos) {
 	
-	// ((this->getColour() == 'w' && moveY > yy) || (this->getColour() == 'b' && moveY < yy)) makes sure the pawns are going in the right direction
+	// ((this->getColour() == 'w' && moveY > yy) || (this->getColour() == 'b' && moveY < yy)) 
+        // makes sure the pawns are going in the right direction
 
 	int curX = this->getX(); 
 	int curY = this->getY();
     
 	char xx = pos[0];
-    char yy = pos[1];
+        char yy = pos[1];
     
 	int moveX = xx - 97;
-    int moveY = yy - 49;
+        int moveY = yy - 49;
 	
 	if(g->getTileAt(pos)->getPiece() != NULL) {
 		if(g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) return 0; // something about a null pointer}

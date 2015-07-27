@@ -58,5 +58,10 @@ bool Rook::isValidMove(std::string pos) {
     if(isBlockedPath(pos)) return 0; // something about a null pointer
     if((pos[0] > 104 || pos[0] < 97 )||(pos[1] > '8' || pos[1] < '1')) return 0;
     if(!isRookMove(pos)) return 0;
+
+    char side = 'z'
+    if(this->getPos() == "a1" || this->getPos() == "a8") side = 'l';
+    if(this->getPos() == "h1" || this->getPos() == "h8") side = 'r';
+    if(side != 'z')g->setRookMove(this->getColour(),side);
     return 1;
 }

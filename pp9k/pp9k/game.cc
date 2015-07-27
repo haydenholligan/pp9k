@@ -199,10 +199,22 @@ void Game::move(string oldPos, string newPos, char up) {
     //not done
 }
 
-void Game::castle(string kingPos) {
+void Game::castle(string kingCurPos,string kingPos) {
     //all if, no else if
     //return; ends the function, void so don't return anything
+	char side;
+
+    	char xx = kingCurPos[1];
+	char newX = kingPos[1];
+    	
+	int xNew = xx - 97;
+	int xOld = newX -97;
+	
     
+	if(kingCurPos[1] < kingPos[1]) side = 'r';
+	else side = 'l';
+	    
+
     if(turn == 1){
         if (isMovedKing('w')) {
             std::cout << "The king has already moved, cannot castle!" << endl;
@@ -212,31 +224,34 @@ void Game::castle(string kingPos) {
             std::cout << "The rook has already moved, cannot castle!" << endl;
             return;
         }
-        
-        if (pieces between) { interim pieces not NULL
-            std::cout << "There are pieces inbetween, cannot castle!" << endl;
-            return;
-        }
-        
-        if (this->isCheck()) {
+        //interim pieces non-NULL
+        for(int i = XOld + 1; i != XNew; i++){
+			if(g->getTileAt(calcPosition(1,i))->getPiece() != NULL) ){ 
+            			std::cout << "There are pieces inbetween, cannot castle!" << endl;
+            			return;
+       			 }//if
+	}//for
+     
+        if (isCheck()) {
             std::cout << "You are in check, cannot castle!" << endl;
             return;
         }
         
-        if (isCheck() || isCheck() || isCheck()) { interim spaces cause check
-            std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
-            return;
-        }
+	for(int i = xOld + 1; i != xNew; i++){
+			if(isCheck(calcPosition(1,i))) ){ 
+            			std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
+            			return;
+       			 }//if
+	}//for
+
         
-        if (isCheck()) { final space is check
+        if (isCheck(calcPosition(1,xNew))) { final space is check
             std::cout << "You would be in check, cannot castle!" << endl;
             
             return;
         }
     }
     else{
-        
-        
         if (isMovedKing('b')) {
             std::cout << "The king has already moved, cannot castle!" << endl;
             return;
@@ -245,29 +260,33 @@ void Game::castle(string kingPos) {
             std::cout << "The rook has already moved, cannot castle!" << endl;
             return;
         }
-        
-        if (pieces between) { interim pieces not NULL
-            std::cout << "There are pieces inbetween, cannot castle!" << endl;
-            return;
-        }
-        
-        if (this->isCheck()) {
+        //interim pieces non-NULL
+        for(int i = xOld + 1; i != xNew; i++){
+			if(g->getTileAt(calcPosition(8,i))->getPiece() != NULL) ){ 
+            			std::cout << "There are pieces inbetween, cannot castle!" << endl;
+            			return;
+       			 }//if
+	}//for
+     
+        if (isCheck()) {
             std::cout << "You are in check, cannot castle!" << endl;
             return;
         }
         
-        if (isCheck() || isCheck() || isCheck()) { interim spaces cause check
-            std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
-            return;
-        }
+	for(int i = xOld + 1; i != xNew; i++){
+			if(isCheck(calcPosition(8,i))) ){ 
+            			std::cout << "Can't move through possible attacked spaces, cannot castle!" << endl;
+            			return;
+       			 }//if
+	}//for
+
         
-        if (isCheck()) { final space is check
+        if (isCheck(calcPosition(8,xNew))) { final space is check
             std::cout << "You would be in check, cannot castle!" << endl;
             
             return;
         }
-        
-    }//else
+    }
     
     std::cout << "Castling!" << endl;
     

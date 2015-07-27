@@ -9,7 +9,6 @@ bool Pawn::isPawnMove(std::string pos) {
 	// ((this->getColour() == 'w' && moveY > yy) || (this->getColour() == 'b' && moveY < yy)) 
         // makes sure the pawns are going in the right direction
 
-	int curX = this->getX(); 
 	int curY = this->getY();
     
 	char xx = pos[0];

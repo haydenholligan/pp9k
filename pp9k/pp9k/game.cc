@@ -503,6 +503,7 @@ void Game::setRookMove(char side){
         else this->p2rookR = 1;
     }
 }
+
 void Game::upgrade(Piece *p, char piece) {
     int iter = 0;
     int x = p->getX();

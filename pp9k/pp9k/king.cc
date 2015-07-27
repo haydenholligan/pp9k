@@ -2,7 +2,7 @@
 #include "game.h"
 #include <cstdlib>
 
-King::King(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("king") {}
+King::King(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("king"), hasMoved(0) {}
 
 bool King::isKingMove(std::string pos){
     
@@ -38,3 +38,12 @@ bool King::isKingMove(std::string pos){
 	g->setKingMove(this->getColour());
         return 1;
     }
+
+
+bool King::getHasMoved() {
+    return hasMoved;
+}
+
+void King::setHasMoved(bool b) {
+    hasMoved = b;
+}

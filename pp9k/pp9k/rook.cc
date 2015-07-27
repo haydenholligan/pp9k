@@ -1,7 +1,7 @@
 #include "rook.h"
 #include "game.h"
 
-Rook::Rook(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("rook") {}
+Rook::Rook(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("rook"), hasMoved(0) {}
 
 bool Rook::isRookMove(std::string pos){
     char xx = pos[0];
@@ -64,4 +64,13 @@ bool Rook::isValidMove(std::string pos) {
     if(this->getPos() == "h1" || this->getPos() == "h8") side = 'r';
     if(side != 'z')g->setRookMove(this->getColour(),side);
     return 1;
+}
+
+
+bool King::getHasMoved() {
+    return hasMoved;
+}
+
+void King::setHasMoved(bool b) {
+    hasMoved = b;
 }

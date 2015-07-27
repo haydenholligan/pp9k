@@ -7,6 +7,7 @@ class King: public Piece {
     int x, y;
     char colour;
     std::string name, position;
+    bool hasMoved;
 public:
     King(int x, int y, std::string pos, char colour);
     //s is the position (ex. e5)
@@ -19,6 +20,8 @@ public:
     bool isValidMove(std::string pos);
     void stringSetPos(std::string pos);
     bool isKingMove(std::string pos);
+    bool getHasMoved();
+    void setHasMoved(bool b);
 };
 
 #endif

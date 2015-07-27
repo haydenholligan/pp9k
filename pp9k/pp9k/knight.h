@@ -20,6 +20,8 @@ public:
     bool isBlockedPath(std::string pos);
     void stringSetPos(std::string pos);
     bool isKnightMove(std::string pos);
+    bool getHasMoved();
+    void setHasMoved(bool b);
 };
 
 #endif

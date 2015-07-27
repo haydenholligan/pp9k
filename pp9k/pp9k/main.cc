@@ -27,7 +27,6 @@ int numBlackWins = 0;
 int turn = -1;
 //1 is player 1's turn(white), 2 is player 2's turn(black)
 
-
 bool isPieceMine(Game *g, string pos, int turn) {
     if (g->getPlayer(turn)->getPlayerNum() == 1 && (g->getPieceAt(pos) >= 65 && g->getPieceAt(pos) <= 90)) {
         return true;

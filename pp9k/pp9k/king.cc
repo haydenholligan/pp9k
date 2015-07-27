@@ -34,8 +34,8 @@ bool King::isKingMove(std::string pos){
         //if(allied spot) return 0; // something about a null pointer
         //if(pieces blocking path) return 0; // something about a null pointer
         if((pos[0] > 104 || pos[0] < 97 )||(pos[1] > '8' || pos[1] < '1')) return 0;
-        if(!isKingMove(pos)) return 0;
-	g->setKingMove(this->getColour());
+        if(!hasMoved) return 0;
+        hasMoved = true;
         return 1;
     }
 

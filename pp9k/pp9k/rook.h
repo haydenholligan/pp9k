@@ -21,6 +21,8 @@ public:
     bool isBlockedPath(std::string pos);
     void stringSetPos(std::string pos);
     bool isRookMove(std::string pos);
+    bool getHasMoved();
+    void setHasMoved(bool b);
 };
 
 #endif

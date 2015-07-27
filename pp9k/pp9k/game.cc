@@ -171,12 +171,12 @@ void Game::move(string oldPos, string newPos, char up) {
     char yy = oldPos[1];
     int x = xx - 97;
     int y = 7 - (yy - 49);
-    /*
+    
      char xx2 = newPos[0];
      char yy2 = newPos[1];
      int x2 = xx - 97;
      int y2 = 7 - (yy - 49);
-     */
+    
     if (oldPos == "e1" && (newPos == "c1" || "g1")) {
         //white king to be castled
         // if (board[y][x].getPiece()->getName() == "king" && board[y2][x2].getPiece()->getName(
@@ -294,8 +294,8 @@ void Game::castle(string newPos, King *k, Rook *r) {
     
     std::cout << "Castling!" << endl;
     
-    //move
-    
+    setPosition(k, newPos);
+        
 }
 
 

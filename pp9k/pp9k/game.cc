@@ -798,7 +798,6 @@ void Game::setup(char setupArr[9][8], bool isEmpty) {
                 board[i][j].setPiece(NULL);
             }
             if (!isEmpty) {
-                if (dbg) cout << "isEmpty = false" << endl;
                 switch (setupArr[i][j]) {
                     case 'r':
                         p2Pieces.push_back(new Rook(j, i, calcPosition(j, i), 'b'));

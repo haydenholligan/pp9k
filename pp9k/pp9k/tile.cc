@@ -5,8 +5,6 @@ Tile::Tile(): x(0), y(0), position("0"), pieceOnTile(NULL) {
 }
 
 Tile::~Tile() {
-    std::cout << "Calling Tile destructor" << std::endl;
-
     pieceOnTile = NULL;
 }
 

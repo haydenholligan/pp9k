@@ -104,6 +104,7 @@ bool Bishop::move(std::string pos) {
         setPos(pos);
         return true;
     }
+    
     else {
         std::cout << "Invalid move, try again" << std::endl;
         return false;

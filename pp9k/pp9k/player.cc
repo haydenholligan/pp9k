@@ -21,3 +21,4 @@ int Player::getPlayerNum() {
 void Player::setPlayerNum(int num) {
    playerNum = num;
 }
+

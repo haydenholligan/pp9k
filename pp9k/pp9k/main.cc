@@ -228,7 +228,7 @@ input:
                         continue;
                     }
                     cout << "adding piece" << endl;
-                    g->addPiece(playing, newPos);
+                    g->addPiece(piece, newPos);
                 }
                 
                 else if (next == "-") {
@@ -242,10 +242,20 @@ input:
                 }
                 
                 else if (next == "=") {
-                    int s;
+                    string s;
                     cin >> s;
-                    turn = s;
-                    cout << "Player " << s << "'s turn" << endl;
+                    if (s == "black") {
+                        turn = 2;
+                        cout << "Player " << s << "'s turn" << endl;
+                    }
+                    else if (s == "white") {
+                        turn  = 1;
+                        cout << "Player " << s << "'s turn" << endl;
+
+                    }
+                    
+                    else cout << "invalid colour!" << endl;
+                        
                 }
                 
                 else if (next == "done") {

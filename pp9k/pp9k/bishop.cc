@@ -9,16 +9,6 @@ Bishop::Bishop(int x, int y, std::string position, char colour): Piece(x, y, pos
     this->name = "bishop";
 }
 
-bool Bishop::isBishopMove(std::string pos){
-    char xx = pos[0];
-    char yy = pos[1];
-    int moveX = xx - 97;
-    int moveY = yy - 49;
-    
-    if (abs(xx - moveX) == abs(yy - moveY)) return 1;
-    return 0;
-}
-
 
 bool Bishop::isBlockedPath(std::string pos){
     if (dbg) std::cout << "Calling bishop::isBlockedPath" << std::endl;
@@ -33,10 +23,17 @@ bool Bishop::isBlockedPath(std::string pos){
     int destY = 7 - (yy - 49);
     
     int startX = this->getX();
-    int startY = this->getY();    if (dbg) std::cout << "Ending function, path is not blocked" << std::endl;
+    int startY = this->getY();
     
-    if(abs(startX-destX) == abs(startY-destY)) {
+    if (dbg) {
+        std::cout << "Start X, Y: " << startX << ", " << startY << std::endl;
+        std::cout << "Dest X, Y: " << destX << ", " << destY << std::endl;
+        
+    }
+    
+    if(abs(startX-destX) != abs(startY-destY)) {
         std::cout << "Not a diagonal move, invalid for bishop!" << std::endl;
+        return 1;
     }
     
     //moving down-right
@@ -115,11 +112,11 @@ bool Bishop::move(std::string pos) {
 }
 
 bool Bishop::isValidMove(std::string pos) {
-    
+    if (dbg) std::cout << "starting bishop::isValidMove" << std::endl;
     if(pos == this->position) return 0;
+    if (dbg) std::cout << "after pos == this->pos" << std::endl;
     if(isBlockedPath(pos)) return 0;
-    if((pos[0] > 104 || pos[0] < 97 )||(pos[1] > '8' || pos[1] < '1')) return 0;
-    if(!isBishopMove(pos)) return 0;
+    if (dbg) std::cout << "after isBlockedPath" << std::endl;
     return 1;
 }
 

@@ -9,7 +9,6 @@ public:
     //s is the position (ex. e5)
     std::string getName();
     bool isValidMove(std::string pos);
-    bool isBishopMove(std::string pos);
     bool isBlockedPath(std::string pos);
     bool move(std::string pos);
 };

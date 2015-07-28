@@ -7,7 +7,7 @@ class Computer: public Player {
     int level;
 public:
     Computer(int playerNum, int level);
-    void movePiece(Piece *p, std::string location);
+    void movePiece();
 };
 
 

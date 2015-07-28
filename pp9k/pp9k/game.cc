@@ -797,37 +797,37 @@ void Game::setup(char setupArr[9][8], bool isEmpty) {
                 switch (setupArr[i][j]) {
                     case 'r':
                         p2Pieces.push_back(new Rook(j, i, calcPosition(j, i), 'b'));
-                        board[i][j].setPiece(p1Pieces.at(nump2Pieces));
+                        board[i][j].setPiece(p2Pieces.at(nump2Pieces));
                         nump2Pieces++;
                         break;
                         
                     case 'n':
                         p2Pieces.push_back(new Knight(j, i,calcPosition(j, i), 'b'));
-                        board[i][j].setPiece(p1Pieces.at(nump2Pieces));
+                        board[i][j].setPiece(p2Pieces.at(nump2Pieces));
                         nump2Pieces++;
                         break;
                         
                     case 'b':
                         p2Pieces.push_back(new Bishop(j, i,calcPosition(j, i), 'b'));
-                        board[i][j].setPiece(p1Pieces.at(nump2Pieces));
+                        board[i][j].setPiece(p2Pieces.at(nump2Pieces));
                         nump2Pieces++;
                         break;
                         
                     case 'q':
                         p2Pieces.push_back(new Queen(j, i,calcPosition(j, i), 'b'));
-                        board[i][j].setPiece(p1Pieces.at(nump2Pieces));
+                        board[i][j].setPiece(p2Pieces.at(nump2Pieces));
                         nump2Pieces++;
                         break;
                         
                     case 'k':
                         p2Pieces.push_back(new King(j, i,calcPosition(j, i), 'b'));
-                        board[i][j].setPiece(p1Pieces.at(nump2Pieces));
+                        board[i][j].setPiece(p2Pieces.at(nump2Pieces));
                         nump2Pieces++;
                         break;
                         
                     case 'p':
                         p2Pieces.push_back(new Pawn(j, i,calcPosition(j, i), 'b'));
-                        board[i][j].setPiece(p1Pieces.at(nump2Pieces));
+                        board[i][j].setPiece(p2Pieces.at(nump2Pieces));
                         nump2Pieces++;
                         break;
                         
@@ -871,34 +871,6 @@ void Game::setup(char setupArr[9][8], bool isEmpty) {
                         break;
                 }
             }
-        }
-    }
-    
-    if (!isEmpty) {
-        //Initialize the pieces for player 1
-        p2Pieces.push_back(new Rook(0, 0, calcPosition(0, 0), 'b'));
-        p2Pieces.push_back(new Rook(7, 0,calcPosition(7, 0), 'b'));
-        p2Pieces.push_back(new Knight(1, 0,calcPosition(1, 0), 'b'));
-        p2Pieces.push_back(new Knight(6, 0,calcPosition(6, 0), 'b'));
-        p2Pieces.push_back(new Bishop(2, 0,calcPosition(2, 0), 'b'));
-        p2Pieces.push_back(new Bishop(5, 0,calcPosition(5, 0), 'b'));
-        p2Pieces.push_back(new Queen(3, 0,calcPosition(3, 0), 'b'));
-        p2Pieces.push_back(new King(4, 0,calcPosition(4, 0), 'b'));
-        
-        //Initialize the pieces for player 2
-        p1Pieces.push_back(new Rook(0, 7,calcPosition(0, 7), 'w'));
-        p1Pieces.push_back(new Rook(7, 7,calcPosition(7, 7), 'w'));
-        p1Pieces.push_back(new Knight(1, 7,calcPosition(1, 7), 'w'));
-        p1Pieces.push_back(new Knight(6, 7,calcPosition(6, 7), 'w'));
-        p1Pieces.push_back(new Bishop(2, 7,calcPosition(2, 7), 'w'));
-        p1Pieces.push_back(new Bishop(5, 7,calcPosition(5, 7), 'w'));
-        p1Pieces.push_back(new Queen(3, 7,calcPosition(3, 7), 'w'));
-        p1Pieces.push_back(new King(4, 7,calcPosition(4, 7), 'w'));
-        
-        //Initialize the pawns for both players
-        for (int i = 0; i < boardSize; i++) {
-            p2Pieces.push_back(new Pawn(i, 1,calcPosition(i, 1), 'b'));
-            p1Pieces.push_back(new Pawn(i, 6,calcPosition(i, 6), 'w'));
         }
     }
     

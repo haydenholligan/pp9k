@@ -35,9 +35,10 @@ bool Rook::isBlockedPath(std::string pos){
     
     if (startX == destX) {
         if (startY < destY) {
-            for (int i = startY; i < destY; i++) {
+            for (int i = startY + 1; i <= destY; i++) {
+                if (dbg) std::cout << "i: " << std::endl;
                 if (g->getTileAt(intPosToStr(startX, i)) != NULL) {
-                    if (dbg) std::cout << "Path is blocked" << std::endl;
+                    if (dbg) std::cout << "Path is blocked1" << std::endl;
                     return 1;
                 }
             }
@@ -46,7 +47,7 @@ bool Rook::isBlockedPath(std::string pos){
         else if (startY > destY) {
             for (int i = startY; i < destY; i--) {
                 if (g->getTileAt(intPosToStr(startX, i)) != NULL) {
-                    if (dbg) std::cout << "Path is blocked" << std::endl;
+                    if (dbg) std::cout << "Path is blocked2" << std::endl;
                     return 1;
                 }
             }
@@ -57,7 +58,7 @@ bool Rook::isBlockedPath(std::string pos){
         if (startX < destX) {
             for (int i = startX; i < destX; i++) {
                 if (g->getTileAt(intPosToStr(i, startY)) != NULL) {
-                    if (dbg) std::cout << "Path is blocked" << std::endl;
+                    if (dbg) std::cout << "Path is blocked3" << std::endl;
                     return 1;
                 }
             }
@@ -66,7 +67,7 @@ bool Rook::isBlockedPath(std::string pos){
         else if (startX > destX) {
             for (int i = startX; i < destX; i--) {
                 if (g->getTileAt(intPosToStr(i, startY)) != NULL) {
-                    if (dbg) std::cout << "Path is blocked" << std::endl;
+                    if (dbg) std::cout << "Path is blocked4" << std::endl;
                     return 1;
                 }
             }

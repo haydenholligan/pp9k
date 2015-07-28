@@ -62,9 +62,11 @@ int main(int argc, const char * argv[]) {
     //Take input
     string s;
     Game *g = NULL;
-    if (argc > 2) // argc should be 2 for correct execution
+    if (dbg) cout << "argc: " << argc << endl;
+    if (argc > 2) { // argc should be 2 for correct execution
         // We print argv[0] assuming it is the program name
         cout<<"usage: "<< argv[0] <<" <filename>\n";
+    }
     
     else if (argc == 2) {
         ifstream file (argv[1]);
@@ -84,11 +86,11 @@ int main(int argc, const char * argv[]) {
                     across = 0;
                 }
             }
-            
         }
         
         g = new Game;
-        g->setup(setupArr);
+        g->setup(setupArr, 0);
+        g->updateBoard();
         isBoardSet = true;
         playing = true;
         if (setupArr[9][0] == 'W') {

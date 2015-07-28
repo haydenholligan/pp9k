@@ -10,7 +10,6 @@ public:
     std::string getName();
     bool isValidMove(std::string pos);
     bool isBlockedPath(std::string pos);
-    bool isQueenMove(std::string pos);
     bool move(std::string pos);
 };
 

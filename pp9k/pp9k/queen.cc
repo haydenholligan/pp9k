@@ -3,75 +3,135 @@
 #include <cstdlib>
 #include <iostream>
 
+extern int dbg;
+
 Queen::Queen(int x, int y, std::string position, char colour): Piece(x, y, position, colour) {
     this->name = "queen";
 }
 
-bool Queen::isQueenMove(std::string pos){
-    char xx = pos[0];
-    char yy = pos[1];
-    int moveX = xx - 97;
-    int moveY = yy - 49;
-    
-    if ((abs(xx - moveX) == abs(yy - moveY)) || (((xx - moveX) != 0) && ((yy - moveY)== 0)) || (((xx - moveX) == 0) && ((yy - moveY)!= 0))) return 1;
-    return 0;
-}
-
 bool Queen::isBlockedPath(std::string pos){
     
-    if(g->getTileAt(pos)->getPiece() != NULL) {
-        if(g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) return 1;}
-    
-    // putting current position and desired move into arrays of numbers to ease the comparison of them
     char xx = pos[0];
     char yy = pos[1];
-    int arrPos[2] = {xx - 97, 7 - (yy - 49)}; // pos as an array of num coordinates
-    int arr[2] = {this->getX(), this->getY()}; //current location as an array of num coordinates
+    int destX = xx - 97;
+    int destY = 7 - (yy - 49);
     
-    //loops and checks if each tile between the current and the desired move is empty
-    while(arr[0] != arrPos[0] || arr[1] != arrPos[1]){//not final position
-        
-        //if the tile we are looking at is not empty, the path is blocked and return TRUE
-        if(g->getTileAt(intPosToStr(arr[0],arr[1]))->getPiece() != NULL) return 1; //if current tile being checked is non-NULL, return true
-        
-        //increments to next position we are checking between current and desired future spot, depending on where bishop is in relation to final spot
-        if(arr[0] < arrPos[0] && arr[1] < arrPos[1]){
-            arr[0]++;
-            arr[1]++;
-        }
-        
-        else if(arr[0] > arrPos[0] && arr[1] < arrPos[1]){
-            arr[0]--;
-            arr[1]++;
-        }
-        
-        else if(arr[0] < arrPos[0] && arr[1] > arrPos[1]){
-            arr[0]++;
-            arr[1]--;
-        }
-        
-        else if(arr[0] > arrPos[0] && arr[1] > arrPos[1]){
-            arr[0]--;
-            arr[1]--;
-        }
-        else if(arr[0] < arrPos[0]){
-            arr[0]++;
-        }
-        
-        else if(arr[0] > arrPos[0]){
-            arr[0]--;
-        }
-        
-        else if(arr[0] > arrPos[0]){
-            arr[1]--;
-        }
-        
-        else{
-            arr[1]++;
-        }	
-        
-    }//while
+    int startX = this->getX();
+    int startY = this->getY();
     
+    if (dbg) {
+        std::cout << "Start X, Y: " << startX << ", " << startY << std::endl;
+        std::cout << "Dest X, Y: " << destX << ", " << destY << std::endl;
+        
+    }
+    
+    if (startX != destX && startY != destY) {
+        if (abs(startX-destX) != abs(startY-destY)) {
+        std::cout << "Invalid queen move!" << std::endl;
+        return 1;
+        }
+    }
+    //moving vertical
+    if (startX == destX) {
+        if (startY < destY) {
+            for (int i = startY; i < destY; i++) {
+                if (g->getTileAt(intPosToStr(startX, i)) != NULL) {
+                    if (dbg) std::cout << "Path is blocked" << std::endl;
+                    return 1;
+                }
+            }
+        }
+        
+        else if (startY > destY) {
+            for (int i = startY; i < destY; i--) {
+                if (g->getTileAt(intPosToStr(startX, i)) != NULL) {
+                    if (dbg) std::cout << "Path is blocked" << std::endl;
+                    return 1;
+                }
+            }
+        }
+    }
+    
+    //moving horizontal
+    else if (startY == destY) {
+        if (startX < destX) {
+            for (int i = startX; i < destX; i++) {
+                if (g->getTileAt(intPosToStr(i, startY)) != NULL) {
+                    if (dbg) std::cout << "Path is blocked" << std::endl;
+                    return 1;
+                }
+            }
+        }
+        
+        else if (startX > destX) {
+            for (int i = startX; i < destX; i--) {
+                if (g->getTileAt(intPosToStr(i, startY)) != NULL) {
+                    if (dbg) std::cout << "Path is blocked" << std::endl;
+                    return 1;
+                }
+            }
+        }
+    }
+    //moving down-right
+    if (startX < destX && startY < destY) {
+        int i = startX;
+        int j = startY;
+        
+        while (i < startX) {
+            if (g->getTileAt(intPosToStr(i, j)) != NULL) {
+                if (dbg) std::cout << "Path is blocked!" << std::endl;
+                return 1;
+            }
+            i++;
+            j++;
+        }
+    }
+    
+    //moving up-left
+    else if (startX > destX && startY > destY) {
+        int i = startX;
+        int j = startY;
+        
+        while (i > startX) {
+            if (g->getTileAt(intPosToStr(i, j)) != NULL) {
+                if (dbg) std::cout << "Path is blocked!" << std::endl;
+                return 1;
+            }
+            i--;
+            j--;
+        }
+    }
+    
+    //moving down-left
+    else if (startX > destX && startY < destY) {
+        int i = startX;
+        int j = startY;
+        
+        while (i > startX) {
+            if (g->getTileAt(intPosToStr(i, j)) != NULL) {
+                if (dbg) std::cout << "Path is blocked!" << std::endl;
+                return 1;
+            }
+            i--;
+            j++;
+        }
+    }
+    //moving up-right
+    else if (startX < destX && startY > destY) {
+        int i = startX;
+        int j = startY;
+        
+        while (i < startX) {
+            if (g->getTileAt(intPosToStr(i, j)) != NULL) {
+                if (dbg) std::cout << "Path is blocked!" << std::endl;
+                return 1;
+            }
+            i++;
+            j--;
+        }
+    }
+
+    if (dbg) std::cout << "Ending queen::isBlockedPath, returning 0" << std::endl;
     return 0;
 }
 
@@ -88,11 +148,15 @@ bool Queen::move(std::string pos) {
 }
 
 bool Queen::isValidMove(std::string pos) {
-    
+    if(g->getTileAt(pos)->getPiece() != NULL) {
+        if(g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) {
+            std::cout << "Your piece is there!" << std::endl;
+            return 1;
+        }
+    }
+
     if(pos == this->position) return 0;
     if(isBlockedPath(pos)) return 0; // something about a null pointer
-    if((pos[0] > 104 || pos[0] < 97 )||(pos[1] > '8' || pos[1] < '1')) return 0;
-    if(!isQueenMove(pos)) return 0;
     return 1;
 }
 

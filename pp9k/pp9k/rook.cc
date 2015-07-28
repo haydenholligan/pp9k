@@ -8,16 +8,6 @@ Rook::Rook(int x, int y, std::string position, char colour): Piece(x, y, positio
     this->name = "rook";
 }
 
-bool Rook::isRookMove(std::string pos){
-    char xx = pos[0];
-    char yy = pos[1];
-    int moveX = xx - 97;
-    int moveY = yy - 49;
-    
-    if ((((xx - moveX) != 0) && ((yy - moveY)== 0)) || (((xx - moveX) == 0) && ((yy - moveY)!= 0))) return 1;
-    return 0;
-}
-
 bool Rook::isBlockedPath(std::string pos){
     if (dbg) std::cout << "Inside rook::isblockedPath" << std::endl;
     

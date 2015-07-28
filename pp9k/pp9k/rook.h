@@ -11,7 +11,6 @@ public:
     std::string getName();
     bool isValidMove(std::string pos);
     bool isBlockedPath(std::string pos);
-    bool isRookMove(std::string pos);
     bool getHasMoved();
     void setHasMoved(bool b);
     bool move(std::string pos);

@@ -32,7 +32,7 @@ bool Bishop::isBlockedPath(std::string pos){
     }
     
     if(abs(startX-destX) != abs(startY-destY)) {
-        std::cout << "Not a diagonal move, invalid for bishop!" << std::endl;
+        std::cout << "Invalid position for bishop!" << std::endl;
         return 1;
     }
     

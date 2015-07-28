@@ -643,27 +643,27 @@ void Game::setup(string s1, string s2) {
         board[i] = new Tile[boardSize];
     }
     
-    //Initialize the pieces for player 1
+    //Initialize the pieces for player 2
     p2Pieces.push_back(new Rook(0, 0, calcPosition(0, 0), 'b'));
-    p2Pieces.push_back(new Rook(7, 0,calcPosition(7, 0), 'b'));
     p2Pieces.push_back(new Knight(1, 0,calcPosition(1, 0), 'b'));
-    p2Pieces.push_back(new Knight(6, 0,calcPosition(6, 0), 'b'));
     p2Pieces.push_back(new Bishop(2, 0,calcPosition(2, 0), 'b'));
-    p2Pieces.push_back(new Bishop(5, 0,calcPosition(5, 0), 'b'));
     p2Pieces.push_back(new Queen(3, 0,calcPosition(3, 0), 'b'));
     p2Pieces.push_back(new King(4, 0,calcPosition(4, 0), 'b'));
+    p2Pieces.push_back(new Bishop(5, 0,calcPosition(5, 0), 'b'));
+    p2Pieces.push_back(new Knight(6, 0,calcPosition(6, 0), 'b'));
+    p2Pieces.push_back(new Rook(7, 0,calcPosition(7, 0), 'b'));
     nump2Pieces += 8;
     
     
-    //Initialize the pieces for player 2
+    //Initialize the pieces for player 1
     p1Pieces.push_back(new Rook(0, 7,calcPosition(0, 7), 'w'));
-    p1Pieces.push_back(new Rook(7, 7,calcPosition(7, 7), 'w'));
     p1Pieces.push_back(new Knight(1, 7,calcPosition(1, 7), 'w'));
-    p1Pieces.push_back(new Knight(6, 7,calcPosition(6, 7), 'w'));
     p1Pieces.push_back(new Bishop(2, 7,calcPosition(2, 7), 'w'));
-    p1Pieces.push_back(new Bishop(5, 7,calcPosition(5, 7), 'w'));
     p1Pieces.push_back(new Queen(3, 7,calcPosition(3, 7), 'w'));
     p1Pieces.push_back(new King(4, 7,calcPosition(4, 7), 'w'));
+    p1Pieces.push_back(new Bishop(5, 7,calcPosition(5, 7), 'w'));
+    p1Pieces.push_back(new Knight(6, 7,calcPosition(6, 7), 'w'));
+    p1Pieces.push_back(new Rook(7, 7,calcPosition(7, 7), 'w'));
     nump1Pieces += 8;
     
     //Initialize the pawns for both players
@@ -724,7 +724,6 @@ void Game::setup(string s1, string s2) {
             board[i][j].setPiece(NULL);
         }
     }
-    
 }
 
 void Game::setup(char setupArr[9][8], bool isEmpty) {

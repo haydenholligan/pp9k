@@ -2,6 +2,8 @@
 #include "game.h"
 #include <iostream>
 
+extern int dbg;
+
 Rook::Rook(int x, int y, std::string position, char colour): Piece(x, y, position, colour), hasMoved(0) {
     this->name = "rook";
 }
@@ -17,9 +19,7 @@ bool Rook::isRookMove(std::string pos){
 }
 
 bool Rook::isBlockedPath(std::string pos){
-    
-    if(g->getTileAt(pos)->getPiece() != NULL) {
-        if(g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) return 1;}
+    if (dbg) std::cout << "Inside rook::isblockedPath" << std::endl;
     
     // putting current position and desired move into arrays of numbers to ease the comparison of them
     char xx = pos[0];
@@ -42,7 +42,7 @@ bool Rook::isBlockedPath(std::string pos){
             arr[0]--;
         }
         
-        else if(arr[0] > arrPos[0]){
+        else if(arr[1] > arrPos[1]){
             arr[1]--;
         }
         
@@ -51,7 +51,7 @@ bool Rook::isBlockedPath(std::string pos){
         }
         
     }//while
-    
+    std::cout << "end isBlockedPath, returning 0" << std::endl;
     return 0;
 }
 
@@ -69,16 +69,15 @@ bool Rook::move(std::string pos) {
 
 
 bool Rook::isValidMove(std::string pos) {
+    if (dbg) std::cout << "Inside rook::isValidMove" << std::endl;
     
-    if(pos == this->position) return 0;
-    if(isBlockedPath(pos)) return 0; // something about a null pointer
-    if((pos[0] > 104 || pos[0] < 97 )||(pos[1] > '8' || pos[1] < '1')) return 0;
-    if(!hasMoved) return 0;
-
-    char side = 'z';
-    if(this->getPos() == "a1" || this->getPos() == "a8") side = 'l';
-    if(this->getPos() == "h1" || this->getPos() == "h8") side = 'r';
-    if(side != 'z') hasMoved = true;
+    if (g->getTileAt(pos)->getPiece() != NULL && g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) { //check to make sure not attacking same colour
+            return 0;
+    }
+    
+    if (pos == this->position) return 0;
+    if (isBlockedPath(pos)) return 0; // something about a null pointer
+    
     return 1;
 }
 

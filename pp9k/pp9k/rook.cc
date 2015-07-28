@@ -11,6 +11,7 @@ Rook::Rook(int x, int y, std::string position, char colour): Piece(x, y, positio
 bool Rook::isBlockedPath(std::string pos){
     if (dbg) std::cout << "Inside rook::isblockedPath" << std::endl;
     
+    
     // putting current position and desired move into arrays of numbers to ease the comparison of them
     char xx = pos[0];
     char yy = pos[1];
@@ -19,7 +20,9 @@ bool Rook::isBlockedPath(std::string pos){
     
     int startX = this->getX();
     int startY = this->getY();
+    
     if (dbg) {
+        std::cout << "test" << std::endl;
         std::cout << "Start X, Y: " << startX << ", " << startY << std::endl;
         std::cout << "Dest X, Y: " << destX << ", " << destY << std::endl;
         
@@ -93,7 +96,6 @@ bool Rook::isValidMove(std::string pos) {
     if (g->getTileAt(pos)->getPiece() != NULL && g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) { //check to make sure not attacking same colour
         return 0;
     }
-    
     if (pos == this->position) return 0;
     if (isBlockedPath(pos)) return 0; // something about a null pointer
     

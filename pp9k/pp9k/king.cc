@@ -17,7 +17,6 @@ bool King::isKingMove(std::string pos){
     if(g->getTileAt(pos)->getPiece() != NULL) {
         if(g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) return 0; // something about a null pointer}
         
-        if(g->isCheck(pos)) return 0; //if it puts the king in Check, move is invalid
         
         if (((abs(xx - moveX) == abs(yy - moveY)) == 1) ||
             ((((xx - moveX) == 1) && ((yy - moveY) == 0)) || ((((xx - moveX) == 0) && ((yy - moveY) == 1)) &&
@@ -31,14 +30,10 @@ bool King::isKingMove(std::string pos){
     return 0;
 }
 
+
 bool King::isValidMove(std::string pos) {
-    
     if(pos == this->position) return 0;
-    //if(allied spot) return 0; // something about a null pointer
-    //if(pieces blocking path) return 0; // something about a null pointer
-    if((pos[0] > 104 || pos[0] < 97 )||(pos[1] > '8' || pos[1] < '1')) return 0;
-    if(!hasMoved) return 0;
-    hasMoved = true;
+    if (isKingMove(pos)) return 1;
     return 1;
 }
 

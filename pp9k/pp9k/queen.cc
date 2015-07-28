@@ -154,7 +154,6 @@ bool Queen::isValidMove(std::string pos) {
             return 1;
         }
     }
-
     if(pos == this->position) return 0;
     if(isBlockedPath(pos)) return 0; // something about a null pointer
     return 1;

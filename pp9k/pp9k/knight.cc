@@ -14,8 +14,11 @@ bool Knight::isKnightMove(std::string pos) {
     
 	int moveX = xx - 97;
     int moveY = yy - 49;
- 
-	if (abs(xx - moveX) + abs(yy - moveY) == 3) return 1;
+    
+    int startX = this->getX();
+    int startY = this->getY();
+    
+	if (abs(startX - moveX) + abs(startY - moveY) == 3) return 1;
 	return 0;
 }
 
@@ -43,7 +46,6 @@ bool Knight::isValidMove(std::string pos) {
         
 	if(pos == this->position) return 0;
 	if(isBlockedPath(pos)) return 0; // something about a null pointer
-	if((pos[0] > 104 || pos[0] < 97 )||(pos[1] > '8' || pos[1] < '1')) return 0;
 	if(!isKnightMove(pos)) return 0;
 	return 1;
 }

@@ -87,7 +87,6 @@ bool Pawn::move(std::string pos) {
 bool Pawn::isValidMove(std::string pos) {
     
     if(pos == this->position) return 0;
-    if((pos[0] > 104 || pos[0] < 97 )||(pos[1] > '8' || pos[1] < '1')) return 0;
     if(!isPawnMove(pos)) return 0;
     return 1;
     /*

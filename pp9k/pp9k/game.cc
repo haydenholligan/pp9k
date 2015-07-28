@@ -192,6 +192,17 @@ bool Game::move(string oldPos, string newPos, char up) {
     else {
         if (dbg) cout << "inside game::move, BEFORE calling getPiece()->move" << endl;
         if (board[y][x].getPiece()->move(newPos)) {
+            if (board[y2][x2].getPiece() != NULL) {
+                if (turn == 1) {
+                    nump2Pieces--;
+                }
+                
+                else if (turn == 2) {
+                    nump1Pieces--;
+                }
+                
+            }
+            
             board[y2][x2].setPiece(board[y][x].getPiece());
             board[y][x].setPiece(NULL);
             
@@ -199,6 +210,7 @@ bool Game::move(string oldPos, string newPos, char up) {
             if (dbg) cout << "inside game::move, AFTER calling getPiece()->move" << endl;
             
             cout << "AAA   up: " << up << endl;
+            
             if (up != 'a') {
                 if (dbg) cout << "inside game::move, calling upgrade()" << endl;
                 upgrade(board[y][x].getPiece(), up);
@@ -455,47 +467,44 @@ bool Game::isCheckmate() {
     //3. king moves out of check
     //if none of these are possible, it is checkmate or stalemate
     Piece *tmpKing = NULL;
+    
     if (turn == 1) {
-        int len = (int)p1Pieces.size();
-        string colour = "Black";
+        int len = (int)p1Pieces.size() - 1;
         for (int i = 0; i < len; i++) {
-            if (p1Pieces.at(i)->getName() == "king")
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (p1Pieces.at(i)->isValidMove(p1Pieces.at(i)->intPosToStr(i, j))) {
+                        return 0;
+                    }
+                }
+            }
+        }
+        
+        for (int i = 0; i < len; i++) {
+            if (p1Pieces.at(i)->getName() == "king") {
                 tmpKing = p1Pieces.at(i);
+            }
+            
         }//for
     }//if
     
     else {
         int len = (int)p2Pieces.size();
-        string colour = "White";
         for (int i = 0; i < len; i++) {
             if (p2Pieces.at(i)->getName() == "king")
                 tmpKing = p2Pieces.at(i);
         }//for
     }
-    
-    //have to generate 8 possible moves and find king in vector
-    int x = tmpKing->getX();
-    int y = tmpKing->getY();
-    
-    string arr[8];
-    //fills array with possible king moves
-    arr[0] = calcPosition(x + 1,y + 1);
-    arr[1] = calcPosition(x + 1,y);
-    arr[2] = calcPosition(x + 1,y - 1);
-    arr[3] = calcPosition(x,y + 1);
-    arr[4] = calcPosition(x,y - 1);
-    arr[5] = calcPosition(x - 1,y - 1);
-    arr[6] = calcPosition(x - 1,y);
-    arr[7] = calcPosition(x - 1,y + 1);
-    
+
     //checks if there is a valid move the king can use
     for(int i = 0; i < 8; i++){
-        
-        string pos = arr[i];
-        //if there is a valid move, return false
-        if(tmpKing->isValidMove(pos)){
-            return 0;
-        }//if
+        for (int j = 0; j < 8; j++) {
+            string pos = calcPosition(i, j);
+            //if there is a valid move, return false
+            if(tmpKing->isValidMove(pos)){
+                return 0;
+            }//if
+        }
     }//for
     if (dbg) cout << "game::isCheckMate() end function" << endl;
     return 1; //if not, return true
@@ -738,32 +747,32 @@ void Game::setup(string s1, string s2) {
         }
     }
     /*
-    cout << "OUTPUTTING TILE ADDRESSES" << endl;
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-                cout << &(board[i][j]) << " ";
-            }
-        cout << endl;
-        }
-    
-
-    cout << "OUTPUTTING TILE PIECE ADDRESSES" << endl;
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-                cout << board[i][j].getPiece() << " ";
-            }
-        cout << endl;
-
-    }
-    
-    cout << "OUTPUTTING TILE POSITIONS" << endl;
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            cout << board[i][j].getPos() << " ";
-        }
-        cout << endl;
-        
-    }*/
+     cout << "OUTPUTTING TILE ADDRESSES" << endl;
+     for (int i = 0; i < 8; i++) {
+     for (int j = 0; j < 8; j++) {
+     cout << &(board[i][j]) << " ";
+     }
+     cout << endl;
+     }
+     
+     
+     cout << "OUTPUTTING TILE PIECE ADDRESSES" << endl;
+     for (int i = 0; i < 8; i++) {
+     for (int j = 0; j < 8; j++) {
+     cout << board[i][j].getPiece() << " ";
+     }
+     cout << endl;
+     
+     }
+     
+     cout << "OUTPUTTING TILE POSITIONS" << endl;
+     for (int i = 0; i < 8; i++) {
+     for (int j = 0; j < 8; j++) {
+     cout << board[i][j].getPos() << " ";
+     }
+     cout << endl;
+     
+     }*/
     
 }
 

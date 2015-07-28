@@ -175,10 +175,10 @@ bool Game::move(string oldPos, string newPos, char up) {
     int x = xx - 97;
     int y = 7 - (yy - 49);
     
-     char xx2 = newPos[0];
-     char yy2 = newPos[1];
-     int x2 = xx2 - 97;
-     int y2 = 7 - (yy2 - 49);
+    char xx2 = newPos[0];
+    char yy2 = newPos[1];
+    int x2 = xx2 - 97;
+    int y2 = 7 - (yy2 - 49);
     
     if (oldPos == "e1" && (newPos == "c1" || "g1")) {
         //white king to be castled
@@ -194,32 +194,32 @@ bool Game::move(string oldPos, string newPos, char up) {
         if (board[y][x].getPiece()->move(newPos)) {
             board[y2][x2].setPiece(board[y][x].getPiece());
             board[y][x].setPiece(NULL);
-        
-        
-        if (dbg) cout << "inside game::move, AFTER calling getPiece()->move" << endl;
-
-        cout << "AAA   up: " << up << endl;
-        if (up != 'a') {
-            if (dbg) cout << "inside game::move, calling upgrade()" << endl;
-            upgrade(board[y][x].getPiece(), up);
-        }
-        //check for check, checkmate, stalemate, upgrade
-        updateBoard(oldPos, newPos, up);
-        return true;
-
+            
+            
+            if (dbg) cout << "inside game::move, AFTER calling getPiece()->move" << endl;
+            
+            cout << "AAA   up: " << up << endl;
+            if (up != 'a') {
+                if (dbg) cout << "inside game::move, calling upgrade()" << endl;
+                upgrade(board[y][x].getPiece(), up);
+            }
+            //check for check, checkmate, stalemate, upgrade
+            updateBoard(oldPos, newPos, up);
+            return true;
+            
         }
         
         else {
             return false;
         }
-
+        
     }
     return false;
     //not done
 }
 
 void Game::castle(string newPos, King *k, Rook *r) {
-    
+    if (dbg) cout << "calling game::castle" << endl;
     char newX = newPos[1];
     int xNew = newX - 97;
     int xOld = k->getX();
@@ -303,29 +303,29 @@ void Game::castle(string newPos, King *k, Rook *r) {
     std::cout << "Castling!" << endl;
     
     setPosition(k, newPos);
-
+    
     //rook new pos
     char c1 = newPos[0];
     string rPos = "";
     rPos += c1;
-	//if rook is to the left of King
+    //if rook is to the left of King
     if(r->getX() < xOld){
-	int z = k->getX() + 1; // it will now be one tile to the right of the king
+        int z = k->getX() + 1; // it will now be one tile to the right of the king
         char c = z + 97;
         rPos += c;
-	}
+    }
     else{
-	int z = k->getX() - 1; //it will now be one tile to the left of the king
+        int z = k->getX() - 1; //it will now be one tile to the left of the king
         char c = z + 97;
         rPos += c;
-	}//if its to the right of the king    
-
-    setPosition(r, rPos);    
+    }//if its to the right of the king
+    
+    setPosition(r, rPos);
 }
 
 
 char Game::getPieceAt(string pos) {
-    cout << endl << "inside game::getPieceAt()" << endl;
+    if (dbg) cout << endl << "inside game::getPieceAt()" << endl;
     //if no piece, char is = 'U'
     char xx = pos[0];
     char yy = pos[1];
@@ -405,40 +405,50 @@ bool Game::isCheck(string pos) {
         len = (int)p1Pieces.size();
         if (pos == "a0") {
             for(int i = 0; i < len; i++){
-                if(p2Pieces.at(i)->getName() == "king")
+                if(p2Pieces.at(i)->getName() == "king") {
+                    if (dbg) cout << "Found king, pos = " << p2Pieces.at(i)->getPos() << endl;
                     pos = p2Pieces.at(i)->getPos();
+                }
             }//for
         }//if
         for (int i = 0; i < len; i++){
-            if (this->p1Pieces.at(i)->isValidMove(pos)){
+            if (p1Pieces.at(i)->isValidMove(pos)){
+                cout << p1Pieces.at(i)->getName() << " has a valid move to check king!" << endl;
                 cout << "Black is in check!" << endl;
                 return 1;
             }//if
         }//for
     }//if
     
-    else { //white's turn
+    else if (turn == 1) { //white's turn
         len = (int)p2Pieces.size();
         if (pos == "a0"){
             for (int i = 0; i < len; i++) {
-                if (p1Pieces.at(i)->getName() == "king")
+                if(p2Pieces.at(i)->getName() == "king") {
+                    if (dbg) cout << "Found king, pos = " << p2Pieces.at(i)->getPos() << endl;
                     pos = p2Pieces.at(i)->getPos();
+                }
             }//for
         }//if
         for (int i = 0; i < len; i++){
-            if (this->p1Pieces.at(i)->isValidMove(pos)){
+            if (p1Pieces.at(i)->isValidMove(pos)){
+                cout << p1Pieces.at(i)->getName() << " has a valid move to check king!" << endl;
                 cout << "White is in check!" << endl;
                 return 1;
             }//if
         }//for
     }//else
+    
+    else {
+        cout << "invalid turn!" << endl;
+    }
     if (dbg) cout << "game::isCheck() starting function, not in check" << endl;
     return 0;
 }
 
 bool Game::isCheckmate() {
     if (dbg) cout << "game::isCheckMate() starting function" << endl;
-
+    
     //ways to avoid checkmate:
     //1. capture the checking piece (doesn't work in double check)
     //2. move a piece inbetween the king and threatening piece
@@ -668,7 +678,7 @@ void Game::setup(string s1, string s2) {
     
     //Initialize the pawns for both players
     for (int i = 0; i < boardSize; i++) {
-        p2Pieces.push_back(new Pawn(i, 1,calcPosition(i, 0), 'b'));
+        p2Pieces.push_back(new Pawn(i, 1,calcPosition(i, 1), 'b'));
         p1Pieces.push_back(new Pawn(i, 6,calcPosition(i, 6), 'w'));
         nump1Pieces++;
         nump2Pieces++;
@@ -691,14 +701,6 @@ void Game::setup(string s1, string s2) {
         board[0][i].setPos(position);
         board[0][i].setPiece(p2Pieces.at(i));
         
-        //Set x, y, position and piece for row 2
-        position = calcPosition(i, 1);
-        board[1][i].setX(i);
-        board[1][i].setY(1);
-        board[1][i].setPos(position);
-        board[1][i].setPiece(p2Pieces.at(i+8));
-        
-        
         //Set x, y, position and piece for row 7
         position = calcPosition(i, 7);
         board[7][i].setX(i);
@@ -706,24 +708,63 @@ void Game::setup(string s1, string s2) {
         board[7][i].setPos(position);
         board[7][i].setPiece(p1Pieces.at(i));
         
+    }
+    
+    for (int i = 8; i < 16; i++) {
+        //Set x, y, position and piece for row 2
+        string position = calcPosition(i-8, 1);
+        board[1][i-8].setX(i-8);
+        board[1][i-8].setY(1);
+        board[1][i-8].setPos(position);
+        board[1][i-8].setPiece(p2Pieces.at(i));
+        
         //Set x, y, position and piece for row 6
-        position = calcPosition(i, 6);
-        board[6][i].setX(i);
-        board[6][i].setY(6);
-        board[6][i].setPos(position);
-        board[6][i].setPiece(p1Pieces.at(i+8));
+        position = calcPosition(i-8, 6);
+        board[6][i-8].setX(i-8);
+        board[6][i-8].setY(6);
+        board[6][i-8].setPos(position);
+        board[6][i-8].setPiece(p1Pieces.at(i));
     }
     
     //Initialize empty cells
     for (int i = 2; i < 6; i++) {
-        for (int j = 2; j < 6; j++) {
+        for (int j = 0; j < 8; j++) {
             string position = calcPosition(j, i);
             board[i][j].setX(j);
             board[i][j].setY(i);
             board[i][j].setPos(position);
             board[i][j].setPiece(NULL);
+            
         }
     }
+    /*
+    cout << "OUTPUTTING TILE ADDRESSES" << endl;
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+                cout << &(board[i][j]) << " ";
+            }
+        cout << endl;
+        }
+    
+
+    cout << "OUTPUTTING TILE PIECE ADDRESSES" << endl;
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+                cout << board[i][j].getPiece() << " ";
+            }
+        cout << endl;
+
+    }
+    
+    cout << "OUTPUTTING TILE POSITIONS" << endl;
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            cout << board[i][j].getPos() << " ";
+        }
+        cout << endl;
+        
+    }*/
+    
 }
 
 void Game::setup(char setupArr[9][8], bool isEmpty) {
@@ -852,7 +893,7 @@ void Game::setup(char setupArr[9][8], bool isEmpty) {
         
         //Initialize the pawns for both players
         for (int i = 0; i < boardSize; i++) {
-            p2Pieces.push_back(new Pawn(i, 1,calcPosition(i, 0), 'b'));
+            p2Pieces.push_back(new Pawn(i, 1,calcPosition(i, 1), 'b'));
             p1Pieces.push_back(new Pawn(i, 6,calcPosition(i, 6), 'w'));
         }
     }

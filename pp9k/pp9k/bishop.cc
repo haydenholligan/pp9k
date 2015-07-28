@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <iostream>
 
+extern int dbg;
+
 Bishop::Bishop(int x, int y, std::string position, char colour): Piece(x, y, position, colour) {
     this->name = "bishop";
 }
@@ -17,7 +19,9 @@ bool Bishop::isBishopMove(std::string pos){
     return 0;
 }
 
+
 bool Bishop::isBlockedPath(std::string pos){
+    if (dbg) std::cout << "Calling bishop::isBlockedPath" << std::endl;
     
     if(g->getTileAt(pos)->getPiece() != NULL) {
         if(g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) return 1;}
@@ -25,38 +29,76 @@ bool Bishop::isBlockedPath(std::string pos){
     // putting current position and0 desired move into arrays of numbers to ease the comparison of them
     char xx = pos[0];
     char yy = pos[1];
-    int arrPos[2] = {xx - 97, 7 - (yy - 49)}; // pos as an array of num coordinates
-    int arr[2] = {this->getX(), this->getY()}; //current location as an array of num coordinates
+    int destX = xx - 97;
+    int destY = 7 - (yy - 49);
     
-    //loops and checks if each tile between the current and the desired move is empty
-    while(arr[0] != arrPos[0] && arr[1] != arrPos[1]){//not final position
-        
-        //if the tile we are looking at is not empty, the path is blocked and return TRUE
-        if(g->getTileAt(intPosToStr(arr[0],arr[1]))->getPiece() != NULL) return 1; //if current tile being checked is non-NULL, return true
-        
-        //increments to next position we are checking between current and desired future spot, depending on where bishop is in relation to final spot
-        if(arr[0] < arrPos[0] && arr[1] < arrPos[1]){
-            arr[0]++;
-            arr[1]++;
-        }
-        
-        else if(arr[0] > arrPos[0] && arr[1] < arrPos[1]){
-            arr[0]--;
-            arr[1]++;
-        }
-        
-        else if(arr[0] < arrPos[0] && arr[1] > arrPos[1]){
-            arr[0]++;
-            arr[1]--;
-        }
-        
-        else{
-            arr[0]--;
-            arr[1]--;
-        }
-        
-    }//while
+    int startX = this->getX();
+    int startY = this->getY();    if (dbg) std::cout << "Ending function, path is not blocked" << std::endl;
     
+    if(abs(startX-destX) == abs(startY-destY)) {
+        std::cout << "Not a diagonal move, invalid for bishop!" << std::endl;
+    }
+    
+    //moving down-right
+    if (startX < destX && startY < destY) {
+        int i = startX;
+        int j = startY;
+        
+        while (i < startX) {
+            if (g->getTileAt(intPosToStr(i, j)) != NULL) {
+                if (dbg) std::cout << "Path is blocked!" << std::endl;
+                return 1;
+            }
+            i++;
+            j++;
+        }
+    }
+    
+    //moving up-left
+    else if (startX > destX && startY > destY) {
+        int i = startX;
+        int j = startY;
+        
+        while (i > startX) {
+            if (g->getTileAt(intPosToStr(i, j)) != NULL) {
+                if (dbg) std::cout << "Path is blocked!" << std::endl;
+                return 1;
+            }
+            i--;
+            j--;
+        }
+    }
+    
+    //moving down-left
+    else if (startX > destX && startY < destY) {
+        int i = startX;
+        int j = startY;
+        
+        while (i > startX) {
+            if (g->getTileAt(intPosToStr(i, j)) != NULL) {
+                if (dbg) std::cout << "Path is blocked!" << std::endl;
+                return 1;
+            }
+            i--;
+            j++;
+        }
+    }
+    //moving up-right
+    else if (startX < destX && startY > destY) {
+        int i = startX;
+        int j = startY;
+        
+        while (i < startX) {
+            if (g->getTileAt(intPosToStr(i, j)) != NULL) {
+                if (dbg) std::cout << "Path is blocked!" << std::endl;
+                return 1;
+            }
+            i++;
+            j--;
+        }
+    }
+    
+    if (dbg) std::cout << "Ending ispathblocked, returning 0" << std::endl;
     return 0;
 }
 

@@ -107,7 +107,8 @@ input:
 	turn = 1;
 		if (dbg) cout << "Turn: " << turn << endl;
             playing = true;
-            string s1, s2;
+            string s1 = "";
+            string s2 = "";
             cin >> s1;
             cin >> s2;
             //might need to be fixed
@@ -168,9 +169,11 @@ input:
                 }
                 
                 if (g->isCheck()) {
+                    cout << "main.cc, check!" << endl;
                     if (g->isCheckmate()) {
                         //if it's white's turn, white gets a point, else black gets a point
                         (turn == 1) ? numWhiteWins++ : numBlackWins++;
+                        cout << "main.cc, checkmate!" << endl;
                         delete g;
                         isBoardSet = false;
                         playing = false;

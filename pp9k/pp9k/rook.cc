@@ -24,46 +24,75 @@ bool Rook::isBlockedPath(std::string pos){
     // putting current position and desired move into arrays of numbers to ease the comparison of them
     char xx = pos[0];
     char yy = pos[1];
-    int arrPos[2] = {xx - 97, 7 - (yy - 49)}; // pos as an array of num coordinates
-    int arr[2] = {this->getX(), this->getY()}; //current location as an array of num coordinates
+    int destX = xx - 97;
+    int destY = 7 - (yy - 49);
     
-    //loops and checks if each tile between the current and the desired move is empty
-    while(arr[0] != arrPos[0] || arr[1] != arrPos[1]){//not final position
+    int startX = this->getX();
+    int startY = this->getY();
+    if (dbg) {
+        std::cout << "Start X, Y: " << startX << ", " << startY << std::endl;
+        std::cout << "Dest X, Y: " << destX << ", " << destY << std::endl;
         
-        //if the tile we are looking at is not empty, the path is blocked and return TRUE
-        if(g->getTileAt(intPosToStr(arr[0],arr[1]))->getPiece() != NULL) return 1; //if current tile being checked is non-NULL, return true
-        
-        //increments to next position we are checking between current and desired future spot, depending on where bishop is in relation to final spot
-        if(arr[0] < arrPos[0]){
-            arr[0]++;
+    }
+    
+    if (startX != destX && startY != destY) {
+        std::cout << "Rook cannot move diagonal" << std::endl;
+        return 1;
+    }
+    
+    if (startX == destX) {
+        if (startY < destY) {
+            for (int i = startY; i < destY; i++) {
+                if (g->getTileAt(intPosToStr(startX, i)) != NULL) {
+                    if (dbg) std::cout << "Path is blocked" << std::endl;
+                    return 1;
+                }
+            }
         }
         
-        else if (arr[0] > arrPos[0]){
-            arr[0]--;
+        else if (startY > destY) {
+            for (int i = startY; i < destY; i--) {
+                if (g->getTileAt(intPosToStr(startX, i)) != NULL) {
+                    if (dbg) std::cout << "Path is blocked" << std::endl;
+                    return 1;
+                }
+            }
+        }
+    }
+    
+    else if (startY == destY) {
+        if (startX < destX) {
+            for (int i = startX; i < destX; i++) {
+                if (g->getTileAt(intPosToStr(i, startY)) != NULL) {
+                    if (dbg) std::cout << "Path is blocked" << std::endl;
+                    return 1;
+                }
+            }
         }
         
-        else if(arr[1] > arrPos[1]){
-            arr[1]--;
+        else if (startX > destX) {
+            for (int i = startX; i < destX; i--) {
+                if (g->getTileAt(intPosToStr(i, startY)) != NULL) {
+                    if (dbg) std::cout << "Path is blocked" << std::endl;
+                    return 1;
+                }
+            }
         }
-        
-        else {
-            arr[1]++;
-        }
-        
-    }//while
+    }
+    
     std::cout << "end isBlockedPath, returning 0" << std::endl;
     return 0;
 }
 
 bool Rook::move(std::string pos) {
-    if(isValidMove(pos)) {
+    if (isValidMove(pos)) {
         setPos(pos);
         return true;
     }
+    
     else {
         std::cout << "Invalid move, try again" << std::endl;
         return false;
-        
     }
 }
 
@@ -72,7 +101,7 @@ bool Rook::isValidMove(std::string pos) {
     if (dbg) std::cout << "Inside rook::isValidMove" << std::endl;
     
     if (g->getTileAt(pos)->getPiece() != NULL && g->getTileAt(pos)->getPiece()->getColour() == this->getColour()) { //check to make sure not attacking same colour
-            return 0;
+        return 0;
     }
     
     if (pos == this->position) return 0;

@@ -6,8 +6,8 @@
 class Computer: public Player {
     int level;
 public:
-    Computer(int playerNum, int level);
-    void movePiece();
+    Computer(int playerNum, int level, Game *g);
+    bool movePiece();
 };
 
 

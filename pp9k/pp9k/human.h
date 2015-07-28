@@ -6,7 +6,7 @@
 
 class Human: public Player {
 public:
-    Human(int playerNum);
+    Human(int playerNum, Game *g);
 };
 
 #endif

@@ -5,6 +5,11 @@
 //might change position later to use setPos function
 Piece::Piece(int x, int y, std::string position, char colour): x(x), y(y), position(position), colour(colour), g(NULL) {}
 
+
+Piece::~Piece() {
+    g = NULL;
+}
+
 int Piece::getX() {
     return this->x;
 }

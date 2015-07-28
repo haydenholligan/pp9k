@@ -24,6 +24,15 @@ Game::~Game() {
     for (int i = 0; i < boardSize; i++) {
         delete [] board[i];
     }
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+    
+    delete board[i][j].getPiece();
+        delete [] board[i];
+        }
+    }
+    //p1Pieces.clear();
+    //p2Pieces.clear();
     
     delete [] board;
     delete p1;
@@ -231,7 +240,6 @@ bool Game::move(string oldPos, string newPos, char up) {
             
             if (dbg) cout << "inside game::move, AFTER calling getPiece()->move" << endl;
             
-            cout << "AAA   up: " << up << endl;
             
             if (up != 'a') {
                 if (dbg) cout << "inside game::move, calling upgrade()" << endl;
@@ -639,44 +647,8 @@ void Game::setPosition(Piece *pc, string s) {
 
 //Set up the board
 void Game::setup(string s1, string s2) {
-    cout << endl << "starting game::setup(1)" << endl;
+    if (dbg) cout << endl << "starting game::setup(1)" << endl;
     //initialize players
-    if (s1 == "human")
-        p1 = new Human(1);
-    
-    else if (s1 == "computer[1]")
-        p1 = new Computer(1, 1);
-    
-    else if (s1 == "computer[2]")
-        p1 = new Computer(2, 1);
-    
-    else if (s1 == "computer[3]")
-        p1 = new Computer(3, 1);
-    
-    else if (s1 == "computer[4]")
-        p1 = new Computer(4, 1);
-    
-    else
-        std::cout << "invalid input" << endl;
-    
-    if (s2 == "human")
-        p2 = new Human(2);
-    
-    else if (s2 == "computer[1]")
-        p1 = new Computer(1, 2);
-    
-    else if (s2 == "computer[2]")
-        p2 = new Computer(2, 2);
-    
-    else if (s2 == "computer[3]")
-        p2 = new Computer(3, 2);
-    
-    else if (s2 == "computer[4]")
-        p2 = new Computer(4, 2);
-    
-    else
-        std::cout << "invalid input" << endl;
-    
     
     //Initialize memory for the tiles
     board = new Tile*[boardSize];
@@ -771,10 +743,48 @@ void Game::setup(string s1, string s2) {
     
 }
 
+void Game::setPlayer(string s1, string s2) {
+    if (s1 == "human")
+        p1 = new Human(1, this);
+    
+    else if (s1 == "computer[1]")
+        p1 = new Computer(1, 1, this);
+    
+    else if (s1 == "computer[2]")
+        p1 = new Computer(2, 1, this);
+    
+    else if (s1 == "computer[3]")
+        p1 = new Computer(3, 1, this);
+    
+    else if (s1 == "computer[4]")
+        p1 = new Computer(4, 1, this);
+    
+    else
+        std::cout << "invalid input" << endl;
+    
+    if (s2 == "human")
+        p2 = new Human(2, this);
+    
+    else if (s2 == "computer[1]")
+        p1 = new Computer(1, 2, this);
+    
+    else if (s2 == "computer[2]")
+        p2 = new Computer(2, 2, this);
+    
+    else if (s2 == "computer[3]")
+        p2 = new Computer(3, 2, this);
+    
+    else if (s2 == "computer[4]")
+        p2 = new Computer(4, 2, this);
+    
+    else
+        std::cout << "invalid input" << endl;
+}
+
+
 void Game::setup(char setupArr[9][8], bool isEmpty) {
     if (dbg) cout << "calling setup(2)" << endl;
-    p1 = new Human(1);
-    p2 = new Human(1);
+
     
     board = new Tile*[boardSize];
     for (int i = 0; i < boardSize; i++) {

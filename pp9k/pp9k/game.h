@@ -20,6 +20,7 @@ const int boardSize = 8;
 class View;
 
 class Game {
+public:
     //Board to hold the tiles, 8x8
     //white top left, alternate rest
     Tile **board;
@@ -37,7 +38,6 @@ class Game {
 
    View *view;
     
-public:
     Game();
     ~Game();
     void setup(std::string s1, std::string s2);
@@ -51,6 +51,7 @@ public:
     Player *getPlayer(int pNum);
     bool isCheckmate();
     bool isStalemate();
+    void setPlayer(std::string s1, std::string s2);
     char getPieceAt(std::string p);
     void upgrade(Piece *p, char piece);
     void updateBoard(std::string oldPos = "0", std::string newPos = "0", char c = 'a');

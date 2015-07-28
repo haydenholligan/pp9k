@@ -29,7 +29,7 @@ bool Rook::isBlockedPath(std::string pos){
     }
     
     if (startX != destX && startY != destY) {
-        std::cout << "Rook cannot move diagonal" << std::endl;
+         std::cout << "Rook cannot move diagonal" << std::endl;
         return 1;
     }
     

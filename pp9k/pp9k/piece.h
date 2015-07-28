@@ -13,6 +13,7 @@ protected:
     Game *g;
 public:
     Piece(int x, int y, std::string position, char colour);
+    virtual ~Piece();
     int getX();
     int getY();
     std::string getPos();

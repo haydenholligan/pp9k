@@ -6,10 +6,11 @@
 class Game;
 
 class Player {
+protected:
      Game *game;
     int playerNum;
 public:
-    Player(int playerNum);
+    Player(int playerNum, Game *g);
     virtual ~Player();
     int getPlayerNum();
     void setPlayerNum(int num);

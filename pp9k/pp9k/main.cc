@@ -20,7 +20,7 @@ using namespace std;
 #include "textView.h"
 #include "graphicsView.h"
 
-bool dbg = true;
+bool dbg = false;
 
 char setupArr[9][8];
 bool isBoardSet = 0;
@@ -57,7 +57,7 @@ void outputFinalScore() {
 }
 
 int main(int argc, const char * argv[]) {
-    cout << "starting game" << endl;
+    cout << "Starting game!" << endl;
     bool playing = false;
     //Take input
     string s;
@@ -100,6 +100,7 @@ int main(int argc, const char * argv[]) {
             turn = 2;
         }
     }
+    
 input:
     while (cin >> s) {
         if (s == "game") {
@@ -118,8 +119,19 @@ input:
             if (!isBoardSet) {
                 g = new Game;
                 g->setup(s1, s2);
+                g->setPlayer(s1, s2);
                 isBoardSet = true;
             }
+            switch (turn) {
+                case 1:
+                    cout << "White's turn!" << endl;
+                    break;
+                case 2:
+                    cout << "Black's turn!" << endl;
+                default:
+                    break;
+            }
+
         }
         
         else if (s == "resign") {
@@ -163,7 +175,7 @@ input:
                 else {
                     if (dbg) cout << "main: before calling g->move" << endl;
                     if (!g->move(oldPos, newPos)) {
-                        cout << "Going to input" << endl;
+                        if (dbg) cout << "Going to input" << endl;
                         goto input;
                     }
                     
@@ -172,11 +184,11 @@ input:
                 }
                 
                 if (g->isCheck()) {
-                    cout << "main.cc, check!" << endl;
+                    cout << "check!" << endl;
                     if (g->isCheckmate()) {
                         //if it's white's turn, white gets a point, else black gets a point
                         (turn == 1) ? numWhiteWins++ : numBlackWins++;
-                        cout << "main.cc, checkmate!" << endl;
+                        cout << "checkmate!" << endl;
                         delete g;
                         isBoardSet = false;
                         playing = false;
@@ -263,13 +275,13 @@ input:
                 }
                 
                 else if (next == "done") {
-                    cout << "exiting setup" << endl;
+                    if (dbg) cout << "exiting setup" << endl;
                     switch (turn) {
                         case 1:
-                            cout << "Black's turn!" << endl;
+                            cout << "White's turn!" << endl;
                             break;
                         case 2:
-                            cout << "White's turn!" << endl;
+                            cout << "Black's turn!" << endl;
                         default:
                             break;
                     }

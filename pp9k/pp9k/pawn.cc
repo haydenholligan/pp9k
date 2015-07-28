@@ -28,7 +28,7 @@ bool Pawn::isPawnMove(std::string pos) {
     
     if (g->getTileAt(pos)->getPiece() != NULL) { //check to make sure there is a piece
         if (g->getTileAt(pos)->getPiece()->getColour() != this->getColour()) { //check to make sure not attacking same colour
-            if (abs(curX - moveX) == abs(curY - moveY) == 1) { //check to make sure attacking diagonal
+            if ((abs(curX - moveX)) == (abs(curY - moveY) == 1)) { //check to make sure attacking diagonal
                 if (this->getColour() == 'w' && curY - moveY == 1) {
                     std::cout << "white can attack!" << std::endl;
                     return 1;
@@ -43,7 +43,7 @@ bool Pawn::isPawnMove(std::string pos) {
     } //attacking diagonal
     
     if (g->getTileAt(pos)->getPiece() == NULL) {
-        std::cout << "getTileAt->getPiece is null" << std::endl;
+        if (dbg) std::cout << "getTileAt->getPiece is null" << std::endl;
         if (this->getColour() == 'w' && curY - moveY == 1) {
             std::cout << "white can move!" << std::endl;
             return 1;

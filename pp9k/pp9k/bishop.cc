@@ -3,7 +3,9 @@
 #include <cstdlib>
 #include <iostream>
 
-Bishop::Bishop(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("bishop") {}
+Bishop::Bishop(int x, int y, std::string position, char colour): Piece(x, y, position, colour) {
+    this->name = "bishop";
+}
 
 bool Bishop::isBishopMove(std::string pos){
     char xx = pos[0];

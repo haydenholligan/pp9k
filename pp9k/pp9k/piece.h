@@ -6,11 +6,10 @@
 class Game;
 //abstract class
 class Piece {
-private:
+protected:
     int x,y;
     std::string position, name;
     char colour;
-protected:
     Game *g;
 public:
     Piece(int x, int y, std::string position, char colour);

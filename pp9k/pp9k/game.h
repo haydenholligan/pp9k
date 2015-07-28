@@ -31,6 +31,7 @@ class Game {
     //holds pieces for each separate player
     std::vector<Piece *> p1Pieces;
     std::vector<Piece *> p2Pieces;
+    
     int nump1Pieces;
     int nump2Pieces;
     
@@ -45,7 +46,7 @@ public:
     void addPiece(char p, std::string pos);
     void removePiece(std::string pos);
     std::string calcPosition(int x, int y);
-    void move(std::string oldPos, std::string newPos, char up = 'a');
+    bool move(std::string oldPos, std::string newPos, char up = 'a');
     void castle(std::string newPos, King *k, Rook *r);
     bool isCheck(std::string pos = "a0");
     Player *getPlayer(int pNum);

@@ -2,7 +2,9 @@
 #include "game.h"
 #include <iostream>
 
-Rook::Rook(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("rook"), hasMoved(0) {}
+Rook::Rook(int x, int y, std::string position, char colour): Piece(x, y, position, colour), hasMoved(0) {
+    this->name = "rook";
+}
 
 bool Rook::isRookMove(std::string pos){
     char xx = pos[0];

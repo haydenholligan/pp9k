@@ -3,7 +3,9 @@
 #include <cstdlib>
 #include <iostream>
 
-Queen::Queen(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("queen") {}
+Queen::Queen(int x, int y, std::string position, char colour): Piece(x, y, position, colour) {
+    this->name = "queen";
+}
 
 bool Queen::isQueenMove(std::string pos){
     char xx = pos[0];

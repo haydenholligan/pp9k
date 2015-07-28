@@ -3,7 +3,9 @@
 #include <cstdlib>
 #include <iostream>
 
-Knight::Knight(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("knight") {}
+Knight::Knight(int x, int y, std::string position, char colour): Piece(x, y, position, colour) {
+    this->name = "knight";
+}
 
 bool Knight::isKnightMove(std::string pos) {
 

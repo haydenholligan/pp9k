@@ -22,7 +22,7 @@ public:
     char dashOrSpace(int x, int y);
     char dashOrSpace(std::string pos);
     char getCharAt(std::string pos);
-    void updateBoard(std::string oldPos, std::string newPos, char c = 'c');
+    void updateBoard(std::string oldPos, std::string newPos, char c = 'a');
 };
 
 #endif

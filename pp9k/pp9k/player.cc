@@ -1,6 +1,10 @@
 #include "player.h"
+#include <iostream>
+extern bool dbg;
 
-Player::Player(int playerNum): game(NULL), playerNum(playerNum) {}
+Player::Player(int playerNum): game(NULL), playerNum(playerNum) {
+    if (dbg) std::cout << "calling player constructor, playerNum: " << playerNum << std::endl;
+}
 
 Player::~Player() {
     game = NULL;

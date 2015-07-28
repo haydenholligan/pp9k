@@ -3,6 +3,8 @@
 
 using namespace std;
 
+extern int dbg;
+
 textView::textView() {
     
     for (int i = 0; i < boardHeight; i++) {
@@ -85,14 +87,20 @@ char textView::dashOrSpace(string pos) {
 }
 
 void textView::updateBoard(string oldPos, string newPos, char c) {
+    if (dbg) {
+        std::cout << "inside textView::updateBoard c = " << c << endl;
+        std::cout << "oldPos = " << oldPos << endl;
+        std::cout << "newPos = " << newPos << endl;
+    }
+    
     //add new piece
-    if (c != 'c' && newPos != "0") {
+    if (c != 'a' && newPos != "0") {
         setPos(newPos, c);
     }
     //move piece
     else if (oldPos != "0" && newPos != "0") {
-        setPos(oldPos, dashOrSpace(oldPos));
         setPos(newPos, getCharAt(oldPos));
+        setPos(oldPos, dashOrSpace(oldPos));
     }
     //remove piece
     else if (oldPos != "0" && c == 'x') {
@@ -107,8 +115,7 @@ void textView::setPos(string pos, char c) {
     int x = xx - 97;
     int y = 7 - (yy - 49);
     
-    board[y][x] = c;
-    
+    board[y][x+2] = c;
 }
 
 char textView::getCharAt(std::string pos) {

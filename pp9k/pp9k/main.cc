@@ -30,13 +30,22 @@ int turn = -1;
 //1 is player 1's turn(white), 2 is player 2's turn(black)
 
 bool isPieceMine(Game *g, string pos, int turn) {
+    if (dbg) {
+        cout << "inside isPieceMine" << endl;
+        cout << "g->getPlayer(turn)->getPlayerNum(): " << g->getPlayer(turn)->getPlayerNum() << endl;
+        cout << "g->getPieceAt(" << pos << ") " << g->getPieceAt(pos) << endl << endl;
+    }
+    
     if (g->getPlayer(turn)->getPlayerNum() == 1 && (g->getPieceAt(pos) >= 65 && g->getPieceAt(pos) <= 90)) {
+        if (dbg) cout << "Player 1 is valid" << endl;
         return true;
     }
     
     if (g->getPlayer(turn)->getPlayerNum() == 2 && (g->getPieceAt(pos) >= 97 && g->getPieceAt(pos) <= 122)) {
+        if (dbg) cout << "Player 2 is valid" << endl;
         return true;
     }
+    if (dbg) cout << "Not valid" << endl;
     return false;
 }
 
@@ -88,14 +97,15 @@ int main(int argc, const char * argv[]) {
             turn = 2;
         }
     }
-    
+input:
     while (cin >> s) {
         if (s == "game") {
             if (playing) {
                 cout << "already playing a game!" << endl;
                 continue;
             }
-            turn = 1;
+	turn = 1;
+		if (dbg) cout << "Turn: " << turn << endl;
             playing = true;
             string s1, s2;
             cin >> s1;
@@ -131,15 +141,32 @@ int main(int argc, const char * argv[]) {
             char upgrade = 0;
             cin >> oldPos;
             cin >> newPos;
+            if (dbg) {
+                cout << "moving, oldPos: " << oldPos << "    newPos: " << newPos << endl;
+            }
             //make sure the player is moving THEIR pieces
             if (isPieceMine(g, oldPos, turn)) {
                 //check for another cin statement for upgrading
                 //newPos will be a8, so newPos[1] is 8 (or 0)
                 if ((turn == 1 && newPos[1] == 8) || (turn == 2 && newPos[1] == 0)) {
                     cin >> upgrade;
+                    if (!g->move(oldPos, newPos, upgrade)) {
+                        cout << "Going to input" << endl;
+                        goto input;
+                    }
                 }
                 
-                g->move(oldPos, newPos, upgrade);
+                else {
+                    if (dbg) cout << "main: before calling g->move" << endl;
+                    if (!g->move(oldPos, newPos)) {
+                        cout << "Going to input" << endl;
+                        goto input;
+                    }
+                    
+                    if (dbg) cout << "main: after calling g->move" << endl;
+
+                }
+                
                 if (g->isCheck()) {
                     if (g->isCheckmate()) {
                         //if it's white's turn, white gets a point, else black gets a point

@@ -4,9 +4,6 @@
 #include "piece.h"
 
 class King: public Piece {
-    int x, y;
-    char colour;
-    std::string name, position;
     bool hasMoved;
 public:
     King(int x, int y, std::string pos, char colour);

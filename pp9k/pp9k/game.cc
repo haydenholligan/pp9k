@@ -10,15 +10,16 @@ using namespace std;
 extern int numWhiteWin;
 extern int numBlackWins;
 extern int turn;
+extern bool dbg;
 
-Game::Game(): board(NULL) {
-    std::cout << "Calling game constructor" << endl;
+Game::Game(): board(NULL), p1Pieces(0), p2Pieces(0) {
+    if (dbg) cout << "Calling game constructor" << endl;
     view = new textView;
 }
 
 
 Game::~Game() {
-    std::cout << "Calling game destructor" << endl;
+    if (dbg) cout << "Calling game destructor" << endl;
     
     for (int i = 0; i < boardSize; i++) {
         delete [] board[i];
@@ -166,19 +167,19 @@ void Game::removePiece(string pos) {
 }
 
 
-void Game::move(string oldPos, string newPos, char up) {
+bool Game::move(string oldPos, string newPos, char up) {
     
     //get x, y coordinates
     char xx = oldPos[0];
     char yy = oldPos[1];
     int x = xx - 97;
     int y = 7 - (yy - 49);
-    /*
+    
      char xx2 = newPos[0];
      char yy2 = newPos[1];
-     int x2 = xx - 97;
-     int y2 = 7 - (yy - 49);
-    */
+     int x2 = xx2 - 97;
+     int y2 = 7 - (yy2 - 49);
+    
     if (oldPos == "e1" && (newPos == "c1" || "g1")) {
         //white king to be castled
         // if (board[y][x].getPiece()->getName() == "king" && board[y2][x2].getPiece()->getName(
@@ -186,37 +187,42 @@ void Game::move(string oldPos, string newPos, char up) {
     
     if (oldPos == "e8" && (newPos == "c8" || "g8")) {
         //black king to be castled
-        
     }
+    
     else {
+        if (dbg) cout << "inside game::move, BEFORE calling getPiece()->move" << endl;
+        if (board[y][x].getPiece()->move(newPos)) {
+            board[y2][x2].setPiece(board[y][x].getPiece());
+            board[y][x].setPiece(NULL);
         
-        board[y][x].getPiece()->move(newPos);
+        
+        if (dbg) cout << "inside game::move, AFTER calling getPiece()->move" << endl;
+
+        cout << "AAA   up: " << up << endl;
         if (up != 'a') {
+            if (dbg) cout << "inside game::move, calling upgrade()" << endl;
             upgrade(board[y][x].getPiece(), up);
         }
         //check for check, checkmate, stalemate, upgrade
         updateBoard(oldPos, newPos, up);
+        return true;
+
+        }
+        
+        else {
+            return false;
+        }
+
     }
-    
+    return false;
     //not done
 }
 
 void Game::castle(string newPos, King *k, Rook *r) {
     
-    //all if, no else if
-    //return; ends the function, void so don't return anything
-    char side;
-    
     char newX = newPos[1];
-    
     int xNew = newX - 97;
-    
     int xOld = k->getX();
-    
-    
-    if(xOld < xNew) side = 'r';
-    else side = 'l';
-    
     
     if(turn == 1){
         if (k->getHasMoved()) {
@@ -319,13 +325,18 @@ void Game::castle(string newPos, King *k, Rook *r) {
 
 
 char Game::getPieceAt(string pos) {
+    cout << endl << "inside game::getPieceAt()" << endl;
     //if no piece, char is = 'U'
     char xx = pos[0];
     char yy = pos[1];
     int x = xx - 97;
     int y = 7 - (yy - 49);
+    if (dbg) cout << "pos: " << pos << "  x: " << x << "  y: " << y << endl;
     string s = board[y][x].getPiece()->getName();
+    if (dbg) cout << "piece name from board[y][x]: " << s << endl;
     char colour = board[y][x].getPiece()->getColour();
+    if (dbg) cout << "piece colour from board[y][x]: " << colour << endl << endl;
+    
     if (colour == 'w') {
         if (s == "knight") {
             return 'N';
@@ -378,6 +389,7 @@ bool Game::isValidPosition(string pos) {
 }
 
 bool Game::isCheck(string pos) {
+    if (dbg) cout << "game::isCheck() starting function" << endl;
     //should be simple to determine if a king is in check
     //every time a piece is moved, determine if any of the opponent's pieces
     //have legal moves to capture the king
@@ -420,10 +432,13 @@ bool Game::isCheck(string pos) {
             }//if
         }//for
     }//else
+    if (dbg) cout << "game::isCheck() starting function, not in check" << endl;
     return 0;
 }
 
 bool Game::isCheckmate() {
+    if (dbg) cout << "game::isCheckMate() starting function" << endl;
+
     //ways to avoid checkmate:
     //1. capture the checking piece (doesn't work in double check)
     //2. move a piece inbetween the king and threatening piece
@@ -472,7 +487,7 @@ bool Game::isCheckmate() {
             return 0;
         }//if
     }//for
-    
+    if (dbg) cout << "game::isCheckMate() end function" << endl;
     return 1; //if not, return true
 }
 
@@ -583,7 +598,7 @@ void Game::setPosition(Piece *pc, string s) {
 
 //Set up the board
 void Game::setup(string s1, string s2) {
-    
+    cout << endl << "starting game::setup(1)" << endl;
     //initialize players
     if (s1 == "human")
         p1 = new Human(1);
@@ -604,19 +619,19 @@ void Game::setup(string s1, string s2) {
         std::cout << "invalid input" << endl;
     
     if (s2 == "human")
-        p2 = new Human(1);
+        p2 = new Human(2);
     
     else if (s2 == "computer[1]")
-        p1 = new Computer(1, 1);
+        p1 = new Computer(1, 2);
     
     else if (s2 == "computer[2]")
-        p2 = new Computer(2, 1);
+        p2 = new Computer(2, 2);
     
     else if (s2 == "computer[3]")
-        p2 = new Computer(3, 1);
+        p2 = new Computer(3, 2);
     
     else if (s2 == "computer[4]")
-        p2 = new Computer(4, 1);
+        p2 = new Computer(4, 2);
     
     else
         std::cout << "invalid input" << endl;
@@ -639,6 +654,7 @@ void Game::setup(string s1, string s2) {
     p2Pieces.push_back(new King(4, 0,calcPosition(4, 0), 'b'));
     nump2Pieces += 8;
     
+    
     //Initialize the pieces for player 2
     p1Pieces.push_back(new Rook(0, 7,calcPosition(0, 7), 'w'));
     p1Pieces.push_back(new Rook(7, 7,calcPosition(7, 7), 'w'));
@@ -652,10 +668,15 @@ void Game::setup(string s1, string s2) {
     
     //Initialize the pawns for both players
     for (int i = 0; i < boardSize; i++) {
-        p2Pieces.push_back(new Pawn(i, 0,calcPosition(i, 0), 'b'));
+        p2Pieces.push_back(new Pawn(i, 1,calcPosition(i, 0), 'b'));
         p1Pieces.push_back(new Pawn(i, 6,calcPosition(i, 6), 'w'));
         nump1Pieces++;
         nump2Pieces++;
+    }
+    
+    for (int i = 0; i < nump1Pieces; i++) {
+        p1Pieces.at(i)->setGame(this);
+        p2Pieces.at(i)->setGame(this);
     }
     
     //Initialize tile information
@@ -703,9 +724,11 @@ void Game::setup(string s1, string s2) {
             board[i][j].setPiece(NULL);
         }
     }
+    
 }
 
 void Game::setup(char setupArr[9][8], bool isEmpty) {
+    if (dbg) cout << "calling setup(2)" << endl;
     p1 = new Human(1);
     p2 = new Human(1);
     
@@ -725,7 +748,8 @@ void Game::setup(char setupArr[9][8], bool isEmpty) {
                 //blank space
                 board[i][j].setPiece(NULL);
             }
-            if (!(isEmpty)) {
+            if (!isEmpty) {
+                if (dbg) cout << "isEmpty = false" << endl;
                 switch (setupArr[i][j]) {
                     case 'r':
                         p2Pieces.push_back(new Rook(j, i, calcPosition(j, i), 'b'));
@@ -806,7 +830,7 @@ void Game::setup(char setupArr[9][8], bool isEmpty) {
         }
     }
     
-    if (!(isEmpty)) {
+    if (!isEmpty) {
         //Initialize the pieces for player 1
         p2Pieces.push_back(new Rook(0, 0, calcPosition(0, 0), 'b'));
         p2Pieces.push_back(new Rook(7, 0,calcPosition(7, 0), 'b'));
@@ -829,7 +853,7 @@ void Game::setup(char setupArr[9][8], bool isEmpty) {
         
         //Initialize the pawns for both players
         for (int i = 0; i < boardSize; i++) {
-            p2Pieces.push_back(new Pawn(i, 0,calcPosition(i, 0), 'b'));
+            p2Pieces.push_back(new Pawn(i, 1,calcPosition(i, 0), 'b'));
             p1Pieces.push_back(new Pawn(i, 6,calcPosition(i, 6), 'w'));
         }
     }

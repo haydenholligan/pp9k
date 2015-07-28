@@ -3,7 +3,9 @@
 #include <cstdlib>
 #include <iostream>
 
-King::King(int x, int y, std::string position, char colour): Piece(x, y, position, colour), name("king"), hasMoved(0) {}
+King::King(int x, int y, std::string position, char colour): Piece(x, y, position, colour), hasMoved(0) {
+    this->name = "king";
+}
 
 bool King::isKingMove(std::string pos){
     

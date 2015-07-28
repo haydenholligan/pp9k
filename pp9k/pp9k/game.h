@@ -23,7 +23,6 @@ class Game {
     //Board to hold the tiles, 8x8
     //white top left, alternate rest
     Tile **board;
-    
     //Pointers to each player
     Player *p1;
     Player *p2;

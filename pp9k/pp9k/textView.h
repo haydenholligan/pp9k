@@ -6,6 +6,7 @@
 
 #include <string>
 
+
 //10 for line # and space beforehand
 const int boardWidth = 10;
 const int boardHeight = 8;

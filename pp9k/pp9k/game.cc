@@ -50,86 +50,108 @@ void Game::addPiece(char p, string pos) {
     char yy = pos[1];
     int x = xx - 97;
     int y = 7 - (yy - 49);
-    string s = calcPosition(x, y);
-    switch(p) {
-        case 'r':
-            p2Pieces.push_back(new Rook(x, y, pos, 'b'));
-            board[y][x].setPiece(p1Pieces.at(nump2Pieces));
-            nump2Pieces++;
-            break;
-            
-        case 'n':
-            p2Pieces.push_back(new Knight(x, y, calcPosition(x, y), 'b'));
-            board[y][x].setPiece(p1Pieces.at(nump2Pieces));
-            nump2Pieces++;
-            break;
-            
-        case 'b':
-            p2Pieces.push_back(new Bishop(x, y, calcPosition(x, y), 'b'));
-            board[y][x].setPiece(p1Pieces.at(nump2Pieces));
-            nump2Pieces++;
-            break;
-            
-        case 'q':
-            p2Pieces.push_back(new Queen(x, y, calcPosition(x, y), 'b'));
-            board[y][x].setPiece(p1Pieces.at(nump2Pieces));
-            nump2Pieces++;
-            break;
-            
-        case 'k':
-            p2Pieces.push_back(new King(x, y, calcPosition(x, y), 'b'));
-            board[y][x].setPiece(p1Pieces.at(nump2Pieces));
-            nump2Pieces++;
-            break;
-            
-        case 'p':
-            p2Pieces.push_back(new Pawn(x, y, calcPosition(x, y), 'b'));
-            board[y][x].setPiece(p1Pieces.at(nump2Pieces));
-            nump2Pieces++;
-            break;
-            
-        case 'R':
-            p1Pieces.push_back(new Rook(x, y, calcPosition(x, y), 'w'));
-            board[y][x].setPiece(p1Pieces.at(nump1Pieces));
-            nump1Pieces++;
-            break;
-            
-        case 'N':
-            p1Pieces.push_back(new Knight(x, y, calcPosition(x, y), 'w'));
-            board[y][x].setPiece(p1Pieces.at(nump1Pieces));
-            nump1Pieces++;
-            break;
-            
-        case 'B':
-            p1Pieces.push_back(new Bishop(x, y, calcPosition(x, y), 'w'));
-            board[y][x].setPiece(p1Pieces.at(nump1Pieces));
-            nump1Pieces++;
-            break;
-            
-        case 'Q':
-            p1Pieces.push_back(new Queen(x, y, calcPosition(x, y), 'w'));
-            board[y][x].setPiece(p1Pieces.at(nump1Pieces));
-            nump1Pieces++;
-            break;
-            
-        case 'K':
-            p1Pieces.push_back(new King(x, y, calcPosition(x, y), 'w'));
-            board[y][x].setPiece(p1Pieces.at(nump1Pieces));
-            nump1Pieces++;
-            break;
-            
-        case 'P':
-            p1Pieces.push_back(new Pawn(x, y, calcPosition(x, y), 'w'));
-            board[y][x].setPiece(p1Pieces.at(nump1Pieces));
-            nump1Pieces++;
-            break;
-            
-        default:
-            std::cout << "Not a valid piece!" << endl;
-            break;
+    if (dbg) cout << "starting game::addPiece" << endl;
+    try {
+        switch(p) {
+            case 'r':
+                p2Pieces.push_back(new Rook(x, y, pos, 'b'));
+                p2Pieces.at(nump2Pieces)->setGame(this);
+                board[y][x].setPiece(p2Pieces.at(nump2Pieces));
+                nump2Pieces++;
+                break;
+                
+            case 'n':
+                p2Pieces.push_back(new Knight(x, y, calcPosition(x, y), 'b'));
+                p2Pieces.at(nump2Pieces)->setGame(this);
+                board[y][x].setPiece(p2Pieces.at(nump2Pieces));
+                nump2Pieces++;
+                break;
+                
+            case 'b':
+                p2Pieces.push_back(new Bishop(x, y, calcPosition(x, y), 'b'));
+                p2Pieces.at(nump2Pieces)->setGame(this);
+                board[y][x].setPiece(p2Pieces.at(nump2Pieces));
+                nump2Pieces++;
+                break;
+                
+            case 'q':
+                p2Pieces.push_back(new Queen(x, y, calcPosition(x, y), 'b'));
+                p2Pieces.at(nump2Pieces)->setGame(this);
+                board[y][x].setPiece(p2Pieces.at(nump2Pieces));
+                nump2Pieces++;
+                break;
+                
+            case 'k':
+                p2Pieces.push_back(new King(x, y, calcPosition(x, y), 'b'));
+                p2Pieces.at(nump2Pieces)->setGame(this);
+                board[y][x].setPiece(p2Pieces.at(nump2Pieces));
+                nump2Pieces++;
+                break;
+                
+            case 'p':
+                p2Pieces.push_back(new Pawn(x, y, calcPosition(x, y), 'b'));
+                p2Pieces.at(nump2Pieces)->setGame(this);
+                board[y][x].setPiece(p2Pieces.at(nump2Pieces));
+                nump2Pieces++;
+                break;
+                
+            case 'R':
+                p1Pieces.push_back(new Rook(x, y, calcPosition(x, y), 'w'));
+                p1Pieces.at(nump1Pieces)->setGame(this);
+                board[y][x].setPiece(p1Pieces.at(nump1Pieces));
+                nump1Pieces++;
+                break;
+                
+            case 'N':
+                p1Pieces.push_back(new Knight(x, y, calcPosition(x, y), 'w'));
+                p1Pieces.at(nump1Pieces)->setGame(this);
+                board[y][x].setPiece(p1Pieces.at(nump1Pieces));
+                nump1Pieces++;
+                break;
+                
+            case 'B':
+                p1Pieces.push_back(new Bishop(x, y, calcPosition(x, y), 'w'));
+                p1Pieces.at(nump1Pieces)->setGame(this);
+                board[y][x].setPiece(p1Pieces.at(nump1Pieces));
+                nump1Pieces++;
+                break;
+                
+            case 'Q':
+                p1Pieces.push_back(new Queen(x, y, calcPosition(x, y), 'w'));
+                p1Pieces.at(nump1Pieces)->setGame(this);
+                board[y][x].setPiece(p1Pieces.at(nump1Pieces));
+                nump1Pieces++;
+                break;
+                
+            case 'K':
+                p1Pieces.push_back(new King(x, y, calcPosition(x, y), 'w'));
+                p1Pieces.at(nump1Pieces)->setGame(this);
+                board[y][x].setPiece(p1Pieces.at(nump1Pieces));
+                nump1Pieces++;
+                break;
+                
+            case 'P':
+                p1Pieces.push_back(new Pawn(x, y, calcPosition(x, y), 'w'));
+                p1Pieces.at(nump1Pieces)->setGame(this);
+                board[y][x].setPiece(p1Pieces.at(nump1Pieces));
+                nump1Pieces++;
+                break;
+                
+            default:
+                std::cout << "Not a valid piece!" << endl;
+                break;
+        }
+    } catch (...) {
+        cout << p << endl;
+        cout << nump2Pieces << endl;
+        throw;
     }
+    
+    
     //old position doesn't change, new position gets piece p
-    updateBoard("0", s, p);
+    updateBoard("0", pos, p);
+    
+    if (dbg) std::cout<< "done adding piece" << std::endl;
 }
 
 void Game::removePiece(string pos) {
@@ -495,7 +517,7 @@ bool Game::isCheckmate() {
                 tmpKing = p2Pieces.at(i);
         }//for
     }
-
+    
     //checks if there is a valid move the king can use
     for(int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++) {
@@ -746,33 +768,6 @@ void Game::setup(string s1, string s2) {
             
         }
     }
-    /*
-     cout << "OUTPUTTING TILE ADDRESSES" << endl;
-     for (int i = 0; i < 8; i++) {
-     for (int j = 0; j < 8; j++) {
-     cout << &(board[i][j]) << " ";
-     }
-     cout << endl;
-     }
-     
-     
-     cout << "OUTPUTTING TILE PIECE ADDRESSES" << endl;
-     for (int i = 0; i < 8; i++) {
-     for (int j = 0; j < 8; j++) {
-     cout << board[i][j].getPiece() << " ";
-     }
-     cout << endl;
-     
-     }
-     
-     cout << "OUTPUTTING TILE POSITIONS" << endl;
-     for (int i = 0; i < 8; i++) {
-     for (int j = 0; j < 8; j++) {
-     cout << board[i][j].getPos() << " ";
-     }
-     cout << endl;
-     
-     }*/
     
 }
 
@@ -797,6 +792,7 @@ void Game::setup(char setupArr[9][8], bool isEmpty) {
                 //blank space
                 board[i][j].setPiece(NULL);
             }
+            
             if (!isEmpty) {
                 switch (setupArr[i][j]) {
                     case 'r':
@@ -963,6 +959,14 @@ void Game::setup(char setupArr[9][8], bool isEmpty) {
                 board[i][j].setPiece(NULL);
             }
         }
+    }
+    
+    for (int i = 0; i < nump1Pieces; i++) {
+        p1Pieces.at(i)->setGame(this);
+    }
+    
+    for (int i = 0; i < nump2Pieces; i++) {
+        p2Pieces.at(i)->setGame(this);
     }
 }
 

@@ -24,6 +24,7 @@ bool dbg = true;
 
 char setupArr[9][8];
 bool isBoardSet = 0;
+bool isSetup = 0;
 int numWhiteWins = 0;
 int numBlackWins = 0;
 int turn = -1;
@@ -213,8 +214,9 @@ input:
             }
             
             //might need to fix
+            isSetup = true;
             g = new Game;
-            g->setup(emptyBoard);
+            g->setup(emptyBoard, 1);
             isBoardSet = true;
             string next;
             while (cin >> next) {
@@ -260,6 +262,16 @@ input:
                 
                 else if (next == "done") {
                     cout << "exiting setup" << endl;
+                    switch (turn) {
+                        case 1:
+                            cout << "Black's turn!" << endl;
+                            break;
+                        case 2:
+                            cout << "White's turn!" << endl;
+                        default:
+                            break;
+                    }
+
                     break;
                 }
                 
